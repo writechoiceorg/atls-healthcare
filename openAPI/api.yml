@@ -1,0 +1,2924 @@
+---
+openapi: 3.0.1
+info:
+  title: ATS API
+  version: v1
+paths:
+  "/v1/Address/saved/check":
+    get:
+      tags:
+      - Address
+      parameters:
+      - name: Name
+        in: query
+        schema:
+          type: string
+      - name: AttentionTo
+        in: query
+        schema:
+          type: string
+      - name: Address1
+        in: query
+        schema:
+          type: string
+      - name: Address2
+        in: query
+        schema:
+          type: string
+      - name: City
+        in: query
+        schema:
+          type: string
+      - name: Province
+        in: query
+        schema:
+          type: string
+      - name: PostalCode
+        in: query
+        schema:
+          type: string
+      - name: Phone
+        in: query
+        schema:
+          type: string
+      - name: Email
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  "/v1/Address/validate/residential":
+    get:
+      tags:
+      - Address
+      parameters:
+      - name: address1
+        in: query
+        schema:
+          type: string
+      - name: postalCode
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  "/v1/Address/validate/postalCode":
+    get:
+      tags:
+      - Address
+      parameters:
+      - name: postalCode
+        in: query
+        schema:
+          type: string
+      - name: province
+        in: query
+        schema:
+          type: string
+      - name: city
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidatePostalCodeResponse"
+  "/v1/Shipments/Imports":
+    get:
+      tags:
+      - Shipments
+      summary: Get all shipment imports
+      parameters:
+      - name: DateSortOrder
+        in: query
+        schema:
+          "$ref": "#/components/schemas/OrderAs"
+      - name: PaginationQuery.PageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: PaginationQuery.PageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Result"
+    post:
+      tags:
+      - Shipments
+      summary: Import orders or picklists
+      parameters:
+      - name: validateOnly
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: addToContinuousManifest
+        in: query
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/LoadOrdersResponse"
+  "/v1/Shipments/Imports/{importId}":
+    get:
+      tags:
+      - Shipments
+      summary: Get shipment import by id
+      parameters:
+      - name: importId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetImportByIdResult"
+  "/v1/Shipments/Imports/{id}/labels":
+    get:
+      tags:
+      - Shipments
+      summary: Get labels by import id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelType"
+      - name: size
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelSize"
+      - name: invert
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: includeLogo
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+  "/v1/Manifests":
+    post:
+      tags:
+      - Manifests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OpenManifestRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/OpenManifestRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/OpenManifestRequest"
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ManifestResponse"
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    get:
+      tags:
+      - Manifests
+      parameters:
+      - name: status
+        in: query
+        schema:
+          "$ref": "#/components/schemas/ManifestStatus"
+      - name: PageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: _sort
+        in: query
+        schema:
+          "$ref": "#/components/schemas/ManifestSortBy"
+      - name: _order
+        in: query
+        schema:
+          "$ref": "#/components/schemas/OrderAs"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ManifestsResponseListPagedResponse"
+  "/v1/Manifests/{manifestId}/shipments":
+    post:
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    get:
+      tags:
+      - Manifests
+      summary: Get shipments by manifest
+      description: Get shipments by manifest
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+  "/v1/Manifests/continuous":
+    get:
+      tags:
+      - Manifests
+      summary: Gets continuous manifest
+      description: Gets continuous manifest. Continuous manifest is a manifest that
+        all shipments are automatically assigned to if not specified otherwise.
+      responses:
+        '200':
+          description: Success
+  "/v1/Manifests/{manifestId}":
+    get:
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ManifestResponse"
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    patch:
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateManifestRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateManifestRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/UpdateManifestRequest"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ManifestResponse"
+    delete:
+      tags:
+      - Manifests
+      summary: Delete manifest
+      description: Delete a manifest by id. <br><br> **NOTE:** Continuous Manifest
+        cannot be deleted.
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: Success
+  "/v1/Manifests/{manifestId}/report":
+    get:
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+  "/v1/Manifests/{manifestId}/export":
+    get:
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+  "/v1/MyAccount/customerAccount":
+    get:
+      tags:
+      - MyAccount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MyCustomerAccountResponse"
+  "/v1/MyAccount/customerAccount/addresses":
+    post:
+      tags:
+      - MyAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomerShipAddressResponse"
+  "/v1/MyAccount/customerAccount/addresses/{addressId}":
+    put:
+      tags:
+      - MyAccount
+      parameters:
+      - name: addressId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/CustomerShipAddressRequest"
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomerShipAddressResponse"
+    delete:
+      tags:
+      - MyAccount
+      parameters:
+      - name: addressId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+  "/v1/MyAccount/customerAccount/addresses/import":
+    post:
+      tags:
+      - MyAccount
+      summary: Import addresses
+      description: Import addresses
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                addressesCsvFile:
+                  type: string
+                  format: binary
+            encoding:
+              addressesCsvFile:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/CustomerShipAddressResponse"
+  "/v1/MyAccount/customerAccount/addresses/export":
+    get:
+      tags:
+      - MyAccount
+      responses:
+        '200':
+          description: Success
+  "/v1/Picklist":
+    post:
+      tags:
+      - Picklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Picklist"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/Picklist"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/Picklist"
+      responses:
+        '200':
+          description: Success
+  "/v1/Picklist/{lookupKey}":
+    get:
+      tags:
+      - Picklist
+      parameters:
+      - name: lookupKey
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  "/v1/PickupRequests":
+    get:
+      tags:
+      - PickupRequests
+      parameters:
+      - name: fromDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/PickupRequestRes"
+    post:
+      tags:
+      - PickupRequests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PickupRequestBody"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/PickupRequestBody"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/PickupRequestBody"
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PickupRequestRes"
+  "/v1/Shipments":
+    post:
+      tags:
+      - Shipments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateShipmentRequestBody"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/CreateShipmentRequestBody"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/CreateShipmentRequestBody"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShipmentResponse"
+  "/v1/Shipments/{shipmentId}":
+    get:
+      tags:
+      - Shipments
+      operationId: Shipments_GetById
+      parameters:
+      - name: shipmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShipmentResponse"
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    delete:
+      tags:
+      - Shipments
+      summary: Void shipment
+      parameters:
+      - name: shipmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProblemDetails"
+        '409':
+          description: 'Conflict: Shipment has already been manifested and thus cannot
+            be voided.'
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  "/v1/Shipments/tracking/{trackingNumber}":
+    get:
+      tags:
+      - Shipments
+      parameters:
+      - name: trackingNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShipmentResponse"
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  "/v1/Shipments/search/wineDirect/{orderNumber}":
+    get:
+      tags:
+      - Shipments
+      parameters:
+      - name: orderNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShipmentResponse"
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  "/v1/Shipments/label":
+    get:
+      tags:
+      - Shipments
+      summary: Get shipment label
+      description: Get shipment label by `shipmentId` or `trackingNumber`. <br/><br/>If
+        `trackingNumber` includes the package number ('8000...1-1'), then the label
+        for the individual package is returned. Otherwise labels for all packages
+        in the shipment are returned. <br/>If `shipmentId` is provided, then the label(s)
+        for the shipment (including all packages) is returned.
+      parameters:
+      - name: trackingNumber
+        in: query
+        schema:
+          type: string
+      - name: shipmentId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelType"
+      - name: size
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelSize"
+      - name: invert
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: includeLogo
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Returns ZPL string by default, otherwise PDF string binary
+            if `type=pdf`
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProblemDetails"
+  "/v1/Shipments/{shipmentId}/label":
+    get:
+      tags:
+      - Shipments
+      summary: Get shipment label
+      description: Get shipment label
+      parameters:
+      - name: shipmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: Type
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelFormat"
+      - name: Size
+        in: query
+        schema:
+          "$ref": "#/components/schemas/LabelSize1"
+      - name: Invert
+        in: query
+        schema:
+          type: boolean
+          description: Invert label (rotate 180 degrees)
+      - name: IncludeLogo
+        in: query
+        schema:
+          type: boolean
+          description: Include ATS logo in label
+      responses:
+        '200':
+          description: Returns ZPL string by default, otherwise PDF string binary
+            if `type=pdf`
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProblemDetails"
+  "/v1/Shipments/service":
+    post:
+      tags:
+      - Shipments
+      summary: Get available services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetAvailableServicesRequestBody"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetAvailableServicesRequestBody"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetAvailableServicesRequestBody"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AvailableServiceResponse"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProblemDetails"
+  "/v1/Shipments/rate":
+    post:
+      tags:
+      - Shipments
+      summary: Rate shipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RateShipmentRequestBody"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/RateShipmentRequestBody"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/RateShipmentRequestBody"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RateResponse"
+  "/v1.2/Shipments":
+    get:
+      tags:
+      - Shipments
+      parameters:
+      - name: status
+        in: query
+        schema:
+          "$ref": "#/components/schemas/ShipmentStatus"
+      - name: reference
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: purchaseOrder
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: PageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        schema:
+          "$ref": "#/components/schemas/SortBy_v1_2"
+      - name: order
+        in: query
+        schema:
+          "$ref": "#/components/schemas/OrderAs"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Response"
+components:
+  schemas:
+    AccessorialDetails:
+      type: object
+      properties:
+        timeRelease:
+          "$ref": "#/components/schemas/TimeReleaseDetails"
+        appointment:
+          "$ref": "#/components/schemas/AppointmentDetails"
+        freightInsurance:
+          "$ref": "#/components/schemas/FreightInsuranceDetails"
+        poDueDate:
+          type: string
+          format: date
+          nullable: true
+      additionalProperties: false
+      description: The accessorials details. If providing accessorial detail, the
+        corresponding accessorial code must be included in the `accessorials` list.
+    AccessorialDetailsRes:
+      type: object
+      properties:
+        timeRelease:
+          "$ref": "#/components/schemas/TimeReleaseDetailRes"
+        appointment:
+          "$ref": "#/components/schemas/AppointmentDetailRes"
+        freightInsurance:
+          "$ref": "#/components/schemas/FreightInsuranceDetailRes"
+        poDueDate:
+          type: string
+          format: date
+          nullable: true
+      additionalProperties: false
+    AccessorialsRes:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+          nullable: true
+        labels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        details:
+          "$ref": "#/components/schemas/AccessorialDetailsRes"
+      additionalProperties: false
+    AdditionalChargeResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        hasFlatCharge:
+          type: boolean
+        flatCharge:
+          type: number
+          format: double
+          nullable: true
+        variableCharge:
+          type: number
+          format: double
+          nullable: true
+        isEnforced:
+          type: boolean
+          nullable: true
+        isSelected:
+          type: boolean
+          nullable: true
+        isPartiallyAvailable:
+          type: boolean
+          nullable: true
+        partialAvailabilityDetails:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Address:
+      type: object
+      properties:
+        name:
+          maxLength: 35
+          minLength: 0
+          type: string
+          nullable: true
+        attentionTo:
+          type: string
+          nullable: true
+        address1:
+          type: string
+          nullable: true
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        isResidential:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    AddressFieldConfigRes:
+      type: object
+      properties:
+        name:
+          "$ref": "#/components/schemas/FieldConfigWithOutRequiredRes"
+        attentionTo:
+          "$ref": "#/components/schemas/FieldConfigRes"
+        address1:
+          "$ref": "#/components/schemas/FieldConfigWithOutRequiredRes"
+        address2:
+          "$ref": "#/components/schemas/FieldConfigRes"
+      additionalProperties: false
+    AddressRequest:
+      required:
+      - address1
+      - city
+      - country
+      - name
+      - postalCode
+      - province
+      type: object
+      properties:
+        name:
+          maxLength: 35
+          type: string
+        attentionTo:
+          maxLength: 35
+          type: string
+          nullable: true
+        address1:
+          maxLength: 35
+          type: string
+        address2:
+          maxLength: 35
+          type: string
+          nullable: true
+        city:
+          maxLength: 35
+          type: string
+        province:
+          maxLength: 2
+          type: string
+          description: Two character abbreviation. E.g. 'BC' for British Columbia
+        postalCode:
+          maxLength: 7
+          minLength: 6
+          type: string
+        country:
+          maxLength: 2
+          type: string
+          description: 'Country abbreviation. Accepted value: ''CA'' for Canada.'
+        isResidential:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    AddressType:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        attentionTo:
+          type: string
+          nullable: true
+        address1:
+          type: string
+          nullable: true
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        isResidential:
+          type: boolean
+          nullable: true
+        country:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AppointmentDetailRes:
+      type: object
+      properties:
+        type:
+          "$ref": "#/components/schemas/AppointmentTypeRes"
+        confirmationCode:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        time:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AppointmentDetails:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          "$ref": "#/components/schemas/AppointmentTypeReq"
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        time:
+          type: string
+          nullable: true
+        confirmationCode:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AppointmentType:
+      enum:
+      - preBooked
+      - request
+      type: string
+    AppointmentTypeReq:
+      type: object
+      properties:
+        value:
+          "$ref": "#/components/schemas/AppointmentType"
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AppointmentTypeRes:
+      type: object
+      properties:
+        value:
+          "$ref": "#/components/schemas/AppointmentType"
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AvailableServiceResponse:
+      type: object
+      properties:
+        availableServices:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ServicesByDateResponse"
+          nullable: true
+        availableAccessorials:
+          type: array
+          items:
+            "$ref": "#/components/schemas/AdditionalChargeResponse"
+          nullable: true
+      additionalProperties: false
+    ConfigRes:
+      type: object
+      properties:
+        shipToAddress:
+          "$ref": "#/components/schemas/ShipToAddressConfigRes"
+        externalSystem:
+          "$ref": "#/components/schemas/MyExternalSystemRes"
+        hideRate:
+          type: boolean
+      additionalProperties: false
+    ContainerTypeResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        length:
+          type: integer
+          format: int32
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+        isNonStackable:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    CreateShipmentRequestBody:
+      required:
+      - address
+      - docketCode
+      - pieces
+      - serviceCode
+      - shipDate
+      - totalWeight
+      type: object
+      properties:
+        docketCode:
+          maxLength: 24
+          type: string
+        accountId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+          deprecated: true
+        accountCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+          deprecated: true
+        addressId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+        consigneeCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        phone:
+          maxLength: 24
+          type: string
+          nullable: true
+        email:
+          maxLength: 50
+          type: string
+          nullable: true
+        pieces:
+          type: integer
+          format: int32
+        totalWeight:
+          type: number
+          format: double
+        isPallet:
+          type: boolean
+        saidToContain:
+          type: integer
+          description: The number of items on the pallet
+          format: int32
+          nullable: true
+        instructions:
+          maxLength: 35
+          type: string
+          nullable: true
+        descriptionOfGoods:
+          maxLength: 35
+          type: string
+          nullable: true
+        packages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PackageRequest"
+          nullable: true
+        shipDate:
+          type: string
+          format: date-time
+        accessorials:
+          type: array
+          items:
+            type: string
+          description: "The accessorials requested for the shipment. Should be a list
+            of the following two character codes:\r\n\r\n## Temperature related\r\n|
+            Code | Description                 |\r\n| ---- | ---------------------------
+            |\r\n| TC   | Ambient (Temperature Track) |\r\n| FR   | Cold Chain Keep
+            Moving      |\r\n| HS   | Heated Service              |\r\n| KC   | Keep
+            Cool Service           |\r\n\r\n## Time related\r\n| Code | Description
+            \           |\r\n| ---- | ---------------------- |\r\n| PT   | Appointment
+            \           |\r\n| PD   | PO Expiration/Due Date |\r\n| TR   | Time Release
+            \          |\r\n\r\n## Other\r\n| Code | Description             |\r\n|
+            ---- | ----------------------- |\r\n| BD   | Backdoor Receipts       |\r\n|
+            CS   | Chain of Signature      |\r\n| DG   | Dangerous Goods         |\r\n|
+            PO   | Hard Copy POD Requested |\r\n| HD   | Residential Delivery    |\r\n|
+            TG   | Tailgate                |\r\n| NS   | No Signature Required   |\r\n|
+            IS   | Freight Insurance       |\r\n<br />"
+          nullable: true
+        accessorialDetails:
+          "$ref": "#/components/schemas/AccessorialDetails"
+        references:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ShipmentReference"
+          nullable: true
+        serviceCode:
+          maxLength: 2
+          type: string
+          description: "The service code for the shipment. Should be one of the following
+            two character codes:\r\n| Code | Description        |\r\n| ---- | ------------------
+            |\r\n| A9   | Air By 9:00 AM     |\r\n| A1   | Air By 10:00 AM    |\r\n|
+            AN   | Air By Noon        |\r\n| A3   | Air By 3:00 PM     |\r\n| G9   |
+            Ground By 9:00 AM  |\r\n| G1   | Ground By 10:00 AM |\r\n| GN   | Ground
+            by Noon     |\r\n| GE   | Ground Expedited   |\r\n<br/>"
+        source:
+          "$ref": "#/components/schemas/Source"
+        groupBy:
+          maxLength: 50
+          type: string
+          description: A user defined free form field used to group/consolidate shipments.
+            If defined, shipment will consolidate based on this field.
+          nullable: true
+        paymentTerm:
+          "$ref": "#/components/schemas/PaymentTermsClass"
+        paymentAccount:
+          type: integer
+          description: Required when PaymentTerm is Collect. Ignored otherwise.
+          format: int32
+          nullable: true
+      additionalProperties: false
+    CustomerShipAddressRequest:
+      required:
+      - address
+      type: object
+      properties:
+        lookupCode:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CustomerShipAddressResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        lookupCode:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/Address"
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CustomerShipmentReferenceResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        prioritySequence:
+          type: integer
+          format: int32
+          nullable: true
+        isRequired:
+          type: boolean
+          nullable: true
+        shortName:
+          type: string
+          nullable: true
+        longName:
+          type: string
+          nullable: true
+        fieldValidationRegex:
+          type: string
+          nullable: true
+        fieldMinLength:
+          type: integer
+          format: int32
+          nullable: true
+        fieldMaxLength:
+          type: integer
+          format: int32
+          nullable: true
+        fieldType:
+          type: string
+          nullable: true
+        hasStrictFieldValidation:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    Destination:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        attentionTo:
+          type: string
+          nullable: true
+        address1:
+          type: string
+          nullable: true
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        isResidential:
+          type: boolean
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FieldConfigRes:
+      type: object
+      properties:
+        min:
+          type: integer
+          format: int32
+          nullable: true
+        max:
+          type: integer
+          format: int32
+          nullable: true
+        required:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    FieldConfigsRes:
+      type: object
+      properties:
+        lookupCode:
+          "$ref": "#/components/schemas/FieldConfigRes"
+        address:
+          "$ref": "#/components/schemas/AddressFieldConfigRes"
+        phone:
+          "$ref": "#/components/schemas/FieldConfigRes"
+        email:
+          "$ref": "#/components/schemas/FieldConfigRes"
+      additionalProperties: false
+    FieldConfigWithOutRequiredRes:
+      type: object
+      properties:
+        min:
+          type: integer
+          format: int32
+          nullable: true
+        max:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    FreightInsuranceDetailRes:
+      type: object
+      properties:
+        declaredValue:
+          type: number
+          format: double
+      additionalProperties: false
+    FreightInsuranceDetails:
+      type: object
+      properties:
+        declaredValue:
+          type: number
+          format: double
+      additionalProperties: false
+    GetAvailableServicesRequestBody:
+      required:
+      - destinationPostalCode
+      - pieces
+      - shipDate
+      - totalWeight
+      type: object
+      properties:
+        docketCode:
+          type: string
+          nullable: true
+        shipDate:
+          type: string
+          format: date-time
+        destinationPostalCode:
+          type: string
+        originPostalCode:
+          type: string
+          description: Account's postal code is used if OriginPostalCode is not provided
+            and the shipment is considered an outbound shipment
+          nullable: true
+        totalWeight:
+          type: number
+          format: double
+        pieces:
+          type: integer
+          format: int32
+        packages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PackageRequest"
+          nullable: true
+        isPallet:
+          type: boolean
+      additionalProperties: false
+    GetImportByIdResult:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        dateImported:
+          type: string
+          format: date-time
+        shipments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/GetImportByIdShipment"
+          nullable: true
+      additionalProperties: false
+    GetImportByIdShipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        serviceCode:
+          type: string
+          nullable: true
+        serviceText:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        pieces:
+          type: integer
+          format: int32
+        totalWeight:
+          type: number
+          format: double
+        shipDate:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ShipmentStatus"
+        trackingNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GroupedServiceResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+          nullable: true
+        type:
+          "$ref": "#/components/schemas/ShipmentServiceType"
+        isEnforced:
+          type: boolean
+          nullable: true
+        isSelected:
+          type: boolean
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        subTitle:
+          type: string
+          nullable: true
+        expectedFreightCharge:
+          type: number
+          format: double
+      additionalProperties: false
+    LabelFormat:
+      enum:
+      - pdf
+      - zpl
+      - tpcl
+      type: string
+    LabelSize:
+      enum:
+      - fourByFour
+      - letter
+      - fourBySix
+      type: string
+    LabelSize1:
+      enum:
+      - fourByFour
+      - letter
+      type: string
+    LabelType:
+      enum:
+      - pdf
+      - zpl
+      - tpcl
+      - zplReturn
+      type: string
+    LoadOrdersResponse:
+      type: object
+      properties:
+        importId:
+          type: integer
+          format: int32
+        shipments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ShipmentResponse"
+          nullable: true
+      additionalProperties: false
+    ManifestResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        dateCreated:
+          type: string
+          format: date-time
+        dateClosed:
+          type: string
+          format: date-time
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ManifestStatus"
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+        door:
+          type: string
+          nullable: true
+        trailerNumber:
+          type: string
+          nullable: true
+        shipmentsAssigned:
+          type: integer
+          format: int32
+        shipments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ShipmentResponse"
+          nullable: true
+      additionalProperties: false
+    ManifestSortBy:
+      enum:
+      - dateClosed
+      type: string
+    ManifestsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        dateCreated:
+          type: string
+          format: date-time
+        dateClosed:
+          type: string
+          format: date-time
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ManifestStatus"
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+        door:
+          type: string
+          nullable: true
+        trailerNumber:
+          type: string
+          nullable: true
+        shipmentsAssigned:
+          type: integer
+          format: int32
+        isContinuousType:
+          type: boolean
+      additionalProperties: false
+    ManifestsResponseListPagedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ManifestsResponse"
+          nullable: true
+        pageNumber:
+          type: integer
+          format: int32
+          nullable: true
+        pageSize:
+          type: integer
+          format: int32
+          nullable: true
+        pageCount:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        isFirstPage:
+          type: boolean
+        isLastPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+      additionalProperties: false
+    ManifestStatus:
+      enum:
+      - open
+      - closed
+      type: string
+    Model:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        dateImported:
+          type: string
+          format: date-time
+        shipmentCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    MyCustomerAccountResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/Address"
+        dockets:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MyDocketResponse"
+          nullable: true
+        shipToAddresses:
+          type: array
+          items:
+            "$ref": "#/components/schemas/CustomerShipAddressResponse"
+          nullable: true
+        containerTypes:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ContainerTypeResponse"
+          nullable: true
+        availableReferences:
+          type: array
+          items:
+            "$ref": "#/components/schemas/CustomerShipmentReferenceResponse"
+          nullable: true
+        labelTemplate:
+          type: string
+          nullable: true
+        config:
+          "$ref": "#/components/schemas/ConfigRes"
+        isReturnAccount:
+          type: boolean
+      additionalProperties: false
+    MyDocketResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        isDefault:
+          type: boolean
+      additionalProperties: false
+    MyExternalSystemRes:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    OpenManifestRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+        door:
+          type: string
+          nullable: true
+        trailerNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    OrderAs:
+      enum:
+      - asc
+      - desc
+      type: string
+    Origin:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        attentionTo:
+          type: string
+          nullable: true
+        address1:
+          type: string
+          nullable: true
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        isResidential:
+          type: boolean
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PackageRequest:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+        length:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+        isNonStackable:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    PackageResponse:
+      type: object
+      properties:
+        cartonId:
+          type: integer
+          format: int32
+        containerTypeId:
+          type: integer
+          format: int32
+          nullable: true
+        weight:
+          type: number
+          format: double
+          nullable: true
+        width:
+          type: number
+          format: double
+          nullable: true
+        length:
+          type: number
+          format: double
+          nullable: true
+        height:
+          type: number
+          format: double
+          nullable: true
+        isNonStackable:
+          type: boolean
+          nullable: true
+        trackingNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Payment:
+      enum:
+      - prepaid
+      - collect
+      type: string
+    PaymentTermsClass:
+      enum:
+      - prepaid
+      - collect
+      type: string
+    Picklist:
+      required:
+      - lookupKey
+      type: object
+      properties:
+        lookupKey:
+          type: string
+        consigneeCode:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressType"
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        pieces:
+          type: integer
+          format: int32
+          nullable: true
+        totalWeight:
+          type: number
+          format: double
+          nullable: true
+        isPallet:
+          type: boolean
+          nullable: true
+        saidToContain:
+          type: integer
+          format: int32
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
+        descriptionOfGoods:
+          type: string
+          nullable: true
+        paymentTerm:
+          "$ref": "#/components/schemas/Payment"
+        paymentAccount:
+          type: integer
+          format: int32
+          nullable: true
+        ref:
+          type: string
+          nullable: true
+        po:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PickupRequestBody:
+      required:
+      - closingTime
+      - pickupTime
+      - pieces
+      - weight
+      type: object
+      properties:
+        pickupTime:
+          type: string
+        closingTime:
+          type: string
+        pieces:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+        email:
+          type: string
+          nullable: true
+        saveEmailAsDefault:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    PickupRequestRes:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        requestDateTime:
+          type: string
+          format: date-time
+        pickupTime:
+          type: string
+          nullable: true
+        closingTime:
+          type: string
+          nullable: true
+        branchEmail:
+          type: string
+          nullable: true
+        customerEmail:
+          type: string
+          nullable: true
+        shipmentDetail:
+          "$ref": "#/components/schemas/PickupRequestShipmentDetailRes"
+      additionalProperties: false
+    PickupRequestShipmentDetailRes:
+      type: object
+      properties:
+        pieces:
+          type: integer
+          format: int32
+        weight:
+          type: number
+          format: double
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    RateAdditionalChargeResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        hasFlatCharge:
+          type: boolean
+        flatCharge:
+          type: number
+          format: double
+          nullable: true
+        variableCharge:
+          type: number
+          format: double
+          nullable: true
+        isPartiallyAvailable:
+          type: boolean
+          nullable: true
+        partialAvailabilityDetails:
+          type: string
+          nullable: true
+      additionalProperties: false
+    RateAddressRequest:
+      required:
+      - address1
+      - city
+      - country
+      - postalCode
+      - province
+      type: object
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        province:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        isResidential:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    RateResponse:
+      type: object
+      properties:
+        accessorials:
+          type: array
+          items:
+            "$ref": "#/components/schemas/RateAdditionalChargeResponse"
+          nullable: true
+        surcharges:
+          type: array
+          items:
+            "$ref": "#/components/schemas/RateAdditionalChargeResponse"
+          nullable: true
+        accessorialsTotal:
+          type: number
+          format: double
+        surchargesTotal:
+          type: number
+          format: double
+        fuelSurcharge:
+          type: number
+          format: double
+        expectedFreightCharge:
+          type: number
+          format: double
+        totalBeforeTax:
+          type: number
+          format: double
+        taxes:
+          type: number
+          format: double
+        total:
+          type: number
+          format: double
+      additionalProperties: false
+    RateShipmentRequestBody:
+      required:
+      - address
+      - pieces
+      - serviceCode
+      - shipDate
+      - totalWeight
+      type: object
+      properties:
+        serviceCode:
+          type: string
+        address:
+          "$ref": "#/components/schemas/RateAddressRequest"
+        pieces:
+          type: integer
+          format: int32
+        packages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PackageRequest"
+          nullable: true
+        totalWeight:
+          type: number
+          format: double
+        isPallet:
+          type: boolean
+        shipDate:
+          type: string
+          format: date-time
+        shipmentTypeEnum:
+          "$ref": "#/components/schemas/ShipmentTypeEnum"
+        selectedAccessorials:
+          type: array
+          items:
+            type: string
+          nullable: true
+        declaredValue:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    ReferenceResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        shortName:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Shipment"
+          nullable: true
+        pageNumber:
+          type: integer
+          format: int32
+          nullable: true
+        pageSize:
+          type: integer
+          format: int32
+          nullable: true
+        pageCount:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        isFirstPage:
+          type: boolean
+        isLastPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+      additionalProperties: false
+    Result:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Model"
+          nullable: true
+        pageNumber:
+          type: integer
+          format: int32
+          nullable: true
+        pageSize:
+          type: integer
+          format: int32
+          nullable: true
+        pageCount:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        isFirstPage:
+          type: boolean
+        isLastPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+      additionalProperties: false
+    ServicesByDateResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        services:
+          type: array
+          items:
+            "$ref": "#/components/schemas/GroupedServiceResponse"
+          nullable: true
+      additionalProperties: false
+    Shipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        docketId:
+          type: integer
+          format: int32
+        docketCode:
+          type: string
+          nullable: true
+        addressId:
+          type: integer
+          format: int32
+          nullable: true
+        consigneeCode:
+          type: string
+          nullable: true
+        serviceCode:
+          type: string
+          nullable: true
+        serviceText:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        pieces:
+          type: integer
+          format: int32
+        totalWeight:
+          type: number
+          format: double
+        shipDate:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ShipmentStatus"
+        trackingNumber:
+          type: string
+          nullable: true
+        manifestId:
+          type: integer
+          format: int32
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+        po:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ShipmentIds:
+      required:
+      - ids
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+      additionalProperties: false
+    ShipmentReference:
+      required:
+      - id
+      - shortName
+      - value
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        shortName:
+          type: string
+        value:
+          maxLength: 24
+          type: string
+      additionalProperties: false
+      description: "Possible Shipment Reference Types:\r\n\r\n| **id** | **shortName**
+        | **description**                  |\r\n| ------ | ------------- | --------------------------------
+        |\r\n| 1      | REF           | Reference Number                 |\r\n| 2
+        \     | PO            | Purchase Order Number            |\r\n| 3      | CSN
+        \          | Customer Shipment Number         |\r\n| 4      | CMN           |
+        Customer Manifest Number         |\r\n| 5      | BOL           | Bill Of Lading
+        \                  |\r\n| 6      | CPO           | Consignee PO                     |\r\n|
+        7      | SREF          | Shipper Reference                |\r\n| 8      |
+        DREF          | Distribution Reference           |\r\n| 9      | PNO           |
+        Product Number                   |\r\n| 10     | CID           | Carton ID
+        \                       |\r\n| 11     | STO           | Store                            |\r\n|
+        12     | LID           | Load ID                          |\r\n| 13     |
+        RTYPE         | Indigo HU Returns Type           |\r\n| 14     | DO            |
+        Delivery Order                   |\r\n| 15     | BC            | Barcode                          |\r\n|
+        16     | CLIC          | Credo Licence                    |\r\n| 17     |
+        AWB           | Agent Waybill                    |\r\n| 18     | SUBS          |
+        Sub-Shipment                     |\r\n| 19     | POS           | Purchase
+        Order Number - Special  |\r\n| 20     | ASN           | ASN                              |\r\n|
+        21     | PTMN          | Pickup Trailer – Manifest Number |\r\n| 22     |
+        RMA           | RMA Number                       |\r\n<br/>"
+    ShipmentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        docketId:
+          type: integer
+          format: int32
+        docketCode:
+          type: string
+          nullable: true
+        accountId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+          deprecated: true
+        accountCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+          deprecated: true
+        consigneeId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+          deprecated: true
+        addressId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+        consigneeCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+        serviceCode:
+          type: string
+          nullable: true
+        serviceText:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        pieces:
+          type: integer
+          format: int32
+        totalWeight:
+          type: number
+          format: double
+        shipDate:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ShipmentStatus"
+        trackingNumber:
+          type: string
+          nullable: true
+        manifestId:
+          type: integer
+          format: int32
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+        po:
+          type: string
+          nullable: true
+        origin:
+          "$ref": "#/components/schemas/Origin"
+        destination:
+          "$ref": "#/components/schemas/Destination"
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        descriptionOfGoods:
+          type: string
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
+        packages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PackageResponse"
+          nullable: true
+        references:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ReferenceResponse"
+          nullable: true
+        isPallet:
+          type: boolean
+        saidToContain:
+          type: integer
+          format: int32
+          nullable: true
+        accessorials:
+          "$ref": "#/components/schemas/AccessorialsRes"
+        rate:
+          "$ref": "#/components/schemas/RateResponse"
+        paymentTerm:
+          "$ref": "#/components/schemas/PaymentTermsClass"
+        paymentAccount:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ShipmentResponseLite:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        docketId:
+          type: integer
+          format: int32
+        docketCode:
+          type: string
+          nullable: true
+        accountId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+          deprecated: true
+        accountCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+          deprecated: true
+        consigneeId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+          deprecated: true
+        addressId:
+          type: integer
+          description: This is the saved address id in ATS System used to associate
+            shipments to a saved address
+          format: int32
+          nullable: true
+        consigneeCode:
+          maxLength: 24
+          type: string
+          description: This is the Shipper's Consignee Id that the Shipper would use
+            to refer to this Consignee
+          nullable: true
+        serviceCode:
+          type: string
+          nullable: true
+        serviceText:
+          type: string
+          nullable: true
+        address:
+          "$ref": "#/components/schemas/AddressRequest"
+        pieces:
+          type: integer
+          format: int32
+        totalWeight:
+          type: number
+          format: double
+        shipDate:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ShipmentStatus"
+        trackingNumber:
+          type: string
+          nullable: true
+        manifestId:
+          type: integer
+          format: int32
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+        po:
+          type: string
+          nullable: true
+        origin:
+          "$ref": "#/components/schemas/Origin"
+        destination:
+          "$ref": "#/components/schemas/Destination"
+      additionalProperties: false
+    ShipmentServiceType:
+      enum:
+      - notSpecified
+      - ground
+      - air
+      - us
+      - truckload
+      - international
+      type: string
+    ShipmentsResponse:
+      type: object
+      properties:
+        totals:
+          "$ref": "#/components/schemas/ShipmentsTotals"
+        shipments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ShipmentResponseLite"
+          nullable: true
+      additionalProperties: false
+    ShipmentsResponsePagedResponse:
+      type: object
+      properties:
+        data:
+          "$ref": "#/components/schemas/ShipmentsResponse"
+        pageNumber:
+          type: integer
+          format: int32
+          nullable: true
+        pageSize:
+          type: integer
+          format: int32
+          nullable: true
+        pageCount:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        isFirstPage:
+          type: boolean
+        isLastPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+      additionalProperties: false
+    ShipmentStatus:
+      enum:
+      - staged
+      - created
+      - manifested
+      - voided
+      type: string
+    ShipmentsTotals:
+      type: object
+      properties:
+        created:
+          type: integer
+          format: int32
+        createdWithTodaysShipDate:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ShipmentTypeEnum:
+      enum:
+      - regular
+      - return
+      type: string
+    ShipToAddressConfigRes:
+      type: object
+      properties:
+        fieldConfigs:
+          "$ref": "#/components/schemas/FieldConfigsRes"
+      additionalProperties: false
+    SortBy:
+      enum:
+      - id
+      - shipDate
+      - name
+      - docketCode
+      - pieces
+      - totalWeight
+      - serviceCode
+      - accountCode
+      - fromAccountCode
+      - consigneeCode
+      - attentionTo
+      - address1
+      - address2
+      - city
+      - province
+      - postalCode
+      - country
+      - trackingNumber
+      - status
+      - reference
+      - po
+      type: string
+    SortBy_v1_2:
+      enum:
+      - id
+      - shipDate
+      - name
+      - docketCode
+      - pieces
+      - totalWeight
+      - serviceCode
+      - consigneeCode
+      - attentionTo
+      - address1
+      - address2
+      - city
+      - province
+      - postalCode
+      - trackingNumber
+      - status
+      - reference
+      - po
+      type: string
+    Source:
+      enum:
+      - wineDirect
+      type: string
+    TimeReleaseDetailRes:
+      type: object
+      properties:
+        type:
+          "$ref": "#/components/schemas/TimeReleaseTypeRes"
+        date1:
+          type: string
+          format: date-time
+          nullable: true
+        date2:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    TimeReleaseDetails:
+      required:
+      - date1
+      - type
+      type: object
+      properties:
+        type:
+          "$ref": "#/components/schemas/TimeReleaseTypeReq"
+        date1:
+          type: string
+          format: date-time
+        date2:
+          type: string
+          description: Required if `type.value` is `deliverBetween`
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    TimeReleaseType:
+      enum:
+      - deliverBefore
+      - deliverAfter
+      - deliverOn
+      - deliverBetween
+      type: string
+    TimeReleaseTypeReq:
+      type: object
+      properties:
+        value:
+          "$ref": "#/components/schemas/TimeReleaseType"
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TimeReleaseTypeRes:
+      type: object
+      properties:
+        value:
+          "$ref": "#/components/schemas/TimeReleaseType"
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateManifestRequest:
+      type: object
+      properties:
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+        door:
+          type: string
+          nullable: true
+        trailerNumber:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        status:
+          "$ref": "#/components/schemas/ManifestStatus"
+      additionalProperties: false
+    ValidatePostalCodeResponse:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+        isValidPostalCode:
+          type: boolean
+        isValidCity:
+          type: boolean
+        isValidProvince:
+          type: boolean
+        isValidProvincePostalCodeCombo:
+          type: boolean
+        city:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        cities:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.ats.healthcare/oauth2/aus681w39m699cyHD5d7/v1/authorize
+          tokenUrl: https://login.ats.healthcare/oauth2/aus681w39m699cyHD5d7/v1/token
+          scopes:
+            Api.Read.All: Access all read operations
+            Api.Write.All: Access all write operations
+security:
+- oauth2:
+  - App.Read.All
+  - App.Write.All
