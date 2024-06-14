@@ -1,0 +1,22 @@
+name: Sync API definition to ReadMe
+
+# Run workflow for every push to the openapi.yml file
+on:
+  push:
+    paths:
+      - 'openAPI/api.yml'
+
+jobs:  
+  sync-readme-api-definition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
+
+      # Run GitHub Action to sync OpenAPI file at ./path-to-file.json
+      - name: GitHub Action
+        # We recommend specifying a fixed version, i.e. @v8
+        # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
+        uses: readmeio/rdme@v8
+        with:
+          rdme: openapi ./openAPI/api.yml --key=${{ secrets.README_API_KEY }} --id=${{ secrets.DEFINITION_ID }}
