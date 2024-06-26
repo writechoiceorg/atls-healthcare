@@ -1007,7 +1007,7 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get a List of Shipments
+      summary: Get a List of Shipments v1.2
       operationId: get-shipments-v1-2
       parameters:
       - name: status
