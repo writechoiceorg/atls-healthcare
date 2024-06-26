@@ -1,4 +1,3 @@
----
 openapi: 3.0.1
 info:
   title: ATS API
@@ -15,38 +14,47 @@ paths:
         in: query
         schema:
           type: string
+        description: The name of the individual or entity to whom the address belongs.
       - name: AttentionTo
         in: query
         schema:
           type: string
+        description: The name of the person to whom attention should be directed at this address.
       - name: Address1
         in: query
         schema:
           type: string
+        description: The primary address line for the location.
       - name: Address2
         in: query
         schema:
           type: string
+        description: The secondary address line for the location, if applicable.
       - name: City
         in: query
         schema:
           type: string
+        description: The city in which the address is located.
       - name: Province
         in: query
         schema:
           type: string
+        description: The province or state in which the address is located.
       - name: PostalCode
         in: query
         schema:
           type: string
+        description: The postal code or ZIP code for the address.
       - name: Phone
         in: query
         schema:
           type: string
+        description: The phone number associated with the address.
       - name: Email
         in: query
         schema:
           type: string
+        description: The email address associated with the address.
       responses:
         '200':
           description: Success
@@ -59,10 +67,12 @@ paths:
       parameters:
       - name: address1
         in: query
+        description: The primary address line for the residential location.
         schema:
           type: string
       - name: postalCode
         in: query
+        description: The postal code or ZIP code for the residential address.
         schema:
           type: string
       responses:
@@ -79,14 +89,17 @@ paths:
         in: query
         schema:
           type: string
+        description: The postal code or ZIP code to be validated.
       - name: province
         in: query
         schema:
           type: string
+        description: The province or state associated with the postal code.
       - name: city
         in: query
         schema:
           type: string
+        description: The city associated with the postal code.
       responses:
         '200':
           description: Success
@@ -2928,26 +2941,35 @@ components:
       properties:
         isValid:
           type: boolean
+          description: Indicates if the postal code is valid.
         isValidPostalCode:
           type: boolean
+          description: Indicates if the provided postal code is valid.
         isValidCity:
           type: boolean
+          description: Indicates if the provided city is valid for the postal code.
         isValidProvince:
           type: boolean
+          description: Indicates if the provided province is valid for the postal code.
         isValidProvincePostalCodeCombo:
           type: boolean
+          description: Indicates if the combination of province and postal code is valid.
         city:
           type: string
           nullable: true
+          description: The city associated with the postal code, if valid.
         province:
           type: string
           nullable: true
+          description: The province associated with the postal code, if valid.
         cities:
           type: array
           items:
             type: string
           nullable: true
+          description: A list of possible cities for the given postal code.
       additionalProperties: false
+
   securitySchemes:
     oauth2:
       type: oauth2
