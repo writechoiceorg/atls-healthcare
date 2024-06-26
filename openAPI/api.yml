@@ -483,6 +483,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest to generate the report for.
         required: true
         schema:
           type: integer
@@ -499,6 +500,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest to be exported.
         required: true
         schema:
           type: integer
