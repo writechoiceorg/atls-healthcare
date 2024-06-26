@@ -231,7 +231,7 @@ paths:
         schema:
           type: boolean
           default: false
-        description: Indicates whether the label should include a logo.
+        description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
           description: Success
@@ -783,6 +783,7 @@ paths:
       - Shipments
       parameters:
       - name: trackingNumber
+        description: The tracking number associated with the shipment.
         in: path
         required: true
         schema:
@@ -811,6 +812,8 @@ paths:
     get:
       tags:
       - Shipments
+      summary: Get Shipment by WineDirect Order Number
+      operationId: get-shipment-by-winedirect-order-number
       parameters:
       - name: orderNumber
         in: path
@@ -885,7 +888,7 @@ paths:
         schema:
           type: boolean
           default: false
-        description: Indicates whether the label should include a logo.
+        description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
           description: Returns ZPL string by default, otherwise PDF string binary
@@ -909,28 +912,31 @@ paths:
       parameters:
       - name: shipmentId
         in: path
+        description: The unique identifier for the shipment.
         required: true
         schema:
           type: integer
           format: int32
       - name: Type
         in: query
+        description: The format of the label to be generated.
         schema:
           "$ref": "#/components/schemas/LabelFormat"
       - name: Size
         in: query
+        description: The size of the label to be generated.
         schema:
           "$ref": "#/components/schemas/LabelSize1"
       - name: Invert
         in: query
         schema:
           type: boolean
-          description: Invert label (rotate 180 degrees)
+          description: Indicates whether the label should be inverted.
       - name: IncludeLogo
         in: query
         schema:
           type: boolean
-          description: Include ATS logo in label
+          description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
           description: Returns ZPL string by default, otherwise PDF string binary
