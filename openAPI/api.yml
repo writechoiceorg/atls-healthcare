@@ -955,7 +955,7 @@ paths:
     post:
       tags:
       - Shipments
-      summary: Get available services
+      summary: Get Available Services
       requestBody:
         content:
           application/json:
@@ -984,7 +984,7 @@ paths:
     post:
       tags:
       - Shipments
-      summary: Rate shipment
+      summary: Rate Shipment
       requestBody:
         content:
           application/json:
@@ -1007,37 +1007,46 @@ paths:
     get:
       tags:
       - Shipments
+      summary: Get a List of Shipments
+      operationId: get-shipments-v1-2
       parameters:
       - name: status
         in: query
+        description: Filter shipments by their status.
         schema:
           "$ref": "#/components/schemas/ShipmentStatus"
       - name: reference
         in: query
+        description: Filter shipments by reference numbers.
         schema:
           type: array
           items:
             type: string
       - name: purchaseOrder
         in: query
+        description: Filter shipments by purchase order number.
         schema:
           type: string
       - name: name
         in: query
+        description: Filter shipments by name.
         schema:
           type: string
       - name: PageNumber
         in: query
+        description: The page number for pagination.
         schema:
           type: integer
           format: int32
       - name: PageSize
         in: query
+        description: The number of items per page for pagination.
         schema:
           type: integer
           format: int32
       - name: sort
         in: query
+        description: The field by which to sort the results.
         schema:
           "$ref": "#/components/schemas/SortBy_v1_2"
       - name: order
