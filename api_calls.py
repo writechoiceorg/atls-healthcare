@@ -42,7 +42,7 @@ def get_token():
 
 
 def request_pickup():
-    pickup_url = f"{url}/v1/pickupRequests"
+    pickup_url = f"{url}/v1/PickupRequests"
     data = {
         "pickupTime": "string",
         "closingTime": "string",
