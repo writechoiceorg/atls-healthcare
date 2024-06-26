@@ -512,6 +512,8 @@ paths:
     get:
       tags:
       - MyAccount
+      summary: Get Customer Account Details
+      operationId: get-customer-account-details
       responses:
         '200':
           description: Success
@@ -1172,31 +1174,41 @@ components:
           minLength: 0
           type: string
           nullable: true
+          description: The name of the individual or entity associated with the address.
         attentionTo:
           type: string
           nullable: true
+          description: The name of the person to whom attention should be directed at this address.
         address1:
           type: string
           nullable: true
+          description: The primary address line for the location.
         address2:
           type: string
           nullable: true
+          description: The secondary address line for the location, if applicable.
         city:
           type: string
           nullable: true
+          description: The city in which the address is located.
         province:
           type: string
           nullable: true
+          description: The province or state in which the address is located.
         country:
           type: string
           nullable: true
+          description: The country in which the address is located.
         postalCode:
           type: string
           nullable: true
+          description: The postal code or ZIP code for the address.
         isResidential:
           type: boolean
           nullable: true
+          description: Indicates if the address is residential.
       additionalProperties: false
+
     AddressFieldConfigRes:
       type: object
       properties:
@@ -1380,10 +1392,13 @@ components:
       properties:
         shipToAddress:
           "$ref": "#/components/schemas/ShipToAddressConfigRes"
+          description: Configuration settings for the ship-to address.
         externalSystem:
           "$ref": "#/components/schemas/MyExternalSystemRes"
+          description: Configuration settings for the external system.
         hideRate:
           type: boolean
+          description: Indicates whether to hide the rate information.
       additionalProperties: false
     ContainerTypeResponse:
       type: object
@@ -1391,24 +1406,31 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the container type.
         name:
           type: string
           nullable: true
+          description: The name of the container type.
         length:
           type: integer
           format: int32
+          description: The length of the container type.
         width:
           type: integer
           format: int32
+          description: The width of the container type.
         height:
           type: integer
           format: int32
+          description: The height of the container type.
         weight:
           type: number
           format: double
+          description: The weight of the container type.
         isNonStackable:
           type: boolean
           nullable: true
+          description: Indicates if the container type is non-stackable.
       additionalProperties: false
     CreateShipmentRequestBody:
       required:
@@ -1539,17 +1561,22 @@ components:
         lookupCode:
           type: string
           nullable: true
+          description: The lookup code associated with the ship-to address.
         address:
           "$ref": "#/components/schemas/AddressRequest"
+          description: The address details for the ship-to address.
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the ship-to address.
         email:
           type: string
           nullable: true
+          description: The email address associated with the ship-to address.
         instructions:
           type: string
           nullable: true
+          description: Special instructions for the ship-to address.
       additionalProperties: false
     CustomerShipAddressResponse:
       type: object
@@ -1557,20 +1584,26 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the ship-to address.
         lookupCode:
           type: string
           nullable: true
+          description: The lookup code associated with the ship-to address.
         address:
           "$ref": "#/components/schemas/Address"
+          description: The address details for the ship-to address.
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the ship-to address.
         email:
           type: string
           nullable: true
+          description: The email address associated with the ship-to address.
         instructions:
           type: string
           nullable: true
+          description: Special instructions for the ship-to address.
       additionalProperties: false
     CustomerShipmentReferenceResponse:
       type: object
@@ -1578,36 +1611,46 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the shipment reference.
         prioritySequence:
           type: integer
           format: int32
           nullable: true
+          description: The priority sequence of the shipment reference.
         isRequired:
           type: boolean
           nullable: true
+          description: Indicates if the shipment reference is required.
         shortName:
           type: string
           nullable: true
+          description: The short name of the shipment reference.
         longName:
           type: string
           nullable: true
+          description: The long name of the shipment reference.
         fieldValidationRegex:
           type: string
           nullable: true
+          description: The regular expression used for field validation.
         fieldMinLength:
           type: integer
           format: int32
           nullable: true
+          description: The minimum length of the field value.
         fieldMaxLength:
           type: integer
           format: int32
           nullable: true
+          description: The maximum length of the field value.
         fieldType:
           type: string
           nullable: true
+          description: The type of the field.
         hasStrictFieldValidation:
           type: boolean
           nullable: true
+          description: Indicates if strict field validation is applied.
       additionalProperties: false
     Destination:
       type: object
@@ -2046,41 +2089,52 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the customer account.
         name:
           type: string
           nullable: true
+          description: The name of the customer account.
         email:
           type: string
           nullable: true
+          description: The email address associated with the customer account.
         address:
           "$ref": "#/components/schemas/Address"
+          description: The address details for the customer account.
         dockets:
           type: array
           items:
             "$ref": "#/components/schemas/MyDocketResponse"
           nullable: true
+          description: A list of dockets associated with the customer account.
         shipToAddresses:
           type: array
           items:
             "$ref": "#/components/schemas/CustomerShipAddressResponse"
           nullable: true
+          description: A list of ship-to addresses for the customer account.
         containerTypes:
           type: array
           items:
             "$ref": "#/components/schemas/ContainerTypeResponse"
           nullable: true
+          description: A list of container types available for the customer account.
         availableReferences:
           type: array
           items:
             "$ref": "#/components/schemas/CustomerShipmentReferenceResponse"
           nullable: true
+          description: A list of available shipment references for the customer account.
         labelTemplate:
           type: string
           nullable: true
+          description: The label template used for the customer account.
         config:
           "$ref": "#/components/schemas/ConfigRes"
+          description: Configuration settings for the customer account.
         isReturnAccount:
           type: boolean
+          description: Indicates if the account is a return account.
       additionalProperties: false
     MyDocketResponse:
       type: object
@@ -2088,14 +2142,18 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the docket.
         code:
           type: string
           nullable: true
+          description: The code associated with the docket.
         description:
           type: string
           nullable: true
+          description: A description of the docket.
         isDefault:
           type: boolean
+          description: Indicates if the docket is the default docket.
       additionalProperties: false
     MyExternalSystemRes:
       type: object
