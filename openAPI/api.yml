@@ -1272,23 +1272,27 @@ components:
       properties:
         type:
           "$ref": "#/components/schemas/AppointmentTypeReq"
+          description: The type of appointment associated with the shipment.
         date:
           type: string
           format: date-time
           nullable: true
+          description: The date of the appointment.
         time:
           type: string
           nullable: true
+          description: The time of the appointment.
         confirmationCode:
           type: string
           nullable: true
+          description: The confirmation code for the appointment.
       additionalProperties: false
     AppointmentType:
       enum:
       - preBooked
       - request
       type: string
-      description: The type of appointment, either preBooked or request.
+      description: The type of appointment, either `preBooked` or `request`.
     AppointmentTypeReq:
       type: object
       properties:
@@ -1297,6 +1301,7 @@ components:
         description:
           type: string
           nullable: true
+          description: A description of the appointment type.
       additionalProperties: false
     AppointmentTypeRes:
       type: object
@@ -1371,80 +1376,87 @@ components:
         docketCode:
           maxLength: 24
           type: string
+          description: The code associated with the shipment docket.
         accountId:
           type: integer
-          description: This is the saved address id in ATS System used to associate
-            shipments to a saved address
+          description: This is the saved address ID in the ATS System used to associate shipments to a saved address.
           format: int32
           nullable: true
           deprecated: true
         accountCode:
           maxLength: 24
           type: string
-          description: This is the Shipper's Consignee Id that the Shipper would use
-            to refer to this Consignee
+          description: This is the Shipper's Consignee ID that the Shipper would use to refer to this Consignee.
           nullable: true
           deprecated: true
         addressId:
           type: integer
-          description: This is the saved address id in ATS System used to associate
-            shipments to a saved address
+          description: This is the saved address ID in the ATS System used to associate shipments to a saved address.
           format: int32
           nullable: true
         consigneeCode:
           maxLength: 24
           type: string
-          description: This is the Shipper's Consignee Id that the Shipper would use
-            to refer to this Consignee
+          description: This is the Shipper's Consignee ID that the Shipper would use to refer to this Consignee.
           nullable: true
         address:
           "$ref": "#/components/schemas/AddressRequest"
+          description: The address details for the shipment.
         phone:
           maxLength: 24
           type: string
           nullable: true
+          description: The phone number associated with the shipment.
         email:
           maxLength: 50
           type: string
           nullable: true
+          description: The email address associated with the shipment.
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         isPallet:
           type: boolean
+          description: Indicates if the shipment is palletized.
         saidToContain:
           type: integer
-          description: The number of items on the pallet
           format: int32
           nullable: true
+          description: The number of items on the pallet.
         instructions:
           maxLength: 35
           type: string
           nullable: true
+          description: Special instructions for the shipment.
         descriptionOfGoods:
           maxLength: 35
           type: string
           nullable: true
+          description: A description of the goods in the shipment.
         packages:
           type: array
           items:
             "$ref": "#/components/schemas/PackageRequest"
           nullable: true
+          description: A list of packages included in the shipment.
         shipDate:
           type: string
           format: date-time
+          description: The date and time when the shipment is to be shipped.
         accessorials:
           type: array
           items:
             type: string
-          description: "The accessorials requested for the shipment. Should be a list
-            of two character codes. Refer to the [Accessorials](ref:accessorials) reference page for a full list of available accessorials."
+          description: The accessorials requested for the shipment. Should be a list of two character codes. Refer to the [Accessorials](ref:accessorials) reference page for a full list of available accessorials.
           nullable: true
         accessorialDetails:
           "$ref": "#/components/schemas/AccessorialDetails"
+          description: Detailed information about the requested accessorial services.
         references:
           type: array
           description: A list of references to be associated with the shipment. Refer to the [Shipment Reference Types](ref:shipment-reference-types) page for a reference of possible values.
@@ -1454,22 +1466,23 @@ components:
         serviceCode:
           maxLength: 2
           type: string
-          description: "The service code for the shipment. Needs to be one of the two character codes found on the [Service Codes](service-codes) reference page."
+          description: The service code for the shipment. Needs to be one of the two character codes found on the [Service Codes](service-codes) reference page.
         source:
           "$ref": "#/components/schemas/Source"
+          description: The source details for the shipment.
         groupBy:
           maxLength: 50
           type: string
-          description: A user defined free form field used to group/consolidate shipments.
-            If defined, shipment will consolidate based on this field.
+          description: A user-defined free form field used to group/consolidate shipments. If defined, shipment will consolidate based on this field.
           nullable: true
         paymentTerm:
           "$ref": "#/components/schemas/PaymentTermsClass"
+          description: The payment terms for the shipment.
         paymentAccount:
           type: integer
-          description: Required when PaymentTerm is Collect. Ignored otherwise.
           format: int32
           nullable: true
+          description: Required when PaymentTerm is Collect. Ignored otherwise.
       additionalProperties: false
     CustomerShipAddressRequest:
       required:
@@ -1658,6 +1671,7 @@ components:
         declaredValue:
           type: number
           format: double
+          description: The declared value of the freight for insurance purposes.
       additionalProperties: false
     GetAvailableServicesRequestBody:
       required:
@@ -3048,14 +3062,16 @@ components:
       properties:
         type:
           "$ref": "#/components/schemas/TimeReleaseTypeReq"
+          description: The type of time release associated with the shipment.
         date1:
           type: string
           format: date-time
+          description: The first date associated with the time release.
         date2:
           type: string
-          description: Required if `type.value` is `deliverBetween`
           format: date-time
           nullable: true
+          description: The second date associated with the time release. Required if `type.value` is `deliverBetween`.
       additionalProperties: false
     TimeReleaseType:
       enum:
@@ -3064,6 +3080,7 @@ components:
       - deliverOn
       - deliverBetween
       type: string
+      description: The type of time release for the delivery, indicating whether the delivery should occur before, after, on, or between specific dates.
     TimeReleaseTypeReq:
       type: object
       properties:
@@ -3072,6 +3089,7 @@ components:
         description:
           type: string
           nullable: true
+          description: A description of the time release type.
       additionalProperties: false
     TimeReleaseTypeRes:
       description: The type of time release associated with the shipment.
