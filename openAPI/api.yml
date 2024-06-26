@@ -597,8 +597,8 @@ paths:
     post:
       tags:
       - MyAccount
-      summary: Import addresses
-      description: Import addresses
+      summary: Import Addresses
+      operationId: import-addresses
       requestBody:
         content:
           multipart/form-data:
@@ -606,6 +606,7 @@ paths:
               type: object
               properties:
                 addressesCsvFile:
+                  description: The file containing the addresses to be imported.
                   type: string
                   format: binary
             encoding:
@@ -624,6 +625,8 @@ paths:
     get:
       tags:
       - MyAccount
+      summary: Export Addresses
+      operationId: export-addresses
       responses:
         '200':
           description: Success
