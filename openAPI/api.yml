@@ -717,6 +717,7 @@ paths:
       - name: shipmentId
         in: path
         required: true
+        description: The unique identifier for the shipment.
         schema:
           type: integer
           format: int32
@@ -748,6 +749,7 @@ paths:
       - name: shipmentId
         in: path
         required: true
+        description: The unique identifier for the shipment.
         schema:
           type: integer
           format: int32
@@ -813,6 +815,7 @@ paths:
       - name: orderNumber
         in: path
         required: true
+        description: The order number associated with the WineDirect shipment.
         schema:
           type: integer
           format: int32
@@ -854,29 +857,35 @@ paths:
         in: query
         schema:
           type: string
+        description: The tracking number for the shipment. If it includes the package number, the label for the individual package is returned.
       - name: shipmentId
         in: query
         schema:
           type: integer
           format: int32
+        description: The unique identifier for the shipment. If provided, the labels for the shipment (including all packages) are returned.
       - name: type
         in: query
         schema:
           "$ref": "#/components/schemas/LabelType"
+        description: The type of label to be generated.
       - name: size
         in: query
         schema:
           "$ref": "#/components/schemas/LabelSize"
+        description: The size of the label to be generated.
       - name: invert
         in: query
         schema:
           type: boolean
           default: false
+        description: Indicates whether the label should be inverted.
       - name: includeLogo
         in: query
         schema:
           type: boolean
           default: false
+        description: Indicates whether the label should include a logo.
       responses:
         '200':
           description: Returns ZPL string by default, otherwise PDF string binary
