@@ -188,6 +188,7 @@ paths:
         schema:
           type: integer
           format: int32
+        description: The unique identifier for the shipment import.
       responses:
         '200':
           description: Success
@@ -1722,14 +1723,17 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the import.
         dateImported:
           type: string
           format: date-time
+          description: The date and time when the import was created.
         shipments:
           type: array
           items:
             "$ref": "#/components/schemas/GetImportByIdShipment"
           nullable: true
+          description: A list of shipments associated with the import.
       additionalProperties: false
     GetImportByIdShipment:
       type: object
@@ -1737,29 +1741,38 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the shipment.
         serviceCode:
           type: string
           nullable: true
+          description: The code for the type of service used for the shipment.
         serviceText:
           type: string
           nullable: true
+          description: A description of the type of service used for the shipment.
         address:
           "$ref": "#/components/schemas/AddressRequest"
+          description: The address details for the shipment.
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         shipDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the shipment was shipped.
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
+          description: The current status of the shipment.
         trackingNumber:
           type: string
           nullable: true
+          description: The tracking number for the shipment.
       additionalProperties: false
     GroupedServiceResponse:
       type: object
