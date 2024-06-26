@@ -120,10 +120,12 @@ paths:
           "$ref": "#/components/schemas/OrderAs"
       - name: PaginationQuery.PageNumber
         in: query
+        description: The page number for pagination.
         schema:
           type: integer
           format: int32
       - name: PaginationQuery.PageSize
+        description: The number of items per page for pagination.
         in: query
         schema:
           type: integer
@@ -143,11 +145,13 @@ paths:
       parameters:
       - name: validateOnly
         in: query
+        description: If true, only validate the orders or picklists without importing.
         schema:
           type: boolean
           default: false
       - name: addToContinuousManifest
         in: query
+        description: If true, add the imported orders or picklists to the continuous manifest.
         schema:
           type: boolean
           default: false
@@ -160,6 +164,7 @@ paths:
                 file:
                   type: string
                   format: binary
+                  description: The file containing the orders or picklists to be imported.
             encoding:
               file:
                 style: form
@@ -1065,13 +1070,16 @@ components:
           items:
             type: string
           nullable: true
+          description: A list of accessorial values.
         labels:
           type: array
           items:
             type: string
           nullable: true
+          description: A list of labels for the accessorial values.
         details:
           "$ref": "#/components/schemas/AccessorialDetailsRes"
+          description: Detailed information about the accessorial services.
       additionalProperties: false
     AdditionalChargeResponse:
       type: object
@@ -1166,35 +1174,45 @@ components:
         name:
           maxLength: 35
           type: string
+          description: The name of the individual or entity associated with the address.
         attentionTo:
           maxLength: 35
           type: string
           nullable: true
+          description: The name of the person to whom attention should be directed at this address.
         address1:
           maxLength: 35
           type: string
+          description: The primary address line for the location.
         address2:
           maxLength: 35
           type: string
           nullable: true
+          description: The secondary address line for the location, if applicable.
         city:
           maxLength: 35
           type: string
+          description: The city in which the address is located.
         province:
           maxLength: 2
           type: string
-          description: Two character abbreviation. E.g. 'BC' for British Columbia
+          description: >-
+            Two character abbreviation. 
+            
+            <small>Example: 'BC' for British Columbia.</small>
         postalCode:
           maxLength: 7
           minLength: 6
           type: string
+          description: The postal code or ZIP code for the address.
         country:
           maxLength: 2
           type: string
-          description: 'Country abbreviation. Accepted value: ''CA'' for Canada.'
+          description: 'Country abbreviation. Accepted value: `CA` for Canada.'
         isResidential:
           type: boolean
           nullable: true
+          description: Indicates if the address is residential.
       additionalProperties: false
     AddressType:
       type: object
@@ -1235,13 +1253,16 @@ components:
         confirmationCode:
           type: string
           nullable: true
+          description: The confirmation code for the appointment.
         date:
           type: string
           format: date-time
           nullable: true
+          description: The date of the appointment.
         time:
           type: string
           nullable: true
+          description: The time of the appointment.
       additionalProperties: false
     AppointmentDetails:
       required:
@@ -1266,6 +1287,7 @@ components:
       - preBooked
       - request
       type: string
+      description: The type of appointment, either preBooked or request.
     AppointmentTypeReq:
       type: object
       properties:
@@ -1277,12 +1299,14 @@ components:
       additionalProperties: false
     AppointmentTypeRes:
       type: object
+      description: The type of appointment associated with the shipment.
       properties:
         value:
           "$ref": "#/components/schemas/AppointmentType"
         description:
           type: string
           nullable: true
+          description: A description of the appointment type.
       additionalProperties: false
     AvailableServiceResponse:
       type: object
@@ -1542,40 +1566,52 @@ components:
       additionalProperties: false
     Destination:
       type: object
+      description: Details of the destination address where the shipment is sent to.
       properties:
         name:
           type: string
           nullable: true
+          description: The name of the individual or entity at the destination address.
         attentionTo:
           type: string
           nullable: true
+          description: The name of the person to whom attention should be directed at the destination address.
         address1:
           type: string
           nullable: true
+          description: The primary address line for the destination location.
         address2:
           type: string
           nullable: true
+          description: The secondary address line for the destination location, if applicable.
         city:
           type: string
           nullable: true
+          description: The city in which the destination address is located.
         province:
           type: string
           nullable: true
+          description: The province or state in which the destination address is located.
         country:
           type: string
           nullable: true
+          description: The country in which the destination address is located.
         postalCode:
           type: string
           nullable: true
+          description: The postal code or ZIP code for the destination address.
         isResidential:
           type: boolean
           nullable: true
+          description: Indicates if the destination address is residential.
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the destination address.
         email:
           type: string
           nullable: true
+          description: The email address associated with the destination address.
       additionalProperties: false
     FieldConfigRes:
       type: object
@@ -1584,18 +1620,23 @@ components:
           type: integer
           format: int32
           nullable: true
+          description: The minimum value or length allowed for the field.
         max:
           type: integer
           format: int32
           nullable: true
+          description: The maximum value or length allowed for the field.
         required:
           type: boolean
           nullable: true
+          description: Indicates if the field is required.
       additionalProperties: false
     FieldConfigsRes:
       type: object
+      description: Configuration settings for the address fields.
       properties:
         lookupCode:
+          description: Configuration for the lookup code field.
           "$ref": "#/components/schemas/FieldConfigRes"
         address:
           "$ref": "#/components/schemas/AddressFieldConfigRes"
@@ -1610,16 +1651,19 @@ components:
         min:
           type: integer
           format: int32
+          description: The minimum value or length allowed for the field.
           nullable: true
         max:
           type: integer
           format: int32
+          description: The maximum value or length allowed for the field.
           nullable: true
       additionalProperties: false
     FreightInsuranceDetailRes:
       type: object
       properties:
         declaredValue:
+          description: The declared value of the freight for insurance purposes.
           type: number
           format: double
       additionalProperties: false
@@ -1641,22 +1685,26 @@ components:
         docketCode:
           type: string
           nullable: true
+          description: The code associated with the shipment docket.
         shipDate:
           type: string
           format: date-time
+          description: The date and time when the shipment is to be shipped.
         destinationPostalCode:
           type: string
+          description: The postal code or ZIP code of the shipment's destination.
         originPostalCode:
           type: string
-          description: Account's postal code is used if OriginPostalCode is not provided
-            and the shipment is considered an outbound shipment
+          description: The postal code or ZIP code of the shipment's origin. If not provided, the account's postal code is used, and the shipment is considered an outbound shipment.
           nullable: true
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         packages:
           type: array
           items:
@@ -1664,6 +1712,7 @@ components:
           nullable: true
         isPallet:
           type: boolean
+          description: Indicates if the shipment is palletized.
       additionalProperties: false
     GetImportByIdResult:
       type: object
@@ -1767,8 +1816,10 @@ components:
         importId:
           type: integer
           format: int32
+          description: The unique identifier for the import operation.
         shipments:
           type: array
+          description: The list of shipments imported during the operation.
           items:
             "$ref": "#/components/schemas/ShipmentResponse"
           nullable: true
@@ -1890,12 +1941,15 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the model.
         dateImported:
           type: string
           format: date-time
+          description: The date and time when the model was imported.
         shipmentCount:
           type: integer
           format: int32
+          description: The number of shipments associated with the model.
       additionalProperties: false
     MyCustomerAccountResponse:
       type: object
@@ -1987,61 +2041,80 @@ components:
       - asc
       - desc
       type: string
+      description: The order in which dates should be sorted (ascending or descending).
     Origin:
+      description: Details of the origin address where the shipment is sent from.
       type: object
       properties:
         name:
           type: string
           nullable: true
+          description: The name of the individual or entity at the origin address.
         attentionTo:
           type: string
           nullable: true
+          description: The name of the person to whom attention should be directed at the origin address.
         address1:
           type: string
           nullable: true
+          description: The primary address line for the origin location.
         address2:
           type: string
           nullable: true
+          description: The secondary address line for the origin location, if applicable.
         city:
           type: string
           nullable: true
+          description: The city in which the origin address is located.
         province:
           type: string
           nullable: true
+          description: The province or state in which the origin address is located.
         country:
           type: string
           nullable: true
+          description: The country in which the origin address is located.
         postalCode:
           type: string
           nullable: true
+          description: The postal code or ZIP code for the origin address.
         isResidential:
           type: boolean
           nullable: true
+          description: Indicates if the origin address is residential.
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the origin address.
         email:
           type: string
           nullable: true
+          description: The email address associated with the origin address.
       additionalProperties: false
     PackageRequest:
+      description: A list of packages included in the shipment.
       type: object
       properties:
         weight:
           type: number
           format: double
+          description: The weight of the package.
         width:
           type: number
           format: double
+          description: The width of the package.
         length:
           type: number
           format: double
+          description: The length of the package.
         height:
           type: number
           format: double
+          description: The height of the package.
         isNonStackable:
           type: boolean
           nullable: true
+          description: Indicates if the package is non-stackable.
       additionalProperties: false
     PackageResponse:
       type: object
@@ -2049,32 +2122,40 @@ components:
         cartonId:
           type: integer
           format: int32
+          description: The unique identifier for the carton.
         containerTypeId:
           type: integer
           format: int32
           nullable: true
+          description: The identifier for the type of container.
         weight:
           type: number
           format: double
           nullable: true
+          description: The weight of the package.
         width:
           type: number
           format: double
           nullable: true
+          description: The width of the package.
         length:
           type: number
           format: double
           nullable: true
+          description: The length of the package.
         height:
           type: number
           format: double
           nullable: true
+          description: The height of the package.
         isNonStackable:
           type: boolean
           nullable: true
+          description: Indicates if the package is non-stackable.
         trackingNumber:
           type: string
           nullable: true
+          description: The tracking number for the package.
       additionalProperties: false
     Payment:
       enum:
@@ -2086,6 +2167,7 @@ components:
       - prepaid
       - collect
       type: string
+      description: The payment terms for the shipment, either prepaid or collect.
     Picklist:
       required:
       - lookupKey
@@ -2351,12 +2433,15 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the reference.
         shortName:
           type: string
           nullable: true
+          description: A short name or label for the reference.
         value:
           type: string
           nullable: true
+          description: The value associated with the reference.
       additionalProperties: false
     Response:
       type: object
@@ -2397,28 +2482,37 @@ components:
           items:
             "$ref": "#/components/schemas/Model"
           nullable: true
+          description: The list of items returned in the result set.
         pageNumber:
           type: integer
           format: int32
           nullable: true
+          description: The current page number in the pagination.
         pageSize:
           type: integer
           format: int32
           nullable: true
+          description: The number of items per page in the pagination.
         pageCount:
           type: integer
           format: int32
+          description: The total number of pages in the result set.
         totalItemCount:
           type: integer
           format: int32
+          description: The total number of items in the result set.
         isFirstPage:
           type: boolean
+          description: Indicates if the current page is the first page.
         isLastPage:
           type: boolean
+          description: Indicates if the current page is the last page.
         hasNextPage:
           type: boolean
+          description: Indicates if there is a next page available.
         hasPreviousPage:
           type: boolean
+          description: Indicates if there is a previous page available.
       additionalProperties: false
     ServicesByDateResponse:
       type: object
@@ -2538,9 +2632,11 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the shipment.
         docketId:
           type: integer
           format: int32
+          description: The identifier for the shipment docket.
         docketCode:
           type: string
           nullable: true
@@ -2579,37 +2675,46 @@ components:
           nullable: true
         serviceCode:
           type: string
+          description: The code for the type of service used for the shipment.
           nullable: true
         serviceText:
           type: string
           nullable: true
+          description: A description of the type of service used for the shipment.
         address:
           "$ref": "#/components/schemas/AddressRequest"
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         shipDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the shipment was shipped.
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
         trackingNumber:
           type: string
           nullable: true
+          description: The tracking number for the shipment.
         manifestId:
           type: integer
           format: int32
           nullable: true
+          description: The identifier for the shipment manifest.
         reference:
           type: string
           nullable: true
+          description: The reference number for the shipment.
         po:
           type: string
           nullable: true
+          description: The purchase order number for the shipment.
         origin:
           "$ref": "#/components/schemas/Origin"
         destination:
@@ -2617,15 +2722,19 @@ components:
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the shipment.
         email:
           type: string
           nullable: true
+          description: The email address associated with the shipment.
         descriptionOfGoods:
           type: string
           nullable: true
+          description: A description of the goods in the shipment.
         instructions:
           type: string
           nullable: true
+          description: Special instructions for the shipment.
         packages:
           type: array
           items:
@@ -2638,10 +2747,12 @@ components:
           nullable: true
         isPallet:
           type: boolean
+          description: Indicates if the shipment is palletized.
         saidToContain:
           type: integer
           format: int32
           nullable: true
+          description: The number of items the shipment is said to contain.
         accessorials:
           "$ref": "#/components/schemas/AccessorialsRes"
         rate:
@@ -2651,6 +2762,7 @@ components:
         paymentAccount:
           type: integer
           format: int32
+          description: The payment account associated with the shipment.
           nullable: true
       additionalProperties: false
     ShipmentResponseLite:
@@ -2791,21 +2903,25 @@ components:
       - manifested
       - voided
       type: string
+      description: The current status of the shipment.
     ShipmentsTotals:
       type: object
       properties:
         created:
           type: integer
           format: int32
+          description: The total number of shipments created.
         createdWithTodaysShipDate:
           type: integer
           format: int32
+          description: The total number of shipments created with today's ship date.
       additionalProperties: false
     ShipmentTypeEnum:
       enum:
       - regular
       - return
       type: string
+      description: The type of shipment, either regular or return.
     ShipToAddressConfigRes:
       type: object
       properties:
@@ -2870,10 +2986,12 @@ components:
           type: string
           format: date-time
           nullable: true
+          description: The first date associated with the time release.
         date2:
           type: string
           format: date-time
           nullable: true
+          description: The second date associated with the time release, if applicable.
       additionalProperties: false
     TimeReleaseDetails:
       required:
@@ -2909,11 +3027,14 @@ components:
           nullable: true
       additionalProperties: false
     TimeReleaseTypeRes:
+      description: The type of time release associated with the shipment.
       type: object
       properties:
         value:
           "$ref": "#/components/schemas/TimeReleaseType"
+          description: The value of the time release type.
         description:
+          description: A description of the time release type.
           type: string
           nullable: true
       additionalProperties: false
