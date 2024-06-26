@@ -525,6 +525,8 @@ paths:
     post:
       tags:
       - MyAccount
+      summary: Add a new Ship-To Address
+      operationId: add-ship-to-address
       requestBody:
         content:
           application/json:
@@ -547,9 +549,12 @@ paths:
     put:
       tags:
       - MyAccount
+      summary: Update a Ship-To Address
+      operationId: update-ship-to-address
       parameters:
       - name: addressId
         in: path
+        description: The unique identifier of the ship-to address to be updated.
         required: true
         schema:
           type: integer
@@ -575,9 +580,12 @@ paths:
     delete:
       tags:
       - MyAccount
+      summary: Delete Ship-To Address
+      operationId: delete-ship-to-address
       parameters:
       - name: addressId
         in: path
+        description: The unique identifier of the ship-to address to be deleted.
         required: true
         schema:
           type: integer
