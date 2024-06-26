@@ -209,24 +209,29 @@ paths:
         schema:
           type: integer
           format: int32
+        description: The unique identifier for the import.
       - name: type
         in: query
         schema:
           "$ref": "#/components/schemas/LabelType"
+        description: The type of label to be generated.
       - name: size
         in: query
         schema:
           "$ref": "#/components/schemas/LabelSize"
+        description: The size of the label to be generated.
       - name: invert
         in: query
         schema:
           type: boolean
           default: false
+        description: Indicates whether the label should be inverted.
       - name: includeLogo
         in: query
         schema:
           type: boolean
           default: false
+        description: Indicates whether the label should include a logo.
       responses:
         '200':
           description: Success
