@@ -317,6 +317,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest to which shipments will be added.
         required: true
         schema:
           type: integer
@@ -367,6 +368,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest.
         required: true
         schema:
           type: integer
@@ -394,6 +396,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest.
         required: true
         schema:
           type: integer
@@ -425,6 +428,7 @@ paths:
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest to be closed.
         required: true
         schema:
           type: integer
@@ -3192,15 +3196,19 @@ components:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the pickup is scheduled.
         door:
           type: string
           nullable: true
+          description: The door number where the pickup will occur.
         trailerNumber:
           type: string
           nullable: true
+          description: The trailer number associated with the manifest.
         name:
           type: string
           nullable: true
+          description: The name of the manifest.
         status:
           "$ref": "#/components/schemas/ManifestStatus"
       additionalProperties: false
