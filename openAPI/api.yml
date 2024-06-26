@@ -461,7 +461,8 @@ paths:
 
 
         > 🚧 Warning
-        > 
+
+
         > The **Continuous Manifest** can't be deleted.
       parameters:
       - name: manifestId
