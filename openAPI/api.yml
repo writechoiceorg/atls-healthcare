@@ -1045,10 +1045,11 @@ components:
           type: string
           format: date
           nullable: true
+          description: The due date for the purchase order.
       additionalProperties: false
+    AccessorialDetailsRes:
       description: The accessorials details. If providing accessorial detail, the
         corresponding accessorial code must be included in the `accessorials` list.
-    AccessorialDetailsRes:
       type: object
       properties:
         timeRelease:
@@ -1440,36 +1441,20 @@ components:
           items:
             type: string
           description: "The accessorials requested for the shipment. Should be a list
-            of the following two character codes:\r\n\r\n## Temperature related\r\n|
-            Code | Description                 |\r\n| ---- | ---------------------------
-            |\r\n| TC   | Ambient (Temperature Track) |\r\n| FR   | Cold Chain Keep
-            Moving      |\r\n| HS   | Heated Service              |\r\n| KC   | Keep
-            Cool Service           |\r\n\r\n## Time related\r\n| Code | Description
-            \           |\r\n| ---- | ---------------------- |\r\n| PT   | Appointment
-            \           |\r\n| PD   | PO Expiration/Due Date |\r\n| TR   | Time Release
-            \          |\r\n\r\n## Other\r\n| Code | Description             |\r\n|
-            ---- | ----------------------- |\r\n| BD   | Backdoor Receipts       |\r\n|
-            CS   | Chain of Signature      |\r\n| DG   | Dangerous Goods         |\r\n|
-            PO   | Hard Copy POD Requested |\r\n| HD   | Residential Delivery    |\r\n|
-            TG   | Tailgate                |\r\n| NS   | No Signature Required   |\r\n|
-            IS   | Freight Insurance       |\r\n<br />"
+            of two character codes. Refer to the [Accessorials](ref:accessorials) reference page for a full list of available accessorials."
           nullable: true
         accessorialDetails:
           "$ref": "#/components/schemas/AccessorialDetails"
         references:
           type: array
+          description: A list of references to be associated with the shipment. Refer to the [Shipment Reference Types](ref:shipment-reference-types) page for a reference of possible values.
           items:
             "$ref": "#/components/schemas/ShipmentReference"
           nullable: true
         serviceCode:
           maxLength: 2
           type: string
-          description: "The service code for the shipment. Should be one of the following
-            two character codes:\r\n| Code | Description        |\r\n| ---- | ------------------
-            |\r\n| A9   | Air By 9:00 AM     |\r\n| A1   | Air By 10:00 AM    |\r\n|
-            AN   | Air By Noon        |\r\n| A3   | Air By 3:00 PM     |\r\n| G9   |
-            Ground By 9:00 AM  |\r\n| G1   | Ground By 10:00 AM |\r\n| GN   | Ground
-            by Noon     |\r\n| GE   | Ground Expedited   |\r\n<br/>"
+          description: "The service code for the shipment. Needs to be one of the two character codes found on the [Service Codes](service-codes) reference page."
         source:
           "$ref": "#/components/schemas/Source"
         groupBy:
@@ -2305,25 +2290,32 @@ components:
         code:
           type: string
           nullable: true
+          description: The code identifying the additional charge.
         name:
           type: string
           nullable: true
+          description: The name of the additional charge.
         hasFlatCharge:
           type: boolean
+          description: Indicates if the charge is a flat rate.
         flatCharge:
           type: number
           format: double
           nullable: true
+          description: The amount of the flat charge.
         variableCharge:
           type: number
           format: double
           nullable: true
+          description: The amount of the variable charge.
         isPartiallyAvailable:
           type: boolean
           nullable: true
+          description: Indicates if the additional charge is partially available.
         partialAvailabilityDetails:
           type: string
           nullable: true
+          description: Details about the partial availability of the additional charge.
       additionalProperties: false
     RateAddressRequest:
       required:
@@ -2336,20 +2328,27 @@ components:
       properties:
         address1:
           type: string
+          description: The primary address line for the location.
         address2:
           type: string
           nullable: true
+          description: The secondary address line for the location, if applicable.
         city:
           type: string
+          description: The city in which the address is located.
         province:
           type: string
+          description: The province or state in which the address is located.
         postalCode:
           type: string
+          description: The postal code or ZIP code for the address.
         country:
           type: string
+          description: The country in which the address is located.
         isResidential:
           type: boolean
           nullable: true
+          description: Indicates if the address is residential.
       additionalProperties: false
     RateResponse:
       type: object
@@ -2359,32 +2358,41 @@ components:
           items:
             "$ref": "#/components/schemas/RateAdditionalChargeResponse"
           nullable: true
+          description: A list of additional accessorial charges.
         surcharges:
           type: array
           items:
             "$ref": "#/components/schemas/RateAdditionalChargeResponse"
           nullable: true
+          description: A list of additional surcharges.
         accessorialsTotal:
           type: number
           format: double
+          description: The total amount of accessorial charges.
         surchargesTotal:
           type: number
           format: double
+          description: The total amount of surcharges.
         fuelSurcharge:
           type: number
           format: double
+          description: The amount of the fuel surcharge.
         expectedFreightCharge:
           type: number
           format: double
+          description: The expected freight charge before additional charges.
         totalBeforeTax:
           type: number
           format: double
+          description: The total amount before tax.
         taxes:
           type: number
           format: double
+          description: The total amount of taxes.
         total:
           type: number
           format: double
+          description: The total amount including all charges and taxes.
       additionalProperties: false
     RateShipmentRequestBody:
       required:
@@ -2397,35 +2405,45 @@ components:
       properties:
         serviceCode:
           type: string
+          description: The code for the type of service being requested.
         address:
           "$ref": "#/components/schemas/RateAddressRequest"
+          description: The address details for the shipment.
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         packages:
           type: array
           items:
             "$ref": "#/components/schemas/PackageRequest"
           nullable: true
+          description: A list of packages included in the shipment.
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         isPallet:
           type: boolean
+          description: Indicates if the shipment is palletized.
         shipDate:
           type: string
           format: date-time
+          description: The date and time when the shipment is to be shipped.
         shipmentTypeEnum:
           "$ref": "#/components/schemas/ShipmentTypeEnum"
+          description: The type of shipment, either regular or return.
         selectedAccessorials:
           type: array
           items:
             type: string
           nullable: true
+          description: A list of selected accessorial services for the shipment.
         declaredValue:
           type: number
           format: double
           nullable: true
+          description: The declared value of the shipment for insurance purposes.
       additionalProperties: false
     ReferenceResponse:
       type: object
@@ -2451,28 +2469,37 @@ components:
           items:
             "$ref": "#/components/schemas/Shipment"
           nullable: true
+          description: The list of shipments returned in the response.
         pageNumber:
           type: integer
           format: int32
           nullable: true
+          description: The current page number in the pagination.
         pageSize:
           type: integer
           format: int32
           nullable: true
+          description: The number of items per page in the pagination.
         pageCount:
           type: integer
           format: int32
+          description: The total number of pages in the result set.
         totalItemCount:
           type: integer
           format: int32
+          description: The total number of items in the result set.
         isFirstPage:
           type: boolean
+          description: Indicates if the current page is the first page.
         isLastPage:
           type: boolean
+          description: Indicates if the current page is the last page.
         hasNextPage:
           type: boolean
+          description: Indicates if there is a next page available.
         hasPreviousPage:
           type: boolean
+          description: Indicates if there is a previous page available.
       additionalProperties: false
     Result:
       type: object
@@ -2532,52 +2559,68 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the shipment.
         docketId:
           type: integer
           format: int32
+          description: The identifier for the shipment docket.
         docketCode:
           type: string
           nullable: true
+          description: The code associated with the shipment docket.
         addressId:
           type: integer
           format: int32
           nullable: true
+          description: The identifier for the address associated with the shipment.
         consigneeCode:
           type: string
           nullable: true
+          description: The code for the consignee associated with the shipment.
         serviceCode:
           type: string
           nullable: true
+          description: The code for the type of service used for the shipment.
         serviceText:
           type: string
           nullable: true
+          description: A description of the type of service used for the shipment.
         address:
           "$ref": "#/components/schemas/AddressRequest"
+          description: The address details for the shipment.
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         totalWeight:
           type: number
           format: double
+          description: The total weight of the shipment.
         shipDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the shipment was shipped.
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
+          description: The current status of the shipment.
         trackingNumber:
           type: string
           nullable: true
+          description: The tracking number for the shipment.
         manifestId:
           type: integer
           format: int32
           nullable: true
+          description: The identifier for the shipment manifest.
         reference:
           type: string
           nullable: true
+          description: The reference number for the shipment.
         po:
           type: string
           nullable: true
+          description: The purchase order number for the shipment.
       additionalProperties: false
     ShipmentIds:
       required:
@@ -2586,6 +2629,7 @@ components:
       properties:
         ids:
           type: array
+          description: A list of shipment IDs.
           items:
             type: integer
             format: int32
@@ -2600,11 +2644,14 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the shipment reference type.
         shortName:
           type: string
+          description: The short name for the shipment reference type.
         value:
           maxLength: 24
           type: string
+          description: The value associated with the shipment reference type.
       additionalProperties: false
       description: "Possible Shipment Reference Types:\r\n\r\n| **id** | **shortName**
         | **description**                  |\r\n| ------ | ------------- | --------------------------------
