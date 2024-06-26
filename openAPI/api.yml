@@ -456,11 +456,17 @@ paths:
       tags:
       - Manifests
       summary: Delete manifest
-      description: Delete a manifest by id. <br><br> **NOTE:** Continuous Manifest
-        cannot be deleted.
+      description: >-
+        Delete a manifest by id.
+
+
+        > 🚧 Warning
+        > 
+        > The **Continuous Manifest** can't be deleted.
       parameters:
       - name: manifestId
         in: path
+        description: The unique identifier for the manifest to be deleted.
         required: true
         schema:
           type: integer
