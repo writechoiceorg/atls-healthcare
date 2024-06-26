@@ -666,7 +666,7 @@ paths:
       summary: Get All Pickup Requests
       operationId: get-all-pickup-requests
       tags:
-      - PickupRequests
+      - Pickup Requests
       parameters:
       - name: fromDate
         in: query
@@ -691,7 +691,7 @@ paths:
       summary: Create a Pickup Request
       operationId: create-pickup-request
       tags:
-      - PickupRequests
+      - Pickup Requests
       requestBody:
         content:
           application/json:
