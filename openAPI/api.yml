@@ -6,6 +6,8 @@ info:
 paths:
   "/v1/Address/saved/check":
     get:
+      operationId: address-saved-check
+      summary: Address Save Check
       tags:
       - Address
       parameters:
@@ -50,6 +52,8 @@ paths:
           description: Success
   "/v1/Address/validate/residential":
     get:
+      operationId: address-validate-residential
+      summary: Validate Residential Address
       tags:
       - Address
       parameters:
@@ -66,6 +70,8 @@ paths:
           description: Success
   "/v1/Address/validate/postalCode":
     get:
+      operationId: address-validate-postalcode
+      summary: Validate Address Postal Code
       tags:
       - Address
       parameters:
@@ -90,9 +96,10 @@ paths:
                 "$ref": "#/components/schemas/ValidatePostalCodeResponse"
   "/v1/Shipments/Imports":
     get:
+      operationId: shipment-imports
       tags:
       - Shipments
-      summary: Get all shipment imports
+      summary: Get All Shipment Imports
       parameters:
       - name: DateSortOrder
         in: query
@@ -118,7 +125,8 @@ paths:
     post:
       tags:
       - Shipments
-      summary: Import orders or picklists
+      summary: Import Orders or Picklists
+      operationId: import-orders-picklists
       parameters:
       - name: validateOnly
         in: query
@@ -153,7 +161,8 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get shipment import by id
+      summary: Get Shipment Import by ID
+      operationId: get-shipment-import-by-id
       parameters:
       - name: importId
         in: path
@@ -172,7 +181,8 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get labels by import id
+      summary: Get Labels by Import ID
+      operationId: get-labels-by-import-id
       parameters:
       - name: id
         in: path
@@ -203,6 +213,8 @@ paths:
           description: Success
   "/v1/Manifests":
     post:
+      operationId: create-manifest
+      summary: Create Manifest
       tags:
       - Manifests
       requestBody:
@@ -236,6 +248,8 @@ paths:
               schema:
                 type: string
     get:
+      operationId: get-all-manifests
+      summary: Get All Manifests
       tags:
       - Manifests
       parameters:
@@ -270,6 +284,8 @@ paths:
                 "$ref": "#/components/schemas/ManifestsResponseListPagedResponse"
   "/v1/Manifests/{manifestId}/shipments":
     post:
+      summary: Add Shipments to Manifest
+      operationId: add-shipments-to-manifest
       tags:
       - Manifests
       parameters:
@@ -318,10 +334,10 @@ paths:
               schema:
                 type: string
     get:
+      summary: Get Shipments by Manifest
+      operationId: get-shipments-by-manifest
       tags:
       - Manifests
-      summary: Get shipments by manifest
-      description: Get shipments by manifest
       parameters:
       - name: manifestId
         in: path
@@ -336,7 +352,8 @@ paths:
     get:
       tags:
       - Manifests
-      summary: Gets continuous manifest
+      operationId: get-continuous-manifest
+      summary: Get Continuous Manifest
       description: Gets continuous manifest. Continuous manifest is a manifest that
         all shipments are automatically assigned to if not specified otherwise.
       responses:
@@ -344,6 +361,8 @@ paths:
           description: Success
   "/v1/Manifests/{manifestId}":
     get:
+      summary: Get Manifest by ID
+      operationId: get-manifest-by-id
       tags:
       - Manifests
       parameters:
@@ -373,6 +392,8 @@ paths:
               schema:
                 type: string
     patch:
+      summary: Close Manifest
+      operationId: close-manifest
       tags:
       - Manifests
       parameters:
@@ -401,6 +422,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ManifestResponse"
     delete:
+      operationId: delete-manifest 
       tags:
       - Manifests
       summary: Delete manifest
@@ -418,6 +440,8 @@ paths:
           description: Success
   "/v1/Manifests/{manifestId}/report":
     get:
+      summary: Get Manifest Report
+      operationId: get-manifest-report
       tags:
       - Manifests
       parameters:
@@ -432,6 +456,8 @@ paths:
           description: Success
   "/v1/Manifests/{manifestId}/export":
     get:
+      summary: Export Manifest
+      operationId: export-manifest
       tags:
       - Manifests
       parameters:
@@ -586,6 +612,8 @@ paths:
           description: Success
   "/v1/PickupRequests":
     get:
+      summary: Get All Pickup Requests
+      operationId: get-all-pickup-requests
       tags:
       - PickupRequests
       parameters:
@@ -609,6 +637,8 @@ paths:
                 items:
                   "$ref": "#/components/schemas/PickupRequestRes"
     post:
+      summary: Create a Pickup Request
+      operationId: create-pickup-request
       tags:
       - PickupRequests
       requestBody:
@@ -653,9 +683,10 @@ paths:
                 "$ref": "#/components/schemas/ShipmentResponse"
   "/v1/Shipments/{shipmentId}":
     get:
+      summary: Get Shipment by ID
+      operationId: get-shipment-by-id
       tags:
       - Shipments
-      operationId: Shipments_GetById
       parameters:
       - name: shipmentId
         in: path
@@ -685,7 +716,8 @@ paths:
     delete:
       tags:
       - Shipments
-      summary: Void shipment
+      summary: Void a Shipment
+      operationId: void-shipment
       parameters:
       - name: shipmentId
         in: path
@@ -717,6 +749,8 @@ paths:
                 type: string
   "/v1/Shipments/tracking/{trackingNumber}":
     get:
+      summary: Track a shipment by Tracking Number
+      operationId: track-shipment
       tags:
       - Shipments
       parameters:
@@ -779,12 +813,16 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get shipment label
-      description: Get shipment label by `shipmentId` or `trackingNumber`. <br/><br/>If
-        `trackingNumber` includes the package number ('8000...1-1'), then the label
-        for the individual package is returned. Otherwise labels for all packages
-        in the shipment are returned. <br/>If `shipmentId` is provided, then the label(s)
-        for the shipment (including all packages) is returned.
+      summary: Get Shipment Labels
+      operationId: get-shipment-labels
+      description: >-
+        Get shipment label by `shipmentId` or `trackingNumber`. 
+
+        
+        If `trackingNumber` includes the package number ('8000...1-1'), then the label for the individual package is returned. Otherwise labels for all packages in the shipment are returned. 
+        
+        
+        If `shipmentId` is provided, then the label(s) for the shipment (including all packages) is returned.
       parameters:
       - name: trackingNumber
         in: query
@@ -831,8 +869,8 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get shipment label
-      description: Get shipment label
+      summary: Get shipment label by Shipment ID
+      operationId: get-shipment-labels-by-shipment-id
       parameters:
       - name: shipmentId
         in: path
