@@ -1037,10 +1037,13 @@ components:
       properties:
         timeRelease:
           "$ref": "#/components/schemas/TimeReleaseDetails"
+          description: Details about the time release for the shipment.
         appointment:
           "$ref": "#/components/schemas/AppointmentDetails"
+          description: Details about the appointment for the shipment.
         freightInsurance:
           "$ref": "#/components/schemas/FreightInsuranceDetails"
+          description: Details about the freight insurance for the shipment.
         poDueDate:
           type: string
           format: date
