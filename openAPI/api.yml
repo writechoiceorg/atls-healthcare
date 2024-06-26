@@ -661,6 +661,8 @@ paths:
                 "$ref": "#/components/schemas/PickupRequestRes"
   "/v1/Shipments":
     post:
+      summary: Create a Shipment
+      operationId: create-shipment
       tags:
       - Shipments
       requestBody:
