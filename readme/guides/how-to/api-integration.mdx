@@ -1,1 +1,86 @@
 This page will guide you through the necessary steps to integrate with ACS's API. By following these, you can fully integrate our solution into your system. From learning how to acquire your API key to presenting all endpoints, you will be able to create shipments and manifests and request pickups entirely through API calls.
+
+## Step 1: API Key/Token
+
+We need to know how a user can get this data from ATS. 
+
+## Step 2: Requesting Pickups
+
+Creating a Pickup request doesn't depend on creating shipments or manifests in ACS. You can create it whenever you need to, keep in mind a few details:
+
+- Pickups can occur daily. ACS won't allow you to request more than one pickup a day.
+- Pickup requests made after 2 pm local time will be scheduled for the next day.
+
+> 👍 ATS Recommendation
+> 
+> ATS recommends that you schedule your daily pickup in the morning and then proceed with creating your shipments and manifest. This way, you can avoid missing the cut-off time.
+
+Now, to request a pickup with ATS API, you need to call the [Create a Pickup Request](ref:create-pickup-request) endpoint, adding to the request's body the following information:
+
+- `pieces`: The approximate number of pieces of the shipments.
+- `weight`: The approximate total weight of the shipments.
+- `pickupTime`: The time the shipments should be picked up. This value must be a 4-digit military time format. 
+- `closingTime`: The closing time for the pickup to occur. This value must be a 4-digit military time format.
+
+> 📘 Military Time Format
+> 
+> To convert the time into military format, follow the examples below:
+> 
+> | 12-hour am-pm clock | 24-hour military time |
+> | :------------------ | :-------------------- |
+> | 7:00 am             | 0700                  |
+> | 7:00 pm             | 1900                  |
+
+## Step 3: Creating Shipments
+
+Creating a shipment with ATS API is similar to using our frontend app. You need to add detailed information about addresses, packages, services, accessorials, and references.
+
+You will call the [Create a Shipment](ref:create-shipment) endpoint, adding the required information about the shipment to the request body. 
+
+> 📘 Reference Pages
+> 
+> You can find codes and their description for [accessorials](ref:accessorials) and [services](ref:service-codes) on their respectives reference pages.
+
+Once created, every shipment gets automatically assigned to a manifest bucket. The response to the request above will return three important identifiers:
+
+- `id`: The created shipment's unique identifier.
+- `trackingNumber`: A unique identifier to track the shipment.
+- `manifestId`: The identifier of the manifest the shipment was just assigned to.
+
+## Step 4: Get Your Shipment Labels
+
+With the shipment created, you need to retrieve each package's label. You have two ways to get your labels. You can either retrieve all the labels by the Shipment's ID or by using the tracking number of each package to retrieve each one individually.
+
+### Get Labels by Shipment ID
+
+Using the [Get shipment label by Shipment ID](ref:/get-shipment-labels-by-shipment-id) endpoint, you can add the `shipmentId` as a path parameter, and retrieve all labels from this shipment.
+
+### Get Shipment Labels
+
+As an option, you may need to retrieve only one package label or prefer using the shipment's `trackingNumber` to find the labels. The [Get Shipment Labels](ref:get-shipment-labels) endpoint allows you to recover the labels based on both `trackingNumber` and/or `shipmentId`. 
+
+#### Using the Tracking Number
+
+Using the tracking number of a shipment, you can search for individual packages belonging to the shipment. For example, if you have `trackingNumber = 8000`, and this shipment has 3 packages in it, each package can be found by adding the following tracking number to the request:
+
+- **Package 1**: `trackingNumber = 8000-1`
+- **Package 2**: `trackingNumber = 8000-2`
+- **Package 3**: `trackingNumber = 8000-3`
+
+And, if you add only the `8000` to the request, it will retrieve the labels for all shipment packages.
+
+## Step 5: The Continuous Manifest
+
+ACS always keeps a manifest open to receive every newly created shipment. This manifest can't be closed and will always keep the same ID. You can retrieve this information by calling the [Get Continuous Manifest](ref:get-continuous-manifest) endpoint.
+
+As this manifest's ID is always consistent, you can retrieve it once and use the same ID for subsequent API calls when creating a manifest.
+
+## Step 6: Creating a Manifest
+
+As mentioned, all shipments are added to a manifest when created, which is always open. So, what happens is, ACS will create a new manifest, move all shipments currently in the continuous manifest to it, and then close the newly created manifest. This process keeps the original manifest open and generates a new manifest ID for the newly created one.
+
+To achieve this, you will call the [Close Manifest](ref:close-manifest) endpoint, adding the `manifestId` as a path parameter. This `manifestId` will be the continuous manifest ID recovered in [Step 5](#step-5-the-continuous-manifest).
+
+## Step 7: Printing the Manifest Report
+
+When a Driver picks up your shipments, you will be required to present him with the Manifest Report. You can recover this report by calling the [Get Manifest Report](ref:get-manifest-report) endpoint, adding the `manifestId` returned at the end of Step 6 as a path parameter. This call will return a PDF file you need to print.
