@@ -1874,74 +1874,95 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the manifest.
         dateCreated:
           type: string
           format: date-time
+          description: The date and time when the manifest was created.
         dateClosed:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the manifest was closed, if applicable.
         name:
           type: string
           nullable: true
+          description: The name of the manifest.
         status:
           "$ref": "#/components/schemas/ManifestStatus"
+          description: The current status of the manifest.
         pickupDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the pickup is scheduled.
         door:
           type: string
           nullable: true
+          description: The door number where the pickup will occur.
         trailerNumber:
           type: string
           nullable: true
+          description: The trailer number associated with the manifest.
         shipmentsAssigned:
           type: integer
           format: int32
+          description: The number of shipments assigned to the manifest.
         shipments:
           type: array
           items:
             "$ref": "#/components/schemas/ShipmentResponse"
           nullable: true
+          description: A list of shipments associated with the manifest.
       additionalProperties: false
     ManifestSortBy:
       enum:
       - dateClosed
       type: string
+      description: The field by which to sort the manifests. Currently, sorting by the date the manifest was closed is supported.
     ManifestsResponse:
       type: object
       properties:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the manifest.
         dateCreated:
           type: string
           format: date-time
+          description: The date and time when the manifest was created.
         dateClosed:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the manifest was closed, if applicable.
         name:
           type: string
           nullable: true
+          description: The name of the manifest.
         status:
           "$ref": "#/components/schemas/ManifestStatus"
+          description: The current status of the manifest.
         pickupDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the pickup is scheduled.
         door:
           type: string
           nullable: true
+          description: The door number where the pickup will occur.
         trailerNumber:
           type: string
           nullable: true
+          description: The trailer number associated with the manifest.
         shipmentsAssigned:
           type: integer
           format: int32
+          description: The number of shipments assigned to the manifest.
         isContinuousType:
           type: boolean
+          description: Indicates if the manifest is of continuous type.
       additionalProperties: false
     ManifestsResponseListPagedResponse:
       type: object
@@ -1951,34 +1972,44 @@ components:
           items:
             "$ref": "#/components/schemas/ManifestsResponse"
           nullable: true
+          description: The list of manifests returned in the response.
         pageNumber:
           type: integer
           format: int32
           nullable: true
+          description: The current page number in the pagination.
         pageSize:
           type: integer
           format: int32
           nullable: true
+          description: The number of items per page in the pagination.
         pageCount:
           type: integer
           format: int32
+          description: The total number of pages in the result set.
         totalItemCount:
           type: integer
           format: int32
+          description: The total number of items in the result set.
         isFirstPage:
           type: boolean
+          description: Indicates if the current page is the first page.
         isLastPage:
           type: boolean
+          description: Indicates if the current page is the last page.
         hasNextPage:
           type: boolean
+          description: Indicates if there is a next page available.
         hasPreviousPage:
           type: boolean
+          description: Indicates if there is a previous page available.
       additionalProperties: false
     ManifestStatus:
       enum:
       - open
       - closed
       type: string
+      description: The status of the manifest, indicating whether it is open or closed.
     Model:
       type: object
       properties:
@@ -2069,16 +2100,20 @@ components:
       properties:
         name:
           type: string
+          description: The name of the manifest.
         pickupDate:
           type: string
           format: date-time
           nullable: true
+          description: The date and time when the pickup is scheduled.
         door:
           type: string
           nullable: true
+          description: The door number where the pickup will occur.
         trailerNumber:
           type: string
           nullable: true
+          description: The trailer number associated with the manifest.
       additionalProperties: false
     OrderAs:
       enum:
