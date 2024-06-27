@@ -7,6 +7,8 @@ load_dotenv()
 
 url = "https://login-b2b-ats-healthcare.us.auth0.com"
 
+base = "https://atsapi-dev.azurewebsites.net"
+
 
 def save_response(response, file_name):
     response.raise_for_status()
@@ -42,14 +44,12 @@ def get_token():
 
 
 def request_pickup():
-    pickup_url = f"{url}/v1/PickupRequests"
+    pickup_url = f"{base}/v1/PickupRequests"
     data = {
-        "pickupTime": "string",
-        "closingTime": "string",
-        "pieces": 0,
-        "weight": 0,
-        "email": "string",
-        "saveEmailAsDefault": False,
+        "pickupTime": "1400",
+        "closingTime": "1900",
+        "pieces": 2,
+        "weight": 10
     }
     token_json = read_json("token.json")
     headers = {
@@ -63,5 +63,5 @@ def request_pickup():
 
 
 if __name__ == "__main__":
-    get_token()
-    # request_pickup()
+    # get_token()
+    request_pickup()
