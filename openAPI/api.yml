@@ -2416,12 +2416,18 @@ components:
       properties:
         pickupTime:
           type: string
-          example: '1400'
-          description: The scheduled time for the pickup in 4-digit military time format.
+          example: '0700'
+          description: >-
+            The scheduled time for the pickup in 4-digit military time format.
+
+            <small>Example: 7:00 AM time becomes `0700` in military format.</small>
         closingTime:
           type: string
           example: '1700'
-          description: The closing time for the pickup location in 4-digit military time format.
+          description: >-
+            The closing time for the pickup location in 4-digit military time format.
+
+            <small>Example: 5:00 PM time becomes `1700` in military format.</small>
         pieces:
           type: integer
           format: int32
