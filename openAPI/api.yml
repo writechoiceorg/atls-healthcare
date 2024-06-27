@@ -2,6 +2,8 @@ openapi: 3.0.1
 info:
   title: ATS API
   version: v1
+servers:
+  - url: https://atsapi-dev.azurewebsites.net
 paths:
   "/v1/Address/saved/check":
     get:
