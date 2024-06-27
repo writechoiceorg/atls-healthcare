@@ -634,6 +634,8 @@ paths:
     post:
       tags:
       - Picklist
+      summary: Create a new Picklist
+      operationId: create-picklist
       requestBody:
         content:
           application/json:
@@ -652,9 +654,12 @@ paths:
     get:
       tags:
       - Picklist
+      summary: Get Picklist by Lookup Key
+      operationId: get-picklist-by-lookup-key
       parameters:
       - name: lookupKey
         in: path
+        description: The key used to look up the picklist.
         required: true
         schema:
           type: string
@@ -670,14 +675,18 @@ paths:
       parameters:
       - name: fromDate
         in: query
+        description: The start date and time for filtering pickup requests.
         schema:
           type: string
           format: date-time
+          example: '2023-01-01T00:00:00Z'
       - name: toDate
         in: query
+        description: The end date and time for filtering pickup requests.
         schema:
           type: string
           format: date-time
+          example: '2023-12-31T23:59:59Z'
       responses:
         '200':
           description: Success
@@ -2337,50 +2346,65 @@ components:
       properties:
         lookupKey:
           type: string
+          description: The key used to look up the picklist.
         consigneeCode:
           type: string
           nullable: true
+          description: The code for the consignee associated with the picklist.
         address:
           "$ref": "#/components/schemas/AddressType"
+          description: The address details for the picklist.
         phone:
           type: string
           nullable: true
+          description: The phone number associated with the picklist.
         email:
           type: string
           nullable: true
+          description: The email address associated with the picklist.
         pieces:
           type: integer
           format: int32
           nullable: true
+          description: The number of pieces in the picklist.
         totalWeight:
           type: number
           format: double
           nullable: true
+          description: The total weight of the picklist.
         isPallet:
           type: boolean
           nullable: true
+          description: Indicates if the picklist is palletized.
         saidToContain:
           type: integer
           format: int32
           nullable: true
+          description: The number of items said to be contained in the picklist.
         instructions:
           type: string
           nullable: true
+          description: Special instructions for the picklist.
         descriptionOfGoods:
           type: string
           nullable: true
+          description: A description of the goods in the picklist.
         paymentTerm:
           "$ref": "#/components/schemas/Payment"
+          description: The payment terms for the picklist, either prepaid or collect.
         paymentAccount:
           type: integer
           format: int32
           nullable: true
+          description: The account number for payment associated with the picklist.
         ref:
           type: string
           nullable: true
+          description: A reference number for the picklist.
         po:
           type: string
           nullable: true
+          description: The purchase order number associated with the picklist.
       additionalProperties: false
     PickupRequestBody:
       required:
@@ -2392,20 +2416,32 @@ components:
       properties:
         pickupTime:
           type: string
+          example: '1400'
+          description: The scheduled time for the pickup in 4-digit military time format.
         closingTime:
           type: string
+          example: '1700'
+          description: The closing time for the pickup location in 4-digit military time format.
         pieces:
           type: integer
           format: int32
+          example: 10
+          description: The approximate  number of pieces/packages in the shipment.
         weight:
           type: number
           format: double
+          example: 150.5
+          description: The approximate total weight of the shipment.
         email:
           type: string
           nullable: true
+          example: 'customer@example.com'
+          description: The email address of the customer requesting the pickup.
         saveEmailAsDefault:
           type: boolean
           nullable: true
+          example: true
+          description: Indicates if the email should be saved as the default email address.
       additionalProperties: false
     PickupRequestRes:
       type: object
@@ -2413,23 +2449,30 @@ components:
         id:
           type: integer
           format: int32
+          description: The unique identifier for the pickup request.
         requestDateTime:
           type: string
           format: date-time
+          description: The date and time when the pickup request was made.
         pickupTime:
           type: string
           nullable: true
+          description: The scheduled time for the pickup.
         closingTime:
           type: string
           nullable: true
+          description: The closing time for the pickup location.
         branchEmail:
           type: string
           nullable: true
+          description: The email address of the branch handling the pickup request.
         customerEmail:
           type: string
           nullable: true
+          description: The email address of the customer requesting the pickup.
         shipmentDetail:
           "$ref": "#/components/schemas/PickupRequestShipmentDetailRes"
+          description: Details of the shipment associated with the pickup request.
       additionalProperties: false
     PickupRequestShipmentDetailRes:
       type: object
@@ -2437,9 +2480,11 @@ components:
         pieces:
           type: integer
           format: int32
+          description: The number of pieces in the shipment.
         weight:
           type: number
           format: double
+          description: The total weight of the shipment.
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -2447,19 +2492,24 @@ components:
         type:
           type: string
           nullable: true
+          description: A URI reference that identifies the problem type.
         title:
           type: string
           nullable: true
+          description: A short, human-readable summary of the problem type.
         status:
           type: integer
           format: int32
           nullable: true
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
         detail:
           type: string
           nullable: true
+          description: A human-readable explanation specific to this occurrence of the problem.
         instance:
           type: string
           nullable: true
+          description: A URI reference that identifies the specific occurrence of the problem.
       additionalProperties: {}
     RateAdditionalChargeResponse:
       type: object
