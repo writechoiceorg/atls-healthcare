@@ -1,0 +1,63 @@
+<style>
+  .card-body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    padding: 20px;
+    text-decoration: none !important;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-1px);
+    border-color: #cf111e;
+  }
+
+  .card:hover p,
+  .card:hover ul {
+    color: #cf111e;
+  }
+
+  .card h2 {
+    margin-top: 0;
+    color: #cf111e;
+  }
+
+  .card p {
+    margin: 15px 0;
+  }
+</style>
+
+<body class="card-body">
+  <div class="card-container">
+    <a href="/docs/getting-started" class="card">
+      <h2>Getting Started</h2>
+      <p>Learn how to create your first shipment and manifest with our quickstart tutorial.</p>
+    </a>
+    <a href="/docs/how-to-overview" class="card">
+      <h2>How to Ship Your Packages</h2>
+      <p>Find step-by-step guides to learn how you can integrate with <b>ACS</b>.</p>
+    </a>
+    <a href="/docs/frontend-app-overview" class="card">
+      <h2>Frontend App</h2>
+      <p>Find detailed information about every page and option on ACS's frontend app.</p>
+    </a>
+  </div>
+</body>
