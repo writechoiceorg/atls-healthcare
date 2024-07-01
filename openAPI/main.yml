@@ -1711,14 +1711,17 @@ components:
       properties:
         code:
           type: string
+          example: DG
           nullable: true
           description: The code identifying the additional charge.
         name:
           type: string
+          example: Dangerous Goods
           nullable: true
           description: The name of the additional charge.
         hasFlatCharge:
           type: boolean
+          example: false
           description: Indicates if the charge is a flat rate.
         flatCharge:
           type: number
@@ -1727,11 +1730,13 @@ components:
           description: The amount of the flat charge.
         variableCharge:
           type: number
+          example: 25.0
           format: double
           nullable: true
           description: The amount of the variable charge.
         isPartiallyAvailable:
           type: boolean
+          example: false
           nullable: true
           description: Indicates if the additional charge is partially available.
         partialAvailabilityDetails:
@@ -1789,30 +1794,37 @@ components:
           description: A list of additional surcharges.
         accessorialsTotal:
           type: number
+          example: 25.0
           format: double
           description: The total amount of accessorial charges.
         surchargesTotal:
           type: number
+          example: 0.0
           format: double
           description: The total amount of surcharges.
         fuelSurcharge:
           type: number
+          example: 4.3989
           format: double
           description: The amount of the fuel surcharge.
         expectedFreightCharge:
           type: number
+          example: 18.92
           format: double
           description: The expected freight charge before additional charges.
         totalBeforeTax:
           type: number
+          example: 48.3189
           format: double
           description: The total amount before tax.
         taxes:
           type: number
           format: double
+          example: 2.415945
           description: The total amount of taxes.
         total:
           type: number
+          example: 50.734845
           format: double
           description: The total amount including all charges and taxes.
       additionalProperties: false
