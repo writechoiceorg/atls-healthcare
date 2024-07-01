@@ -109,7 +109,21 @@ def create_shipment():
     save_response(response, "create_shipment")
 
 
+def get_shipment_labels():
+    label_url = f"{base}/v1/Shipments/label?trackingNumber=800014422&type=pdf"
+
+    headers = create_headers()
+
+    response = requests.get(label_url, headers=headers)
+    save_response(response, "get_labels")
+
+
+def get_shipment_labels_by_id():
+    ...
+
+
 if __name__ == "__main__":
     # get_token()
     # request_pickup()
-    create_shipment()
+    # create_shipment()
+    get_shipment_labels()
