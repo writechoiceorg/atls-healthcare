@@ -241,6 +241,10 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousManifestRes"
   "/v1/Manifests/{manifestId}":
     patch:
       summary: Close Manifest
@@ -2639,7 +2643,57 @@ components:
           nullable: true
           description: A list of possible cities for the given postal code.
       additionalProperties: false
-
+    ContinuousManifestRes:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the continuous manifest.
+          example: 504
+        dateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the manifest was created.
+          example: 2023-10-03T23:24:36.8083692+00:00
+        dateClosed:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time when the manifest was closed.
+          example: null
+        name:
+          type: string
+          nullable: true
+          description: The name associated with the manifest.
+          example: null
+        status:
+          type: string
+          description: The status of the manifest.
+          example: open
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled pickup date for the manifest.
+          example: null
+        door:
+          type: string
+          nullable: true
+          description: The door assigned for the pickup.
+          example: null
+        trailerNumber:
+          type: string
+          nullable: true
+          description: The trailer number associated with the manifest.
+          example: null
+        shipmentsAssigned:
+          type: integer
+          description: The number of shipments assigned to the manifest.
+          example: 0
+        isContinuousType:
+          type: boolean
+          description: Indicates if the manifest is of continuous type.
+          example: true
   securitySchemes:
     oauth2:
       type: oauth2

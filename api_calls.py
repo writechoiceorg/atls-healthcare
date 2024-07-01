@@ -127,9 +127,19 @@ def get_shipment_labels_by_id():
     save_response(response, "get_labels_id")
 
 
+def get_continuous_manifest():
+    manifest_url = f"{base}/v1/Manifests/continuous"
+
+    headers = create_headers()
+
+    response = requests.get(manifest_url, headers=headers)
+    save_response(response, "continuous_manifest")
+
+
 if __name__ == "__main__":
     # get_token()
     # request_pickup()
     # create_shipment()
     # get_shipment_labels()
-    get_shipment_labels_by_id()
+    # get_shipment_labels_by_id()
+    get_continuous_manifest()
