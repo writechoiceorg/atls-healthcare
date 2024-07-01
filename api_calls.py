@@ -18,6 +18,8 @@ def save_response(response, file_name):
         return True
     main_path = f"./response_examples/{file_name}"
     file_path = f"{main_path}/{file_name}_{status}.json"
+    if file_name == 'token':
+        file_path = file_name
     with open(file_path, "w") as json_file:
         json.dump(response_data, json_file, indent=4)
 
@@ -65,12 +67,7 @@ def request_pickup():
         "pieces": 2,
         "weight": 10
     }
-    token_json = read_json("token.json")
-    headers = {
-        "accept": "application/json",
-        "Content-Type": "application/json",
-        "authorization": f"Bearer {token_json["access_token"]}",
-    }
+    headers = create_headers()
 
     response = requests.post(pickup_url, json=data, headers=headers)
     save_response(response, "pickup")
