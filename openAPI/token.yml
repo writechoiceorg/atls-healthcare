@@ -42,7 +42,7 @@ paths:
                   example: client_credentials
       responses:
         '200':
-          description: Successful response with the access token.
+          description: Success
           content:
             application/json:
               schema:
@@ -51,7 +51,7 @@ paths:
                   access_token:
                     type: string
                     description: The access token.
-                    example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJCT2pNMGZTNTBhdHVyVHBqMUpPbyJ9.eyJvcmdhbml6YXRpb25JZCI6IjUiLCJhY2NvdW50SWQiOiI2IiwiYXBwX2dyb3VwcyI6WyJXaW5lU2hpcHBlcl9DdXN0b21lcl9TaGlwcGVyIl0sImNpZCI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi1iMmItYXRzLWhlYWx0aGNhcmUudXMuYXV0aDAuY29tLyIsInN1YiI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3Rlc3QuYXBpLmF0cy5oZWFsdGhjYXJlIiwiaWF0IjoxNzE5NTE1MjkxLCJleHAiOjE3MTk2MDE2OTEsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsImF6cCI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpIn0.kYXezF8MgtTL1G-iqgXp6tReVKLtp2bFVmBrSTqLRbrdDiz9HfunXcIhB3Y7Eja3hUze7IUgWAd-Yw6klj11gromy5Yn57_VpT3Kt2awZu2LEhZN8uCkR0gHN-kfvHNZs0oHEUTfFZqrpI4sZyg020pKYOpHUZdfZ86m_UeV2rlpj_Hd8G6Bk1JKSZQO3G4T5k9j4XuEqfTSa5QvG2GeqFQgWUWI7cIdlXnnKz7fxUrhMsQhLSQcLz_vtvwXlZc5msOB81vWWhC95XwGchbau2nPJzAVI8KMzj1zQqjPzAJ9GRdCZFaE-Q7Tcaqvqho6ndoKigj35lIt8i7-bZ3LBg
+                    example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJCT2pNMGZTNTBhdHVyVHBqMUpPbyJ9.eyJvcmdhbml6YXRpb25JZCI6IjUiLCJhY2NvdW50SWQiOiI2IiwiYXBwX2dyb3VwcyI6WyJXaW5lU2hpcHBlcl9DdXN0b21lcl9TaGlwcGVyIl0sImNpZCI6IlV4YWlzV0ZLSkxxxzN5QU9HOVFTMWlyNTczOGJkdERpIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi1iMmItYXRzLWhlYWx0aGNhcmUudXMuYXV0aDAuY29tLyIsInN1YiI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3Rlc3QxxXBpLmF0cy5oZWFsdGhjYXJlIiwiaWF0IjoxNzE5NTE1MjkxLCJleHAiOjE3MTk2MDE2OTEsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsImF6cCI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpIn0.kYXezF8MgtTL1G-iqgXp6tReVKLtp2bFVmBrSTqLRbxxDiz9HfunXcIhB3Y7Eja3hUze7IUgWAd-Yw6klj11gromy5Yn57_VpT3Kt2awZu2LEhZN8uCkR0gHN-kfvHNZs0oHEUTfFZqrpIxxZyg020pKYOpHUZxxZ86m_UeV2rlpj_Hd8G6Bk1JKSZQO3G4T5k9j4XuEqfTSa5QvG2GeqFQgWUWI7cIdlXnnKz7fxUrhMsQhLSQcLz_vtvwXlZc5msOB81vWWhC95XwGxxbau2nPJzAVI8KMzj1zQqjPzAJ9GRdCZFaE-Q7Tcaqvqho6ndoKigj35lIt8i7-bZ3LBg
                   expires_in:
                     type: integer
                     description: The duration in seconds for which the token is valid.
