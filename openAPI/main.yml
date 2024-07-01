@@ -1228,7 +1228,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusReq"
           description: The current status of the manifest.
         pickupDate:
           type: string
@@ -1280,7 +1280,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusRes"
           description: The current status of the manifest.
         pickupDate:
           type: string
@@ -1343,12 +1343,18 @@ components:
           type: boolean
           description: Indicates if there is a previous page available.
       additionalProperties: false
-    ManifestStatus:
+    ManifestStatusRes:
       enum:
       - open
       - closed
       type: string
       description: The status of the manifest, indicating whether it is open or closed.
+    ManifestStatusReq:
+      enum:
+      - open
+      - closed
+      type: string
+      description: The status of the manifest, indicating whether to open or close it.
     Model:
       type: object
       properties:
@@ -2654,7 +2660,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusReq"
       additionalProperties: false
     ValidatePostalCodeResponse:
       type: object

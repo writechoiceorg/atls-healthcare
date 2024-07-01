@@ -282,7 +282,7 @@ paths:
       - name: status
         in: query
         schema:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusReq"
       - name: PageNumber
         in: query
         description: The current page number for pagination.
@@ -1256,14 +1256,17 @@ components:
         name:
           maxLength: 35
           type: string
+          example: John Doe
           description: The name of the individual or entity associated with the address.
         attentionTo:
           maxLength: 35
+          example: Jane Doe
           type: string
           nullable: true
           description: The name of the person to whom attention should be directed at this address.
         address1:
           maxLength: 35
+          example: 150-18279 Blundell Rd
           type: string
           description: The primary address line for the location.
         address2:
@@ -1273,10 +1276,12 @@ components:
           description: The secondary address line for the location, if applicable.
         city:
           maxLength: 35
+          example: Vancouver
           type: string
           description: The city in which the address is located.
         province:
           maxLength: 2
+          example: BC
           type: string
           description: >-
             Two character abbreviation. 
@@ -1285,15 +1290,18 @@ components:
         postalCode:
           maxLength: 7
           minLength: 6
+          example: V6W1L8
           type: string
           description: The postal code or ZIP code for the address.
         country:
           maxLength: 2
           type: string
+          example: CA
           description: 'Country abbreviation. Accepted value: `CA` for Canada.'
         isResidential:
           type: boolean
           nullable: true
+          example: false
           description: Indicates if the address is residential.
       additionalProperties: false
     AddressType:
@@ -1513,6 +1521,7 @@ components:
           description: The total weight of the shipment.
         isPallet:
           type: boolean
+          example: false
           description: Indicates if the shipment is palletized.
         saidToContain:
           type: integer
@@ -1680,14 +1689,17 @@ components:
       properties:
         name:
           type: string
+          example: John Doe
           nullable: true
           description: The name of the individual or entity at the destination address.
         attentionTo:
           type: string
+          example: Jane Doe
           nullable: true
           description: The name of the person to whom attention should be directed at the destination address.
         address1:
           type: string
+          example: 150-18279 Blundell Rd
           nullable: true
           description: The primary address line for the destination location.
         address2:
@@ -1696,18 +1708,22 @@ components:
           description: The secondary address line for the destination location, if applicable.
         city:
           type: string
+          example: Vancouver
           nullable: true
           description: The city in which the destination address is located.
         province:
           type: string
+          example: BC
           nullable: true
           description: The province or state in which the destination address is located.
         country:
           type: string
           nullable: true
+          example: CA
           description: The country in which the destination address is located.
         postalCode:
           type: string
+          example: V6W1L8
           nullable: true
           description: The postal code or ZIP code for the destination address.
         isResidential:
@@ -1716,10 +1732,12 @@ components:
           description: Indicates if the destination address is residential.
         phone:
           type: string
+          example: '123-456-7890'
           nullable: true
           description: The phone number associated with the destination address.
         email:
           type: string
+          example: john.doe@ats.ca
           nullable: true
           description: The email address associated with the destination address.
       additionalProperties: false
@@ -1968,7 +1986,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusReq"
           description: The current status of the manifest.
         pickupDate:
           type: string
@@ -2020,7 +2038,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusRes"
           description: The current status of the manifest.
         pickupDate:
           type: string
@@ -2083,12 +2101,18 @@ components:
           type: boolean
           description: Indicates if there is a previous page available.
       additionalProperties: false
-    ManifestStatus:
+    ManifestStatusRes:
       enum:
       - open
       - closed
       type: string
       description: The status of the manifest, indicating whether it is open or closed.
+    ManifestStatusReq:
+      enum:
+      - open
+      - closed
+      type: string
+      description: The status of the manifest, indicating whether to open or close it.
     Model:
       type: object
       properties:
@@ -2222,6 +2246,7 @@ components:
         name:
           type: string
           nullable: true
+          example: "ATS Demo 2"
           description: The name of the individual or entity at the origin address.
         attentionTo:
           type: string
@@ -2229,6 +2254,7 @@ components:
           description: The name of the person to whom attention should be directed at the origin address.
         address1:
           type: string
+          example: 100 Vaughan Valley Blvd
           nullable: true
           description: The primary address line for the origin location.
         address2:
@@ -2237,18 +2263,22 @@ components:
           description: The secondary address line for the origin location, if applicable.
         city:
           type: string
+          example: Vaughan
           nullable: true
           description: The city in which the origin address is located.
         province:
           type: string
+          example: 'ON'
           nullable: true
           description: The province or state in which the origin address is located.
         country:
           type: string
+          example: CA
           nullable: true
           description: The country in which the origin address is located.
         postalCode:
           type: string
+          example: L4H3C5
           nullable: true
           description: The postal code or ZIP code for the origin address.
         isResidential:
@@ -2258,10 +2288,12 @@ components:
         phone:
           type: string
           nullable: true
+          example: "123-456-7890"
           description: The phone number associated with the origin address.
         email:
           type: string
           nullable: true
+          example: acs-demo2@ats.ca
           description: The email address associated with the origin address.
       additionalProperties: false
     PackageRequest:
@@ -2328,6 +2360,7 @@ components:
         trackingNumber:
           type: string
           nullable: true
+          example: 800014422-1
           description: The tracking number for the package.
       additionalProperties: false
     Payment:
@@ -2458,26 +2491,32 @@ components:
           type: integer
           format: int32
           description: The unique identifier for the pickup request.
+          example: 134
         requestDateTime:
           type: string
           format: date-time
           description: The date and time when the pickup request was made.
+          example: '2024-07-01T16:31:40.9603962+00:00'
         pickupTime:
           type: string
           nullable: true
           description: The scheduled time for the pickup.
+          example: 0700
         closingTime:
           type: string
           nullable: true
           description: The closing time for the pickup location.
+          example: 1700
         branchEmail:
           type: string
           nullable: true
           description: The email address of the branch handling the pickup request.
+          example: HYZ_Pickups@ats.ca
         customerEmail:
           type: string
           nullable: true
           description: The email address of the customer requesting the pickup.
+          example: john.doe@email.com
         shipmentDetail:
           "$ref": "#/components/schemas/PickupRequestShipmentDetailRes"
           description: Details of the shipment associated with the pickup request.
@@ -2489,10 +2528,12 @@ components:
           type: integer
           format: int32
           description: The number of pieces in the shipment.
+          example: 10
         weight:
           type: number
           format: double
           description: The total weight of the shipment.
+          example: 150.5
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -2519,19 +2560,41 @@ components:
           nullable: true
           description: A URI reference that identifies the specific occurrence of the problem.
       additionalProperties: {}
+    NotFoundResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of error.
+          example: https://tools.ietf.org/html/rfc7231#section-6.5.4
+        title:
+          type: string
+          description: A short, human-readable summary of the problem.
+          example: Not Found
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 404
+        traceId:
+          type: string
+          description: A unique identifier for this particular occurrence of the problem.
+          example: 00-b97c98f44be31b8594ba0715da119e06-b94062e99cad3610-00
     RateAdditionalChargeResponse:
       type: object
       properties:
         code:
           type: string
+          example: DG
           nullable: true
           description: The code identifying the additional charge.
         name:
           type: string
+          example: Dangerous Goods
           nullable: true
           description: The name of the additional charge.
         hasFlatCharge:
           type: boolean
+          example: false
           description: Indicates if the charge is a flat rate.
         flatCharge:
           type: number
@@ -2540,11 +2603,13 @@ components:
           description: The amount of the flat charge.
         variableCharge:
           type: number
+          example: 25.0
           format: double
           nullable: true
           description: The amount of the variable charge.
         isPartiallyAvailable:
           type: boolean
+          example: false
           nullable: true
           description: Indicates if the additional charge is partially available.
         partialAvailabilityDetails:
@@ -2602,30 +2667,37 @@ components:
           description: A list of additional surcharges.
         accessorialsTotal:
           type: number
+          example: 25.0
           format: double
           description: The total amount of accessorial charges.
         surchargesTotal:
           type: number
+          example: 0.0
           format: double
           description: The total amount of surcharges.
         fuelSurcharge:
           type: number
+          example: 4.3989
           format: double
           description: The amount of the fuel surcharge.
         expectedFreightCharge:
           type: number
+          example: 18.92
           format: double
           description: The expected freight charge before additional charges.
         totalBeforeTax:
           type: number
+          example: 48.3189
           format: double
           description: The total amount before tax.
         taxes:
           type: number
           format: double
+          example: 2.415945
           description: The total amount of taxes.
         total:
           type: number
+          example: 50.734845
           format: double
           description: The total amount including all charges and taxes.
       additionalProperties: false
@@ -2888,42 +2960,26 @@ components:
           type: string
           description: The value associated with the shipment reference type.
       additionalProperties: false
-      description: "Possible Shipment Reference Types:\r\n\r\n| **id** | **shortName**
-        | **description**                  |\r\n| ------ | ------------- | --------------------------------
-        |\r\n| 1      | REF           | Reference Number                 |\r\n| 2
-        \     | PO            | Purchase Order Number            |\r\n| 3      | CSN
-        \          | Customer Shipment Number         |\r\n| 4      | CMN           |
-        Customer Manifest Number         |\r\n| 5      | BOL           | Bill Of Lading
-        \                  |\r\n| 6      | CPO           | Consignee PO                     |\r\n|
-        7      | SREF          | Shipper Reference                |\r\n| 8      |
-        DREF          | Distribution Reference           |\r\n| 9      | PNO           |
-        Product Number                   |\r\n| 10     | CID           | Carton ID
-        \                       |\r\n| 11     | STO           | Store                            |\r\n|
-        12     | LID           | Load ID                          |\r\n| 13     |
-        RTYPE         | Indigo HU Returns Type           |\r\n| 14     | DO            |
-        Delivery Order                   |\r\n| 15     | BC            | Barcode                          |\r\n|
-        16     | CLIC          | Credo Licence                    |\r\n| 17     |
-        AWB           | Agent Waybill                    |\r\n| 18     | SUBS          |
-        Sub-Shipment                     |\r\n| 19     | POS           | Purchase
-        Order Number - Special  |\r\n| 20     | ASN           | ASN                              |\r\n|
-        21     | PTMN          | Pickup Trailer – Manifest Number |\r\n| 22     |
-        RMA           | RMA Number                       |\r\n<br/>"
     ShipmentResponse:
       type: object
       properties:
         id:
           type: integer
           format: int32
+          example: 11036
           description: The unique identifier for the shipment.
         docketId:
           type: integer
+          example: 97
           format: int32
           description: The identifier for the shipment docket.
         docketCode:
           type: string
+          example: ATSDemo2
           nullable: true
         accountId:
           type: integer
+          example: null
           description: This is the saved address id in ATS System used to associate
             shipments to a saved address
           format: int32
@@ -2931,6 +2987,7 @@ components:
           deprecated: true
         accountCode:
           maxLength: 24
+          example: null
           type: string
           description: This is the Shipper's Consignee Id that the Shipper would use
             to refer to this Consignee
@@ -2938,6 +2995,7 @@ components:
           deprecated: true
         consigneeId:
           type: integer
+          example: null
           description: This is the saved address id in ATS System used to associate
             shipments to a saved address
           format: int32
@@ -2945,47 +3003,57 @@ components:
           deprecated: true
         addressId:
           type: integer
+          example: null
           description: This is the saved address id in ATS System used to associate
             shipments to a saved address
           format: int32
           nullable: true
         consigneeCode:
           maxLength: 24
+          example: null
           type: string
           description: This is the Shipper's Consignee Id that the Shipper would use
             to refer to this Consignee
           nullable: true
         serviceCode:
           type: string
+          example: GE
           description: The code for the type of service used for the shipment.
           nullable: true
         serviceText:
           type: string
+          example: Ground Expedited
           nullable: true
           description: A description of the type of service used for the shipment.
         address:
           "$ref": "#/components/schemas/AddressRequest"
         pieces:
           type: integer
+          example: 5
           format: int32
           description: The number of pieces in the shipment.
         totalWeight:
           type: number
+          example: 15
           format: double
           description: The total weight of the shipment.
         shipDate:
           type: string
           format: date-time
+          example: '2024-07-03T10:00:00+00:00'
           nullable: true
           description: The date and time when the shipment was shipped.
         status:
+          example: created
           "$ref": "#/components/schemas/ShipmentStatus"
         trackingNumber:
           type: string
+          example: '800014422'
           nullable: true
           description: The tracking number for the shipment.
         manifestId:
           type: integer
+          example: 1337
           format: int32
           nullable: true
           description: The identifier for the shipment manifest.
@@ -3004,17 +3072,21 @@ components:
         phone:
           type: string
           nullable: true
+          example: 123-456-7890
           description: The phone number associated with the shipment.
         email:
           type: string
+          example: john.doe@ats.ca
           nullable: true
           description: The email address associated with the shipment.
         descriptionOfGoods:
           type: string
+          example: Medical supplies
           nullable: true
           description: A description of the goods in the shipment.
         instructions:
           type: string
+          example: Handle with care
           nullable: true
           description: Special instructions for the shipment.
         packages:
@@ -3029,6 +3101,7 @@ components:
           nullable: true
         isPallet:
           type: boolean
+          example: false
           description: Indicates if the shipment is palletized.
         saidToContain:
           type: integer
@@ -3345,7 +3418,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
-          "$ref": "#/components/schemas/ManifestStatus"
+          "$ref": "#/components/schemas/ManifestStatusReq"
       additionalProperties: false
     ValidatePostalCodeResponse:
       type: object
@@ -3380,7 +3453,57 @@ components:
           nullable: true
           description: A list of possible cities for the given postal code.
       additionalProperties: false
-
+    ContinuousManifestRes:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the continuous manifest.
+          example: 504
+        dateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the manifest was created.
+          example: 2023-10-03T23:24:36.8083692+00:00
+        dateClosed:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time when the manifest was closed.
+          example: null
+        name:
+          type: string
+          nullable: true
+          description: The name associated with the manifest.
+          example: null
+        status:
+          type: string
+          description: The status of the manifest.
+          example: open
+        pickupDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled pickup date for the manifest.
+          example: null
+        door:
+          type: string
+          nullable: true
+          description: The door assigned for the pickup.
+          example: null
+        trailerNumber:
+          type: string
+          nullable: true
+          description: The trailer number associated with the manifest.
+          example: null
+        shipmentsAssigned:
+          type: integer
+          description: The number of shipments assigned to the manifest.
+          example: 0
+        isContinuousType:
+          type: boolean
+          description: Indicates if the manifest is of continuous type.
+          example: true
   securitySchemes:
     oauth2:
       type: oauth2

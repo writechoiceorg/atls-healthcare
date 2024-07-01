@@ -157,7 +157,7 @@ def close_manifest():
     headers = create_headers()
 
     data = {
-        # "status": "closed"
+        "status": "closed"
     }
 
     response = requests.patch(manifest_url, json=data, headers=headers)
