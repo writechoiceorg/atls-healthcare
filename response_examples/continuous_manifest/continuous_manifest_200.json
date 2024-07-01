@@ -7,6 +7,6 @@
     "pickupDate": null,
     "door": null,
     "trailerNumber": null,
-    "shipmentsAssigned": 0,
+    "shipmentsAssigned": 1,
     "isContinuousType": true
 }

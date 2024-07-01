@@ -245,6 +245,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ContinuousManifestRes"
+  "/v1/Manifests/{manifestId}/shipments":
+    post:
+      summary: Add Shipments to Manifest
+      operationId: add-shipments-to-manifest
+      tags:
+      - Manifests
+      parameters:
+      - name: manifestId
+        in: path
+        description: The unique identifier for the manifest to which shipments will be added.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/ShipmentIds"
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFoundResponse"
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
   "/v1/Manifests/{manifestId}":
     patch:
       summary: Close Manifest

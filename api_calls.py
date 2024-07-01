@@ -14,6 +14,8 @@ def save_response(response, file_name):
     response_data = response.json()
     status = response.status_code
     print(status)
+    if status == 204:
+        return True
     main_path = f"./response_examples/{file_name}"
     file_path = f"{main_path}/{file_name}_{status}.json"
     with open(file_path, "w") as json_file:
@@ -136,10 +138,38 @@ def get_continuous_manifest():
     save_response(response, "continuous_manifest")
 
 
+def add_shipment_to_manifest():
+    manifest_url = f"{base}/v1/Manifests/504/shipments"
+
+    headers = create_headers()
+
+    data = {
+        "ids": [11536]
+    }
+
+    response = requests.post(manifest_url, json=data, headers=headers)
+    save_response(response, "add_to_manifest")
+
+
+def close_manifest():
+    manifest_url = f"{base}/v1/Manifests/504"
+
+    headers = create_headers()
+
+    data = {
+        # "status": "closed"
+    }
+
+    response = requests.patch(manifest_url, json=data, headers=headers)
+    save_response(response, "close_manifest")
+
+
 if __name__ == "__main__":
     # get_token()
     # request_pickup()
     # create_shipment()
     # get_shipment_labels()
     # get_shipment_labels_by_id()
-    get_continuous_manifest()
+    # add_shipment_to_manifest()
+    # get_continuous_manifest()
+    close_manifest()
