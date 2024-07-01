@@ -3,9 +3,6 @@ info:
   title: ATS Auth API
   description: This API provides authentication for ATS Healthcare B2B services.
   version: 1.0.0
-servers:
-  - url: https://login-b2b-ats-healthcare.us.auth0.com
-  - url: https://atsapi-dev.azurewebsites.net
 paths:
   /oauth/token:
     post:
