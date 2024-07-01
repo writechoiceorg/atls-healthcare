@@ -119,11 +119,17 @@ def get_shipment_labels():
 
 
 def get_shipment_labels_by_id():
-    ...
+    label_url = f"{base}/v1/Shipments/11038/label"
+
+    headers = create_headers()
+
+    response = requests.get(label_url, headers=headers)
+    save_response(response, "get_labels_id")
 
 
 if __name__ == "__main__":
     # get_token()
     # request_pickup()
     # create_shipment()
-    get_shipment_labels()
+    # get_shipment_labels()
+    get_shipment_labels_by_id()
