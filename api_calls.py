@@ -12,8 +12,11 @@ base = "https://atsapi-dev.azurewebsites.net"
 
 def save_response(response, file_name):
     response_data = response.json()
-    print(response.status_code)
-    with open(f"./response_examples/{file_name}/{file_name}_{response.status_code}.json", "w") as json_file:
+    status = response.status_code
+    print(status)
+    main_path = f"./response_examples/{file_name}"
+    file_path = f"{main_path}/{file_name}_{status}.json"
+    with open(file_path, "w") as json_file:
         json.dump(response_data, json_file, indent=4)
 
 
@@ -28,6 +31,15 @@ def read_json(file_path):
         print(f"Error decoding JSON from file: {file_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+def create_headers():
+    token_json = read_json("token.json")
+    return {
+        "accept": "application/json",
+        "Content-Type": "application/json",
+        "authorization": f"Bearer {token_json["access_token"]}",
+    }
 
 
 def get_token():
@@ -62,6 +74,42 @@ def request_pickup():
     save_response(response, "pickup")
 
 
+def create_shipment():
+    shipment_url = f"{base}/v1/Shipments"
+
+    data = {
+        "docketCode": "ATSDemo2",
+        "address": {
+            "name": "John Doe",
+            "attentionTo": "Jane Doe",
+            "address1": "150-18279 Blundell Rd",
+            "city": "Vancouver",
+            "province": "BC",
+            "postalCode": "V6W1L8",
+            "country": "CA",
+            "isResidential": False,
+        },
+        "phone": '123-456-7890',
+        "email": "john.doe@ats.ca",
+        "pieces": 5,
+        "totalWeight": 15,
+        "isPallet": False,
+        "instructions": "Handle with care",
+        "descriptionOfGoods": "Medical supplies",
+        "shipDate": "2024-07-03T10:00:00Z",
+        "accessorials": ["DG"],
+        "serviceCode": "GE",
+        "source": "wineDirect",
+        "paymentTerm": "prepaid",
+    }
+
+    headers = create_headers()
+
+    response = requests.post(shipment_url, json=data, headers=headers)
+    save_response(response, "create_shipment")
+
+
 if __name__ == "__main__":
     # get_token()
-    request_pickup()
+    # request_pickup()
+    create_shipment()

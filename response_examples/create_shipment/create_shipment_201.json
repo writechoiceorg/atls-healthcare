@@ -1,0 +1,163 @@
+{
+    "phone": "123-456-7890",
+    "email": "john.doe@ats.ca",
+    "descriptionOfGoods": "Medical supplies",
+    "instructions": "Handle with care",
+    "packages": [
+        {
+            "cartonId": 1,
+            "containerTypeId": null,
+            "weight": null,
+            "width": null,
+            "length": null,
+            "height": null,
+            "isNonStackable": null,
+            "trackingNumber": "800014422-1"
+        },
+        {
+            "cartonId": 2,
+            "containerTypeId": null,
+            "weight": null,
+            "width": null,
+            "length": null,
+            "height": null,
+            "isNonStackable": null,
+            "trackingNumber": "800014422-2"
+        },
+        {
+            "cartonId": 3,
+            "containerTypeId": null,
+            "weight": null,
+            "width": null,
+            "length": null,
+            "height": null,
+            "isNonStackable": null,
+            "trackingNumber": "800014422-3"
+        },
+        {
+            "cartonId": 4,
+            "containerTypeId": null,
+            "weight": null,
+            "width": null,
+            "length": null,
+            "height": null,
+            "isNonStackable": null,
+            "trackingNumber": "800014422-4"
+        },
+        {
+            "cartonId": 5,
+            "containerTypeId": null,
+            "weight": null,
+            "width": null,
+            "length": null,
+            "height": null,
+            "isNonStackable": null,
+            "trackingNumber": "800014422-5"
+        }
+    ],
+    "references": [],
+    "isPallet": false,
+    "saidToContain": null,
+    "accessorials": {
+        "values": [
+            "DG"
+        ],
+        "labels": [
+            "Dangerous Goods"
+        ],
+        "details": {
+            "timeRelease": null,
+            "appointment": null,
+            "freightInsurance": null,
+            "poDueDate": null
+        }
+    },
+    "rate": {
+        "accessorials": [
+            {
+                "code": "DG",
+                "name": "Dangerous Goods",
+                "hasFlatCharge": false,
+                "flatCharge": null,
+                "variableCharge": 25.0,
+                "isPartiallyAvailable": false,
+                "partialAvailabilityDetails": null
+            }
+        ],
+        "surcharges": [
+            {
+                "code": "FL",
+                "name": "Fuel",
+                "hasFlatCharge": false,
+                "flatCharge": null,
+                "variableCharge": null,
+                "isPartiallyAvailable": null,
+                "partialAvailabilityDetails": null
+            }
+        ],
+        "accessorialsTotal": 25.0,
+        "surchargesTotal": 0.0,
+        "fuelSurcharge": 4.3989,
+        "expectedFreightCharge": 18.92,
+        "totalBeforeTax": 48.3189,
+        "taxes": 2.415945,
+        "total": 50.734845
+    },
+    "paymentTerm": "prepaid",
+    "paymentAccount": null,
+    "id": 11036,
+    "docketId": 97,
+    "docketCode": "ATSDemo2",
+    "accountId": null,
+    "accountCode": null,
+    "consigneeId": null,
+    "addressId": null,
+    "consigneeCode": null,
+    "serviceCode": "GE",
+    "serviceText": "Ground Expedited",
+    "address": {
+        "name": "John Doe",
+        "attentionTo": "Jane Doe",
+        "address1": "150-18279 Blundell Rd",
+        "address2": null,
+        "city": "Vancouver",
+        "province": "BC",
+        "postalCode": "V6W1L8",
+        "country": "CA",
+        "isResidential": false
+    },
+    "pieces": 5,
+    "totalWeight": 15,
+    "shipDate": "2024-07-03T10:00:00+00:00",
+    "status": "created",
+    "trackingNumber": "800014422",
+    "manifestId": 1337,
+    "reference": null,
+    "po": null,
+    "origin": {
+        "name": "ATS Demo 2",
+        "attentionTo": null,
+        "address1": "100 Vaughan Valley Blvd",
+        "address2": null,
+        "city": "Vaughan",
+        "province": "ON",
+        "country": "CA",
+        "postalCode": "L4H3C5",
+        "isResidential": null,
+        "phone": "123-456-7890",
+        "email": "acs-demo2@ats.ca"
+    },
+    "destination": {
+        "name": "John Doe",
+        "attentionTo": "Jane Doe",
+        "address1": "150-18279 Blundell Rd",
+        "address2": null,
+        "city": "Vancouver",
+        "province": "BC",
+        "country": "CA",
+        "postalCode": "V6W1L8",
+        "isResidential": false,
+        "phone": "123-456-7890",
+        "email": "john.doe@ats.ca"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "type": "validation",
+    "title": "Shipment validation failed",
+    "status": 400,
+    "traceId": "00-74fe5266fe8390b1abf616e44696b0f3-fd4b4ef969ef01be-00",
+    "errors": {
+        "Address.PostalCode": [
+            "Postal Code has invalid postal code and province combo"
+        ]
+    }
+}
