@@ -2641,6 +2641,8 @@ components:
       additionalProperties: false
     UpdateManifestRequest:
       type: object
+      required:
+        - status
       properties:
         pickupDate:
           type: string
