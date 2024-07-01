@@ -62,5 +62,46 @@ paths:
                     example: Bearer
         '400':
           description: Invalid request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error code.
+                    example: invalid_request
+                  error_description:
+                    type: string
+                    description: Description of the error.
+                    example: 'Missing required parameter: grant_type'
         '401':
           description: Unauthorized request. Invalid client credentials.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error code.
+                    example: access_denied
+                  error_description:
+                    type: string
+                    description: Description of the error.
+                    example: Unauthorized
+        '403':
+          description: Forbidden request. Access denied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error code.
+                    example: access_denied
+                  error_description:
+                    type: string
+                    description: Description of the error.
+                    example: No audience parameter was provided, and no default audience has been configured
