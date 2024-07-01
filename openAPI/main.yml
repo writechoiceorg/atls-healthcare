@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ProblemDetails"
+                "$ref": "#/components/schemas/NotFoundResponse"
   "/v1/Shipments/{shipmentId}/label":
     get:
       tags:
@@ -1742,6 +1742,25 @@ components:
           nullable: true
           description: A URI reference that identifies the specific occurrence of the problem.
       additionalProperties: {}
+    NotFoundResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of error.
+          example: https://tools.ietf.org/html/rfc7231#section-6.5.4
+        title:
+          type: string
+          description: A short, human-readable summary of the problem.
+          example: Not Found
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 404
+        traceId:
+          type: string
+          description: A unique identifier for this particular occurrence of the problem.
+          example: 00-b97c98f44be31b8594ba0715da119e06-b94062e99cad3610-00
     RateAdditionalChargeResponse:
       type: object
       properties:

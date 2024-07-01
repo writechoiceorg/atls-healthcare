@@ -110,7 +110,7 @@ def create_shipment():
 
 
 def get_shipment_labels():
-    label_url = f"{base}/v1/Shipments/label?trackingNumber=800014422&type=pdf"
+    label_url = f"{base}/v1/Shipments/label?trackingNumber=900014422"
 
     headers = create_headers()
 
