@@ -378,17 +378,17 @@ paths:
       responses:
         '200':
           description: Success
-  "/v1/Manifests/continuous":
-    get:
-      tags:
-      - Manifests
-      operationId: get-continuous-manifest
-      summary: Get Continuous Manifest
-      description: Gets continuous manifest. Continuous manifest is a manifest that
-        all shipments are automatically assigned to if not specified otherwise.
-      responses:
-        '200':
-          description: Success
+  # "/v1/Manifests/continuous":
+  #   get:
+  #     tags:
+  #     - Manifests
+  #     operationId: get-continuous-manifest
+  #     summary: Get Continuous Manifest
+  #     description: Gets continuous manifest. Continuous manifest is a manifest that
+  #       all shipments are automatically assigned to if not specified otherwise.
+  #     responses:
+  #       '200':
+  #         description: Success
   "/v1/Manifests/{manifestId}":
     get:
       summary: Get Manifest by ID
@@ -422,37 +422,37 @@ paths:
             text/json:
               schema:
                 type: string
-    patch:
-      summary: Close Manifest
-      operationId: close-manifest
-      tags:
-      - Manifests
-      parameters:
-      - name: manifestId
-        in: path
-        description: The unique identifier for the manifest to be closed.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/UpdateManifestRequest"
-          text/json:
-            schema:
-              "$ref": "#/components/schemas/UpdateManifestRequest"
-          application/*+json:
-            schema:
-              "$ref": "#/components/schemas/UpdateManifestRequest"
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ManifestResponse"
+    # patch:
+    #   summary: Close Manifest
+    #   operationId: close-manifest
+    #   tags:
+    #   - Manifests
+    #   parameters:
+    #   - name: manifestId
+    #     in: path
+    #     description: The unique identifier for the manifest to be closed.
+    #     required: true
+    #     schema:
+    #       type: integer
+    #       format: int32
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           "$ref": "#/components/schemas/UpdateManifestRequest"
+    #       text/json:
+    #         schema:
+    #           "$ref": "#/components/schemas/UpdateManifestRequest"
+    #       application/*+json:
+    #         schema:
+    #           "$ref": "#/components/schemas/UpdateManifestRequest"
+    #   responses:
+    #     '200':
+    #       description: Success
+    #       content:
+    #         application/json:
+    #           schema:
+    #             "$ref": "#/components/schemas/ManifestResponse"
     delete:
       operationId: delete-manifest 
       tags:
@@ -476,23 +476,23 @@ paths:
       responses:
         '204':
           description: Success
-  "/v1/Manifests/{manifestId}/report":
-    get:
-      summary: Get Manifest Report
-      operationId: get-manifest-report
-      tags:
-      - Manifests
-      parameters:
-      - name: manifestId
-        in: path
-        description: The unique identifier for the manifest to generate the report for.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
+  # "/v1/Manifests/{manifestId}/report":
+  #   get:
+  #     summary: Get Manifest Report
+  #     operationId: get-manifest-report
+  #     tags:
+  #     - Manifests
+  #     parameters:
+  #     - name: manifestId
+  #       in: path
+  #       description: The unique identifier for the manifest to generate the report for.
+  #       required: true
+  #       schema:
+  #         type: integer
+  #         format: int32
+  #     responses:
+  #       '200':
+  #         description: Success
   "/v1/Manifests/{manifestId}/export":
     get:
       summary: Export Manifest
@@ -698,53 +698,53 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/PickupRequestRes"
-    post:
-      summary: Create a Pickup Request
-      operationId: create-pickup-request
-      tags:
-      - Pickup Requests
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/PickupRequestBody"
-          text/json:
-            schema:
-              "$ref": "#/components/schemas/PickupRequestBody"
-          application/*+json:
-            schema:
-              "$ref": "#/components/schemas/PickupRequestBody"
-      responses:
-        '201':
-          description: Success
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/PickupRequestRes"
-  "/v1/Shipments":
-    post:
-      summary: Create a Shipment
-      operationId: create-shipment
-      tags:
-      - Shipments
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/CreateShipmentRequestBody"
-          text/json:
-            schema:
-              "$ref": "#/components/schemas/CreateShipmentRequestBody"
-          application/*+json:
-            schema:
-              "$ref": "#/components/schemas/CreateShipmentRequestBody"
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ShipmentResponse"
+    # post:
+    #   summary: Create a Pickup Request
+    #   operationId: create-pickup-request
+    #   tags:
+    #   - Pickup Requests
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           "$ref": "#/components/schemas/PickupRequestBody"
+    #       text/json:
+    #         schema:
+    #           "$ref": "#/components/schemas/PickupRequestBody"
+    #       application/*+json:
+    #         schema:
+    #           "$ref": "#/components/schemas/PickupRequestBody"
+    #   responses:
+    #     '201':
+    #       description: Success
+    #       content:
+    #         application/json:
+    #           schema:
+    #             "$ref": "#/components/schemas/PickupRequestRes"
+  # "/v1/Shipments":
+  #   post:
+  #     summary: Create a Shipment
+  #     operationId: create-shipment
+  #     tags:
+  #     - Shipments
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             "$ref": "#/components/schemas/CreateShipmentRequestBody"
+  #         text/json:
+  #           schema:
+  #             "$ref": "#/components/schemas/CreateShipmentRequestBody"
+  #         application/*+json:
+  #           schema:
+  #             "$ref": "#/components/schemas/CreateShipmentRequestBody"
+  #     responses:
+  #       '200':
+  #         description: Success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               "$ref": "#/components/schemas/ShipmentResponse"
   "/v1/Shipments/{shipmentId}":
     get:
       summary: Get Shipment by ID
@@ -879,116 +879,116 @@ paths:
             text/json:
               schema:
                 type: string
-  "/v1/Shipments/label":
-    get:
-      tags:
-      - Shipments
-      summary: Get Shipment Labels
-      operationId: get-shipment-labels
-      description: >-
-        Get shipment label by `shipmentId` or `trackingNumber`. 
+  # "/v1/Shipments/label":
+  #   get:
+  #     tags:
+  #     - Shipments
+  #     summary: Get Shipment Labels
+  #     operationId: get-shipment-labels
+  #     description: >-
+  #       Get shipment label by `shipmentId` or `trackingNumber`. 
 
         
-        If `trackingNumber` includes the package number ('8000...1-1'), then the label for the individual package is returned. Otherwise labels for all packages in the shipment are returned. 
+  #       If `trackingNumber` includes the package number ('8000...1-1'), then the label for the individual package is returned. Otherwise labels for all packages in the shipment are returned. 
         
         
-        If `shipmentId` is provided, then the label(s) for the shipment (including all packages) is returned.
-      parameters:
-      - name: trackingNumber
-        in: query
-        schema:
-          type: string
-        description: The tracking number for the shipment. If it includes the package number, the label for the individual package is returned.
-      - name: shipmentId
-        in: query
-        schema:
-          type: integer
-          format: int32
-        description: The unique identifier for the shipment. If provided, the labels for the shipment (including all packages) are returned.
-      - name: type
-        in: query
-        schema:
-          "$ref": "#/components/schemas/LabelType"
-        description: The type of label to be generated.
-      - name: size
-        in: query
-        schema:
-          "$ref": "#/components/schemas/LabelSize"
-        description: The size of the label to be generated.
-      - name: invert
-        in: query
-        schema:
-          type: boolean
-          default: false
-        description: Indicates whether the label should be inverted.
-      - name: includeLogo
-        in: query
-        schema:
-          type: boolean
-          default: false
-        description: Indicates whether the label should include ATS's logo.
-      responses:
-        '200':
-          description: Returns ZPL string by default, otherwise PDF string binary
-            if `type=pdf`
-          content:
-            text/plain:
-              schema:
-                type: string
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ProblemDetails"
-  "/v1/Shipments/{shipmentId}/label":
-    get:
-      tags:
-      - Shipments
-      summary: Get shipment label by Shipment ID
-      operationId: get-shipment-labels-by-shipment-id
-      parameters:
-      - name: shipmentId
-        in: path
-        description: The unique identifier for the shipment.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: Type
-        in: query
-        description: The format of the label to be generated.
-        schema:
-          "$ref": "#/components/schemas/LabelFormat"
-      - name: Size
-        in: query
-        description: The size of the label to be generated.
-        schema:
-          "$ref": "#/components/schemas/LabelSize1"
-      - name: Invert
-        in: query
-        schema:
-          type: boolean
-          description: Indicates whether the label should be inverted.
-      - name: IncludeLogo
-        in: query
-        schema:
-          type: boolean
-          description: Indicates whether the label should include ATS's logo.
-      responses:
-        '200':
-          description: Returns ZPL string by default, otherwise PDF string binary
-            if `type=pdf`
-          content:
-            text/plain:
-              schema:
-                type: string
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ProblemDetails"
+  #       If `shipmentId` is provided, then the label(s) for the shipment (including all packages) is returned.
+  #     parameters:
+  #     - name: trackingNumber
+  #       in: query
+  #       schema:
+  #         type: string
+  #       description: The tracking number for the shipment. If it includes the package number, the label for the individual package is returned.
+  #     - name: shipmentId
+  #       in: query
+  #       schema:
+  #         type: integer
+  #         format: int32
+  #       description: The unique identifier for the shipment. If provided, the labels for the shipment (including all packages) are returned.
+  #     - name: type
+  #       in: query
+  #       schema:
+  #         "$ref": "#/components/schemas/LabelType"
+  #       description: The type of label to be generated.
+  #     - name: size
+  #       in: query
+  #       schema:
+  #         "$ref": "#/components/schemas/LabelSize"
+  #       description: The size of the label to be generated.
+  #     - name: invert
+  #       in: query
+  #       schema:
+  #         type: boolean
+  #         default: false
+  #       description: Indicates whether the label should be inverted.
+  #     - name: includeLogo
+  #       in: query
+  #       schema:
+  #         type: boolean
+  #         default: false
+  #       description: Indicates whether the label should include ATS's logo.
+  #     responses:
+  #       '200':
+  #         description: Returns ZPL string by default, otherwise PDF string binary
+  #           if `type=pdf`
+  #         content:
+  #           text/plain:
+  #             schema:
+  #               type: string
+  #       '404':
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               "$ref": "#/components/schemas/ProblemDetails"
+  # "/v1/Shipments/{shipmentId}/label":
+  #   get:
+  #     tags:
+  #     - Shipments
+  #     summary: Get shipment label by Shipment ID
+  #     operationId: get-shipment-labels-by-shipment-id
+  #     parameters:
+  #     - name: shipmentId
+  #       in: path
+  #       description: The unique identifier for the shipment.
+  #       required: true
+  #       schema:
+  #         type: integer
+  #         format: int32
+  #     - name: Type
+  #       in: query
+  #       description: The format of the label to be generated.
+  #       schema:
+  #         "$ref": "#/components/schemas/LabelFormat"
+  #     - name: Size
+  #       in: query
+  #       description: The size of the label to be generated.
+  #       schema:
+  #         "$ref": "#/components/schemas/LabelSize1"
+  #     - name: Invert
+  #       in: query
+  #       schema:
+  #         type: boolean
+  #         description: Indicates whether the label should be inverted.
+  #     - name: IncludeLogo
+  #       in: query
+  #       schema:
+  #         type: boolean
+  #         description: Indicates whether the label should include ATS's logo.
+  #     responses:
+  #       '200':
+  #         description: Returns ZPL string by default, otherwise PDF string binary
+  #           if `type=pdf`
+  #         content:
+  #           text/plain:
+  #             schema:
+  #               type: string
+  #       '404':
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               "$ref": "#/components/schemas/ProblemDetails"
   "/v1/Shipments/service":
     post:
       tags:
