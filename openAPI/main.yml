@@ -80,6 +80,38 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ShipmentResponse"
+        '400':
+          description: Shipment validation failed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of error.
+                    example: validation
+                  title:
+                    type: string
+                    description: A short, human-readable summary of the problem.
+                    example: Shipment validation failed
+                  status:
+                    type: integer
+                    description: The HTTP status code.
+                    example: 400
+                  traceId:
+                    type: string
+                    description: A unique identifier for this particular occurrence of the problem.
+                    example: 00-74fe5266fe8390b1abf616e44696b0f3-fd4b4ef969ef01be-00
+                  errors:
+                    type: object
+                    properties:
+                      Address.PostalCode:
+                        type: array
+                        items:
+                          type: string
+                          description: Description of the specific validation error.
+                          example: Postal Code has invalid postal code and province combo
   "/v1/Shipments/label":
     get:
       tags:
