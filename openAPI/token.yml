@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: ATS Healthcare Auth API
+  title: ATS Auth API
   description: This API provides authentication for ATS Healthcare B2B services.
   version: 1.0.0
 servers:
@@ -9,8 +9,11 @@ servers:
 paths:
   /oauth/token:
     post:
-      summary: Generate OAuth2 Token
+      summary: Generate Token
       description: Request an access token using client credentials.
+      operationId: generate-token
+      tags:
+        - Token
       requestBody:
         required: true
         content:
