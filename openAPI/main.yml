@@ -1593,12 +1593,12 @@ components:
           type: string
           nullable: true
           description: The scheduled time for the pickup.
-          example: 1400
+          example: 0700
         closingTime:
           type: string
           nullable: true
           description: The closing time for the pickup location.
-          example: 1900
+          example: 1700
         branchEmail:
           type: string
           nullable: true
@@ -1620,12 +1620,12 @@ components:
           type: integer
           format: int32
           description: The number of pieces in the shipment.
-          example: 2
+          example: 10
         weight:
           type: number
           format: double
           description: The total weight of the shipment.
-          example: 10
+          example: 150.5
       additionalProperties: false
     ProblemDetails:
       type: object
