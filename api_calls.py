@@ -11,9 +11,9 @@ base = "https://atsapi-dev.azurewebsites.net"
 
 
 def save_response(response, file_name):
-    response.raise_for_status()
     response_data = response.json()
-    with open(f"{file_name}.json", "w") as json_file:
+    print(response.status_code)
+    with open(f"{file_name}_{response.status_code}.json", "w") as json_file:
         json.dump(response_data, json_file, indent=4)
 
 
