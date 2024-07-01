@@ -13,7 +13,7 @@ base = "https://atsapi-dev.azurewebsites.net"
 def save_response(response, file_name):
     response_data = response.json()
     print(response.status_code)
-    with open(f"{file_name}_{response.status_code}.json", "w") as json_file:
+    with open(f"./response_examples/{file_name}/{file_name}_{response.status_code}.json", "w") as json_file:
         json.dump(response_data, json_file, indent=4)
 
 
