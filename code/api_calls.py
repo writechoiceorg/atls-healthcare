@@ -1,4 +1,5 @@
 import requests
+from requests import Response
 import json
 import os
 from dotenv import load_dotenv
@@ -10,18 +11,41 @@ url = "https://login-b2b-ats-healthcare.us.auth0.com"
 base = "https://atsapi-dev.azurewebsites.net"
 
 
-def save_response(response, file_name):
+def save_response(response: Response, file_name):
+    response.raise_for_status()
     response_data = response.json()
     status = response.status_code
     print(status)
     if status == 204:
         return True
-    main_path = f"./response_examples/{file_name}"
+
+    if file_name == "token":
+        file_path = f"./code/{file_name}.json"
+        with open(file_path, "w") as json_file:
+            json.dump(response_data, json_file, indent=4)
+        return
+
+    main_path = f"./code/responses/{file_name}"
+    os.makedirs(main_path, exist_ok=True)
     file_path = f"{main_path}/{file_name}_{status}.json"
-    if file_name == 'token':
-        file_path = file_name
+
+    existing_data = []
+    if os.path.exists(file_path):
+        with open(file_path, "r") as json_file:
+            try:
+                existing_data = json.load(json_file)
+                if not isinstance(existing_data, list):
+                    existing_data = [existing_data]
+            except json.JSONDecodeError:
+                existing_data = []
+
+    if not isinstance(existing_data, list):
+        existing_data = []
+
+    existing_data.append(response_data)
+
     with open(file_path, "w") as json_file:
-        json.dump(response_data, json_file, indent=4)
+        json.dump(existing_data, json_file, indent=4)
 
 
 def read_json(file_path):
@@ -38,7 +62,7 @@ def read_json(file_path):
 
 
 def create_headers():
-    token_json = read_json("token.json")
+    token_json = read_json("./code/token.json")
     return {
         "accept": "application/json",
         "Content-Type": "application/json",
@@ -162,11 +186,11 @@ def close_manifest():
 
 
 if __name__ == "__main__":
-    # get_token()
+    get_token()
     # request_pickup()
     # create_shipment()
     # get_shipment_labels()
     # get_shipment_labels_by_id()
     # add_shipment_to_manifest()
     # get_continuous_manifest()
-    close_manifest()
+    # close_manifest()

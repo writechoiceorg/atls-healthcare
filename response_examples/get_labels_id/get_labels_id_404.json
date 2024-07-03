@@ -1,7 +1,0 @@
-{
-    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-    "title": "Not Found",
-    "status": 404,
-    "detail": "Shipment with id 11038 was not found",
-    "traceId": "00-1f00cc53e63fe9d95b6184982ad33089-1c2fdc501920e652-00"
-}

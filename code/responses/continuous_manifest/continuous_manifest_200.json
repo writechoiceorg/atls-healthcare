@@ -1,0 +1,14 @@
+[
+    {
+        "id": 504,
+        "dateCreated": "2023-10-03T23:24:36.8083692+00:00",
+        "dateClosed": null,
+        "name": null,
+        "status": "open",
+        "pickupDate": null,
+        "door": null,
+        "trailerNumber": null,
+        "shipmentsAssigned": 1,
+        "isContinuousType": true
+    }
+]

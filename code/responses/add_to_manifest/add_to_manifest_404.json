@@ -1,0 +1,9 @@
+[
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+        "title": "Not Found",
+        "status": 404,
+        "detail": "Shipments with ids System.Collections.Generic.List`1[System.Int32] were not found.",
+        "traceId": "00-51e7c64e06a3d0bde666f69b0933c1bb-b59ccab75302f99b-00"
+    }
+]

@@ -1,7 +1,0 @@
-{
-    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.8",
-    "title": "Conflict",
-    "status": 409,
-    "detail": "Pickup request has already been made for today",
-    "traceId": "00-e8bd157007f733901420ff84d1eb7f0f-6b9aab365ca73220-00"
-}
