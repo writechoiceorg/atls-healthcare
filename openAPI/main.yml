@@ -182,7 +182,7 @@ paths:
     get:
       tags:
       - Shipments
-      summary: Get shipment label by Shipment ID
+      summary: Get Shipment Labels by Shipment ID
       operationId: get-shipment-labels-by-shipment-id
       parameters:
       - name: shipmentId
