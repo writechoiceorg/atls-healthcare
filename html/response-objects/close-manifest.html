@@ -1,0 +1,833 @@
+<style>
+  details {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .card p {
+    margin-left: 20px;
+  }
+
+  .card {
+    border: 1px solid #efefef;
+    background: #fcfcfce0;
+    margin: 1.5em 0;
+    border-radius: 4px;
+    border-left: 6px double #cf111e;
+    padding: 0.25em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card .card {
+    margin: 1.5em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .card {
+      background-color: #303b42;
+      border: 1px solid #4a5861;
+      border-left: 10px solid #cf111e;
+    }
+  }
+
+  [data-color-mode="dark"] .card {
+    background-color: #303b42;
+    border: 1px solid #4a5861;
+    border-left: 10px solid #cf111e;
+  }
+</style>
+
+<div>
+
+  <div class="card">
+    <p><strong>id</strong> <small>Type: integer</small>
+      <br />A unique identifier for the manifest.
+      <br /><small> Example: 0 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>dateCreated</strong> <small>Type: string (date-time)</small>
+      <br />The date and time when the manifest was created.
+      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>dateClosed</strong> <small>Type: string (date-time)</small>
+      <br />The date and time when the manifest was closed.
+      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>name</strong> <small>Type: string</small>
+      <br />The name of the manifest.
+      <br /><small> Example: string </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>status</strong> <small>Type: string</small>
+      <br />The current status of the manifest.
+      <br /><small> Example: open </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>pickupDate</strong> <small>Type: string (date-time)</small>
+      <br />The scheduled pickup date for the manifest.
+      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>door</strong> <small>Type: string</small>
+      <br />The door number associated with the manifest.
+      <br /><small> Example: string </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>trailerNumber</strong> <small>Type: string</small>
+      <br />The trailer number associated with the manifest.
+      <br /><small> Example: string </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>shipmentsAssigned</strong> <small>Type: integer</small>
+      <br />The number of shipments assigned to the manifest.
+      <br /><small> Example: 0 </small>
+    </p>
+  </div>
+
+  <details class="card">
+    <summary>
+      <strong>shipments</strong> <small>array of objects</small>
+      <br />
+      <p>A list of shipments associated with the manifest.</p>
+    </summary>
+    <div>
+      <div class="card">
+        <p><strong>id</strong> <small>Type: integer</small>
+          <br />The unique identifier for the shipment.
+          <br /><small> Example: 11036 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>docketId</strong> <small>Type: integer</small>
+          <br />The ID of the docket associated with the shipment.
+          <br /><small> Example: 97 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>docketCode</strong> <small>Type: string</small>
+          <br />The code of the docket associated with the shipment.
+          <br /><small> Example: ATSDemo2 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>addressId</strong> <small>Type: integer (nullable)</small>
+          <br />The ID of the address associated with the shipment.
+          <br /><small> Example: null </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>consigneeCode</strong> <small>Type: string (nullable)</small>
+          <br />The code of the consignee associated with the shipment.
+          <br /><small> Example: null </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>serviceCode</strong> <small>Type: string</small>
+          <br />The code of the service level for the shipment.
+          <br /><small> Example: GE </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>serviceText</strong> <small>Type: string</small>
+          <br />A description of the service level for the shipment.
+          <br /><small> Example: Ground Expedited </small>
+        </p>
+      </div>
+      <details class="card">
+        <summary>
+          <strong>address</strong> <small>object</small>
+          <br />
+          <p>The address details for the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>name</strong> <small>Type: string</small>
+              <br />The name of the individual or company.
+              <br /><small> Example: John Doe </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>attentionTo</strong> <small>Type: string</small>
+              <br />The name of the person to whom attention should be directed.
+              <br /><small> Example: Jane Doe </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address1</strong> <small>Type: string</small>
+              <br />The primary address line.
+              <br /><small> Example: 150-18279 Blundell Rd </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address2</strong> <small>Type: string (nullable)</small>
+              <br />The secondary address line.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>city</strong> <small>Type: string</small>
+              <br />The city of the address.
+              <br /><small> Example: Vancouver </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>province</strong> <small>Type: string</small>
+              <br />The province or state of the address.
+              <br /><small> Example: BC </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>postalCode</strong> <small>Type: string</small>
+              <br />The postal code or ZIP code of the address.
+              <br /><small> Example: V6W1L8 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>country</strong> <small>Type: string</small>
+              <br />The country code of the address.
+              <br /><small> Example: CA </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>isResidential</strong> <small>Type: boolean</small>
+              <br />Indicates if the address is residential.
+              <br /><small> Example: false </small>
+            </p>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <p><strong>pieces</strong> <small>Type: integer</small>
+          <br />The number of pieces in the shipment.
+          <br /><small> Example: 5 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>totalWeight</strong> <small>Type: number</small>
+          <br />The total weight of the shipment.
+          <br /><small> Example: 15 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>shipDate</strong> <small>Type: string (date-time)</small>
+          <br />The date and time when the shipment is scheduled to ship.
+          <br /><small> Example: 2024-07-03T10:00:00+00:00 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>status</strong> <small>Type: string</small>
+          <br />The current status of the shipment.
+          <br /><small> Example: created </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>trackingNumber</strong> <small>Type: string</small>
+          <br />The tracking number for the shipment.
+          <br /><small> Example: 800014422 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>manifestId</strong> <small>Type: integer</small>
+          <br />The ID of the manifest associated with the shipment.
+          <br /><small> Example: 1337 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>reference</strong> <small>Type: string</small>
+          <br />The reference associated with the shipment.
+          <br /><small> Example: string </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>po</strong> <small>Type: string</small>
+          <br />The purchase order number associated with the shipment.
+          <br /><small> Example: string </small>
+        </p>
+      </div>
+      <details class="card">
+        <summary>
+          <strong>origin</strong> <small>object</small>
+          <br />
+          <p>The origin details for the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>name</strong> <small>Type: string</small>
+              <br />The name of the origin location.
+              <br /><small> Example: ATS Demo 2 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>attentionTo</strong> <small>Type: string (nullable)</small>
+              <br />The name of the person to whom attention should be directed at the origin location.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address1</strong> <small>Type: string</small>
+              <br />The primary address line of the origin location.
+              <br /><small> Example: 100 Vaughan Valley Blvd </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address2</strong> <small>Type: string (nullable)</small>
+              <br />The secondary address line of the origin location.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>city</strong> <small>Type: string</small>
+              <br />The city of the origin location.
+              <br /><small> Example: Vaughan </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>province</strong> <small>Type: string</small>
+              <br />The province or state of the origin location.
+              <br /><small> Example: ON </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>country</strong> <small>Type: string</small>
+              <br />The country code of the origin location.
+              <br /><small> Example: CA </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>postalCode</strong> <small>Type: string</small>
+              <br />The postal code or ZIP code of the origin location.
+              <br /><small> Example: L4H3C5 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>isResidential</strong> <small>Type: boolean</small>
+              <br />Indicates if the origin location is residential.
+              <br /><small> Example: true </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>phone</strong> <small>Type: string</small>
+              <br />The phone number of the origin location.
+              <br /><small> Example: 123-456-7890 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>email</strong> <small>Type: string</small>
+              <br />The email address of the origin location.
+              <br /><small> Example: acs-demo2@ats.ca </small>
+            </p>
+          </div>
+        </div>
+      </details>
+      <details class="card">
+        <summary>
+          <strong>destination</strong> <small>object</small>
+          <br />
+          <p>The destination details for the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>name</strong> <small>Type: string</small>
+              <br />The name of the destination location.
+              <br /><small> Example: John Doe </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>attentionTo</strong> <small>Type: string (nullable)</small>
+              <br />The name of the person to whom attention should be directed at the destination location.
+              <br /><small> Example: Jane Doe </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address1</strong> <small>Type: string</small>
+              <br />The primary address line of the destination location.
+              <br /><small> Example: 150-18279 Blundell Rd </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>address2</strong> <small>Type: string (nullable)</small>
+              <br />The secondary address line of the destination location.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>city</strong> <small>Type: string</small>
+              <br />The city of the destination location.
+              <br /><small> Example: Vancouver </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>province</strong> <small>Type: string</small>
+              <br />The province or state of the destination location.
+              <br /><small> Example: BC </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>country</strong> <small>Type: string</small>
+              <br />The country code of the destination location.
+              <br /><small> Example: CA </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>postalCode</strong> <small>Type: string</small>
+              <br />The postal code or ZIP code of the destination location.
+              <br /><small> Example: V6W1L8 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>isResidential</strong> <small>Type: boolean</small>
+              <br />Indicates if the destination location is residential.
+              <br /><small> Example: true </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>phone</strong> <small>Type: string</small>
+              <br />The phone number of the destination location.
+              <br /><small> Example: 123-456-7890 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>email</strong> <small>Type: string</small>
+              <br />The email address of the destination location.
+              <br /><small> Example: john.doe@ats.ca </small>
+            </p>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <p><strong>phone</strong> <small>Type: string</small>
+          <br />The phone number associated with the shipment.
+          <br /><small> Example: 123-456-7890 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>email</strong> <small>Type: string</small>
+          <br />The email address associated with the shipment.
+          <br /><small> Example: john.doe@ats.ca </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>descriptionOfGoods</strong> <small>Type: string</small>
+          <br />A description of the goods being shipped.
+          <br /><small> Example: Medical supplies </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>instructions</strong> <small>Type: string</small>
+          <br />Any special instructions for handling the shipment.
+          <br /><small> Example: Handle with care </small>
+        </p>
+      </div>
+      <details class="card">
+        <summary>
+          <strong>packages</strong> <small>array of objects</small>
+          <br />
+          <p>A list of packages included in the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>cartonId</strong> <small>Type: integer</small>
+              <br />The unique identifier for the carton.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>containerTypeId</strong> <small>Type: integer</small>
+              <br />The identifier for the type of container.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>weight</strong> <small>Type: number</small>
+              <br />The weight of the package.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>width</strong> <small>Type: number</small>
+              <br />The width of the package.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>length</strong> <small>Type: number</small>
+              <br />The length of the package.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>height</strong> <small>Type: number</small>
+              <br />The height of the package.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>isNonStackable</strong> <small>Type: boolean</small>
+              <br />Indicates if the package is non-stackable.
+              <br /><small> Example: true </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>trackingNumber</strong> <small>Type: string</small>
+              <br />The tracking number for the package.
+              <br /><small> Example: 800014422-1 </small>
+            </p>
+          </div>
+        </div>
+      </details>
+      <details class="card">
+        <summary>
+          <strong>references</strong> <small>array of objects</small>
+          <br />
+          <p>A list of references associated with the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>id</strong> <small>Type: integer</small>
+              <br />The unique identifier for the reference.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>shortName</strong> <small>Type: string</small>
+              <br />The short name for the reference.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>value</strong> <small>Type: string</small>
+              <br />The value of the reference.
+              <br /><small> Example: string </small>
+            </p>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <p><strong>isPallet</strong> <small>Type: boolean</small>
+          <br />Indicates if the shipment is palletized.
+          <br /><small> Example: false </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>saidToContain</strong> <small>Type: integer</small>
+          <br />The number of items said to be contained in the shipment.
+          <br /><small> Example: 0 </small>
+        </p>
+      </div>
+      <details class="card">
+        <summary>
+          <strong>accessorials</strong> <small>object</small>
+          <br />
+          <p>Details of any accessorials associated with the shipment.</p>
+        </summary>
+        <div>
+          <div class="card">
+            <p><strong>values</strong> <small>array of strings</small>
+              <br />A list of accessorial values associated with the shipment.
+              <br /><small> Example: ["string"] </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>labels</strong> <small>array of strings</small>
+              <br />A list of accessorial labels associated with the shipment.
+              <br /><small> Example: ["string"] </small>
+            </p>
+          </div>
+          <details class="card">
+            <summary>
+              <strong>details</strong> <small>object</small>
+              <br />
+              <p>Detailed information of the accessorials.</p>
+            </summary>
+            <div>
+              <details class="card">
+                <summary>
+                  <strong>timeRelease</strong> <small>object</small>
+                  <br />
+                  <p>Details of the time release accessorial.</p>
+                </summary>
+                <div>
+                  <div class="card">
+                    <p><strong>type.value</strong> <small>string</small>
+                      <br />The type of time release.
+                      <br /><small> Example: deliverBefore </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>type.description</strong> <small>string</small>
+                      <br />Description of the time release type.
+                      <br /><small> Example: string </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>date1</strong> <small>string (date-time)</small>
+                      <br />The first date for the time release.
+                      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>date2</strong> <small>string (date-time)</small>
+                      <br />The second date for the time release.
+                      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+                    </p>
+                  </div>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>
+                  <strong>appointment</strong> <small>object</small>
+                  <br />
+                  <p>Details of the appointment accessorial.</p>
+                </summary>
+                <div>
+                  <div class="card">
+                    <p><strong>type.value</strong> <small>string</small>
+                      <br />The type of appointment.
+                      <br /><small> Example: preBooked </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>type.description</strong> <small>string</small>
+                      <br />Description of the appointment type.
+                      <br /><small> Example: string </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>confirmationCode</strong> <small>string</small>
+                      <br />The confirmation code for the appointment.
+                      <br /><small> Example: string </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>date</strong> <small>string (date-time)</small>
+                      <br />The date of the appointment.
+                      <br /><small> Example: 2024-07-03T15:11:58.820Z </small>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <p><strong>time</strong> <small>string</small>
+                      <br />The time of the appointment.
+                      <br /><small> Example: string </small>
+                    </p>
+                  </div>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>
+                  <strong>freightInsurance</strong> <small>object</small>
+                  <br />
+                  <p>Details of the freight insurance accessorial.</p>
+                </summary>
+                <div>
+                  <div class="card">
+                    <p><strong>declaredValue</strong> <small>number</small>
+                      <br />The declared value of the freight insurance.
+                      <br /><small> Example: 0 </small>
+                    </p>
+                  </div>
+                </div>
+              </details>
+
+              <div class="card">
+                <p><strong>poDueDate</strong> <small>string (date)</small>
+                  <br />The due date for the purchase order.
+                  <br /><small> Example: 2024-07-03 </small>
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="card">
+        <summary>
+          <strong>rate</strong> <small>object</small>
+          <br />
+          <p>Details of the rate information.</p>
+        </summary>
+        <div>
+          <details class="card">
+            <summary>
+              <strong>accessorials</strong> <small>array of objects</small>
+              <br />
+              <p>A list of accessorial charges associated with the rate.</p>
+            </summary>
+            <div>
+              <div class="card">
+                <p><strong>code</strong> <small>string</small>
+                  <br />The code of the accessorial.
+                  <br /><small> Example: DG </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>name</strong> <small>string</small>
+                  <br />The name of the accessorial.
+                  <br /><small> Example: Dangerous Goods </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>hasFlatCharge</strong> <small>boolean</small>
+                  <br />Indicates if the accessorial has a flat charge.
+                  <br /><small> Example: false </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>flatCharge</strong> <small>number</small>
+                  <br />The flat charge amount.
+                  <br /><small> Example: 0 </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>variableCharge</strong> <small>number</small>
+                  <br />The variable charge amount.
+                  <br /><small> Example: 25 </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>isPartiallyAvailable</strong> <small>boolean</small>
+                  <br />Indicates if the accessorial is partially available.
+                  <br /><small> Example: false </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>partialAvailabilityDetails</strong> <small>string</small>
+                  <br />Details about the partial availability.
+                  <br /><small> Example: string </small>
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <details class="card">
+            <summary>
+              <strong>surcharges</strong> <small>array of objects</small>
+              <br />
+              <p>A list of surcharges associated with the rate.</p>
+            </summary>
+            <div>
+              <div class="card">
+                <p><strong>code</strong> <small>string</small>
+                  <br />The code of the surcharge.
+                  <br /><small> Example: DG </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>name</strong> <small>string</small>
+                  <br />The name of the surcharge.
+                  <br /><small> Example: Dangerous Goods </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>hasFlatCharge</strong> <small>boolean</small>
+                  <br />Indicates if the surcharge has a flat charge.
+                  <br /><small> Example: false </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>flatCharge</strong> <small>number</small>
+                  <br />The flat charge amount.
+                  <br /><small> Example: 0 </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>variableCharge</strong> <small>number</small>
+                  <br />The variable charge amount.
+                  <br /><small> Example: 25 </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>isPartiallyAvailable</strong> <small>boolean</small>
+                  <br />Indicates if the surcharge is partially available.
+                  <br /><small> Example: false </small>
+                </p>
+              </div>
+              <div class="card">
+                <p><strong>partialAvailabilityDetails</strong> <small>string</small>
+                  <br />Details about the partial availability.
+                  <br /><small> Example: string </small>
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <div class="card">
+            <p><strong>accessorialsTotal</strong> <small>number</small>
+              <br />The total amount of accessorial charges.
+              <br /><small> Example: 25 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>surchargesTotal</strong> <small>number</small>
+              <br />The total amount of surcharges.
+              <br /><small> Example: 0 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>fuelSurcharge</strong> <small>number</small>
+              <br />The amount of the fuel surcharge.
+              <br /><small> Example: 4.3989 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>expectedFreightCharge</strong> <small>number</small>
+              <br />The expected freight charge amount.
+              <br /><small> Example: 18.92 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>totalBeforeTax</strong> <small>number</small>
+              <br />The total amount before tax.
+              <br /><small> Example: 48.3189 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>taxes</strong> <small>number</small>
+              <br />The amount of taxes.
+              <br /><small> Example: 2.415945 </small>
+            </p>
+          </div>
+          <div class="card">
+            <p><strong>total</strong> <small>number</small>
+              <br />The total amount including taxes.
+              <br /><small> Example: 50.734845 </small>
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <div class="card">
+        <p><strong>paymentTerm</strong> <small>Type: string</small>
+          <br />The payment term for the shipment.
+          <br /><small> Example: prepaid </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>paymentAccount</strong> <small>Type: integer</small>
+          <br />The payment account for the shipment.
+          <br /><small> Example: 0 </small>
+        </p>
+      </div>
+    </div>
+  </details>
+
+
+</div>
