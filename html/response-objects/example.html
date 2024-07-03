@@ -1,0 +1,54 @@
+<style>
+  details {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .card p {
+    margin-left: 20px;
+  }
+
+  .card {
+    border: 1px solid #efefef;
+    background: #fcfcfce0;
+    margin: 1.5em 0;
+    border-radius: 4px;
+    border-left: 6px double #cf111e;
+    padding: 0.25em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card .card {
+    margin: 1.5em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .card {
+      background-color: #303b42;
+      border: 1px solid #4a5861;
+      border-left: 10px solid #cf111e;
+    }
+  }
+
+  [data-color-mode="dark"] .card {
+    background-color: #303b42;
+    border: 1px solid #4a5861;
+    border-left: 10px solid #cf111e;
+  }
+</style>
+
+<div>
+  <details class="card">
+    <summary>
+      <strong>destination</strong> <small>object</small>
+      <br />
+      <p>The destination details for the shipment.</p>
+    </summary>
+    <div>
+
+    </div>
+  </details>
+
+
+
+</div>

@@ -1,0 +1,63 @@
+<style>
+  details {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .card p {
+    margin-left: 20px;
+  }
+
+  .card {
+    border: 1px solid #efefef;
+    background: #fcfcfce0;
+    margin: 1.5em 0;
+    border-radius: 4px;
+    border-left: 6px double #cf111e;
+    padding: 0.25em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card .card {
+    margin: 1.5em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .card {
+      background-color: #303b42;
+      border: 1px solid #4a5861;
+      border-left: 10px solid #cf111e;
+    }
+  }
+
+  [data-color-mode="dark"] .card {
+    background-color: #303b42;
+    border: 1px solid #4a5861;
+    border-left: 10px solid #cf111e;
+  }
+</style>
+
+<div>
+  <div class="card">
+    <p><strong>access_token</strong> <small>string</small>
+      <br />The token that can be used for <a href="/reference/authentication">authentication</a>.
+      <br /><small> Example:
+        eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJCT2pNMGZTNTBhdHVyVHBqMXXXbyJ9.eyJvcmdhbml6Yxxpb25JZCI6IjUxxCJhY2NvdW50SWQiOiI2IiwiYXBwX2dyb3VwcyI6WyJXaW5lU2hpcHBlcl9DdXN0b21lcl9TaGlwcGVyIl0sImNpZCI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi1iMmItYXRzLWhlYWx0aGNhcmUudXMuYXV0aDAuY29tLyIsInN1YiI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3Rlc3QuYXBpLmF0cy5oZWFsdGhjYXJlIiwiaWF0IjoxNzIwMDE1NzMxLCJleHAiOjE3MjAxMDIxMzEsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsImF6cCI6IlV4YWlzV0ZLSkxxxxN5QU9HOVFTMWlyNTczOGJkdERpIn0.atG8N-a3TCUff0BPe4UqzrOeuUmUolxxx5WfMcXcIDEa5805IR1TGkyu1x0NkglwAf8dP2mjwKaSpxCjItcMq6tJhPVq1Fy2xxZcfrFS8-kPwptqUhxbeowGiJK7Us7-bBFXeLUanEmwZRxxxtNvs66ytrv4lBWyL39l6PwGkpHW2Ypzg0h95funW8XvJv-2ZDB_NSDjcG_yiUXT8UghHjRwNKQSTebA3nAZPpXxgZl111YY0696uohYE0ZasaPTAz10LMtmKAbYnhDpFoeC-WtRne6GQO3h1NvlxxxBC0RHGx9rltxREIdAB1bLUWHrcELqPxKMUweSkp3OSfboSA
+      </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>expires_in</strong> <small>integer</small>
+      <br />The duration in seconds for which the access token is valid.
+      <br /><small> Example: 86400 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>token_type</strong> <small>string</small>
+      <br />The type of the token issued.
+      <br /><small> Example: Bearer </small>
+    </p>
+  </div>
+</div>

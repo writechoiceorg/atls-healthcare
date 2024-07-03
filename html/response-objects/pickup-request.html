@@ -1,0 +1,104 @@
+<style>
+  details {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .card p {
+    margin-left: 20px;
+  }
+
+  .card {
+    border: 1px solid #efefef;
+    background: #fcfcfce0;
+    margin: 1.5em 0;
+    border-radius: 4px;
+    border-left: 6px double #cf111e;
+    padding: 0.25em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card .card {
+    margin: 1.5em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .card {
+      background-color: #303b42;
+      border: 1px solid #4a5861;
+      border-left: 10px solid #cf111e;
+    }
+  }
+
+  [data-color-mode="dark"] .card {
+    background-color: #303b42;
+    border: 1px solid #4a5861;
+    border-left: 10px solid #cf111e;
+  }
+</style>
+
+<div>
+  <div class="card">
+    <p><strong>id</strong> <small>integer</small>
+      <br />A unique identifier for the pickup request.
+      <br /><small> Example: 134 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>requestDateTime</strong> <small>string (date-time)</small>
+      <br />The date and time when the pickup request was made.
+      <br /><small> Example: 2024-07-01T16:31:40.9603962+00:00 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>pickupTime</strong> <small>integer</small>
+      <br />The scheduled time for the pickup in military format (e.g., 700 for 7:00 AM).
+      <br /><small> Example: 700 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>closingTime</strong> <small>integer</small>
+      <br />The scheduled closing time in military format (e.g., 1700 for 5:00 PM).
+      <br /><small> Example: 1700 </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>branchEmail</strong> <small>string</small>
+      <br />The email address of the branch handling the pickup.
+      <br /><small> Example: HYZ_Pickups@ats.ca </small>
+    </p>
+  </div>
+
+  <div class="card">
+    <p><strong>customerEmail</strong> <small>string</small>
+      <br />The email address of the customer who requested the pickup.
+      <br /><small> Example: john.doe@email.com </small>
+    </p>
+  </div>
+
+  <details class="card">
+    <summary><strong>shipmentDetail</strong> <small>object</small>
+      <br />
+      <p>Details of the shipment included in the pickup request.</p>
+    </summary>
+    <div>
+      <div class="card">
+        <p><strong>pieces</strong> <small>integer</small>
+          <br />The number of pieces in the shipment.
+          <br /><small> Example: 10 </small>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>weight</strong> <small>number</small>
+          <br />The total weight of the shipment in pounds.
+          <br /><small> Example: 150.5 </small>
+        </p>
+      </div>
+    </div>
+  </details>
+
+</div>
