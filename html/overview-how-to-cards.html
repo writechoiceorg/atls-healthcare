@@ -9,42 +9,48 @@
 
   .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px;
     justify-content: center;
-    width: 100%;
+    width: 98%;
+    margin: 0 auto;
   }
 
   .card {
     background-color: #fff;
     border: 1px solid #DCDCDC;
     border-radius: 6px;
-    padding: 20px;
+    padding: 35px 18px;
     text-decoration: none !important;
     color: #333;
     transition: all 0.3s ease;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-style: normal;
+    line-height: 18px;
+  }
+
+  .card:hover {
+    transform: translateY(-1px);
+    border-color: #E31937;
+  }
+
+  .card:hover h2 {
+    color: #E31937;
   }
 
   .card h2 {
-    margin-top: 0;
     color: #383838;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Inter;
-    font-size: 17.5px;
-    font-style: normal;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 18px;
+    margin: 0 0 12px;
   }
 
-  .card p.content {
-    color: #676767;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px;
+  .card p,
+  .card ul {
     margin: 15px 0;
+    font-size: 14px;
+    font-weight: 400;
   }
 
   .card .link {
@@ -66,59 +72,41 @@
     margin-left: 4px;
     margin-top: 3px;
   }
-
-  .card:hover {
-    transform: translateY(-1px);
-    border-color: #E31937;
-    box-shadow: 0px 0px 9.7px 0px rgba(0, 0, 0, 0.21);
-  }
-
-  .card:hover h2 {
-    color: #E31937;
-  }
-
-  @media only screen and (min-width: 1398px) {
-    .card .link svg {
-      margin-top: 4px;
-    }
-  }
 </style>
 
 <body class="card-body">
   <div class="card-container">
-    <a href="/docs/getting-started" class="card">
-      <h2>Getting Started</h2>
-      <p class="content">Learn how to create your first shipment and manifest with our quickstart tutorial.</p>
-      <div class="link">
-        <p>View</p>
-        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M8.13897 9.49966C7.66344 9.49966 7.27795 9.11418 7.27795 8.63867V2.22199L0.861027 2.22199C0.385495 2.22199 3.30401e-07 1.83651 0 1.36099C2.50232e-07 0.88548 0.385495 0.5 0.861027 0.5L8.13897 0.500001C8.61451 0.500001 9 0.885481 9 1.361L9 8.63867C9 9.11418 8.61451 9.49966 8.13897 9.49966Z"
-            fill="#E31937" />
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M7.83827 1.66222C8.17452 1.99846 8.17452 2.54362 7.83827 2.87986L1.47006 9.24782C1.13381 9.58406 0.588641 9.58406 0.252389 9.24782C-0.0838633 8.91158 -0.0838631 8.36643 0.252389 8.03019L6.62059 1.66222C6.95684 1.32599 7.50202 1.32599 7.83827 1.66222Z"
-            fill="#E31937" />
-        </svg>
-      </div>
-    </a>
-    <a href="/docs/how-to-overview" class="card">
-      <h2>How to Ship Your Packages</h2>
-      <p class="content">Find step-by-step guides to learn how you can integrate with <b>ACS</b>.</p>
-      <div class="link">
-        <p>View</p>
-        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M8.13897 9.49966C7.66344 9.49966 7.27795 9.11418 7.27795 8.63867V2.22199L0.861027 2.22199C0.385495 2.22199 3.30401e-07 1.83651 0 1.36099C2.50232e-07 0.88548 0.385495 0.5 0.861027 0.5L8.13897 0.500001C8.61451 0.500001 9 0.885481 9 1.361L9 8.63867C9 9.11418 8.61451 9.49966 8.13897 9.49966Z"
-            fill="#E31937" />
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M7.83827 1.66222C8.17452 1.99846 8.17452 2.54362 7.83827 2.87986L1.47006 9.24782C1.13381 9.58406 0.588641 9.58406 0.252389 9.24782C-0.0838633 8.91158 -0.0838631 8.36643 0.252389 8.03019L6.62059 1.66222C6.95684 1.32599 7.50202 1.32599 7.83827 1.66222Z"
-            fill="#E31937" />
-        </svg>
-      </div>
-    </a>
-    <a href="/docs/frontend-app-overview" class="card">
+    <a href="/docs/frontend-app" class="card">
       <h2>Frontend App</h2>
-      <p class="content">Find detailed information about every page and option on ACS's frontend app.</p>
+      <p>The ACS Frontend App provides an intuitive, web-based interface for shipment management.</p>
+      <p><strong>When to Use the Frontend App</strong></p>
+      <ul>
+        <li>Ease of Use: Simple, user-friendly interface without coding.</li>
+        <li>Small to Medium Volume: Ideal for occasional or moderate volume shipments.</li>
+        <li>Quick Setup: Start quickly without integration complexities.</li>
+      </ul>
+      <div class="link">
+        <p>View</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M8.13897 9.49966C7.66344 9.49966 7.27795 9.11418 7.27795 8.63867V2.22199L0.861027 2.22199C0.385495 2.22199 3.30401e-07 1.83651 0 1.36099C2.50232e-07 0.88548 0.385495 0.5 0.861027 0.5L8.13897 0.500001C8.61451 0.500001 9 0.885481 9 1.361L9 8.63867C9 9.11418 8.61451 9.49966 8.13897 9.49966Z"
+            fill="#E31937" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M7.83827 1.66222C8.17452 1.99846 8.17452 2.54362 7.83827 2.87986L1.47006 9.24782C1.13381 9.58406 0.588641 9.58406 0.252389 9.24782C-0.0838633 8.91158 -0.0838631 8.36643 0.252389 8.03019L6.62059 1.66222C6.95684 1.32599 7.50202 1.32599 7.83827 1.66222Z"
+            fill="#E31937" />
+        </svg>
+      </div>
+    </a>
+    <a href="/docs/api-integration" class="card">
+      <h2>Integrating with the API</h2>
+      <p>The ATS API offers a powerful way to integrate shipping functionalities directly into your
+        apps.</p>
+      <p><strong>When to Use the API</strong></p>
+      <ul>
+        <li>Automation: Automate shipping processes and integrate with existing systems.</li>
+        <li>High Volume: Ideal for large-volume users requiring efficient batch processing.</li>
+        <li>Customization: Tailor shipping workflows to your business needs.</li>
+      </ul>
       <div class="link">
         <p>View</p>
         <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
