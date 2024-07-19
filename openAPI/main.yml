@@ -10,6 +10,8 @@ paths:
       summary: Generate Token
       description: Request an access token using client credentials.
       operationId: generate-token
+      servers:
+        - url: https://login-b2b-ats-healthcare.us.auth0.com
       tags:
         - Token
       requestBody:
