@@ -2889,4 +2889,3 @@ components:
           scopes:
             Api.Read.All: Access all read operations
             Api.Write.All: Access all write operations
-
