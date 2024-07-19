@@ -2,8 +2,6 @@ openapi: 3.0.1
 info:
   title: ATS API Main Endpoints
   version: v1
-servers:
-  - url: https://atsapi-dev.azurewebsites.net
 paths:
   /oauth/token:
     post:
@@ -109,6 +107,8 @@ paths:
     post:
       summary: Create a Pickup Request
       operationId: create-pickup-request
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -164,6 +164,8 @@ paths:
     post:
       summary: Create a Shipment
       operationId: create-shipment
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -226,6 +228,8 @@ paths:
       - Shipments
       summary: Get Shipment Labels
       operationId: get-shipment-labels
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -296,6 +300,8 @@ paths:
       - Shipments
       summary: Get Shipment Labels by Shipment ID
       operationId: get-shipment-labels-by-shipment-id
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -351,6 +357,8 @@ paths:
       tags:
       - Manifests
       operationId: get-continuous-manifest
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -369,6 +377,8 @@ paths:
     post:
       summary: Add Shipments to Manifest
       operationId: add-shipments-to-manifest
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -419,6 +429,8 @@ paths:
     patch:
       summary: Close Manifest
       operationId: close-manifest
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
@@ -455,6 +467,8 @@ paths:
     get:
       summary: Get Manifest Report
       operationId: get-manifest-report
+      servers:
+        - url: https://atsapi-dev.azurewebsites.net
       security:
         - oauth2:
           - App.Read.All
