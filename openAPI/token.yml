@@ -28,18 +28,18 @@ paths:
               properties:
                 client_id:
                   type: string
-                  description: The client ID provided by ATS.
+                  description: The client's identifier provided by ATS.
                 client_secret:
                   type: string
-                  description: The client secret provided by ATS.
+                  description: The client's secret provided by ATS.
                 audience:
                   type: string
-                  description: The audience for the token.
+                  description: The intended audience for the token, which varies between production (PROD) and testing (TEST) environments.
                   example: https://test.api.ats.healthcare
                 grant_type:
                   type: string
                   description: The grant type, which should be `client_credentials`.
-                  example: client_credentials
+                  default: client_credentials
       responses:
         '200':
           description: Success
