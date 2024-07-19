@@ -2,6 +2,9 @@ openapi: 3.0.1
 info:
   title: ATS API Main Endpoints
   version: v1
+servers:
+  - url: https://atsapi-dev.azurewebsites.net
+  - url: https://login-b2b-ats-healthcare.us.auth0.com
 paths:
   /oauth/token:
     post:
