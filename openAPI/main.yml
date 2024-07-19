@@ -1354,7 +1354,6 @@ components:
       - open
       - closed
       type: string
-      example: closed
       description: The status of the manifest, indicating whether to open or close it.
     Model:
       type: object
@@ -2663,6 +2662,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
+          default: closed
           "$ref": "#/components/schemas/ManifestStatusReq"
       additionalProperties: false
     ValidatePostalCodeResponse:
