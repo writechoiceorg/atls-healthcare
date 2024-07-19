@@ -5,116 +5,10 @@ info:
 servers:
   - url: https://atsapi-dev.azurewebsites.net
 paths:
-  /oauth/token:
-    post:
-      summary: Generate Token
-      description: Request an access token using client credentials.
-      operationId: generate-token
-      servers:
-        - url: https://login-b2b-ats-healthcare.us.auth0.com
-      tags:
-        - Token
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - client_id
-                - client_secret
-                - audience
-                - grant_type
-              properties:
-                client_id:
-                  type: string
-                  description: The client's identifier provided by ATS.
-                client_secret:
-                  type: string
-                  description: The client's secret provided by ATS.
-                audience:
-                  type: string
-                  description: The intended audience for the token, which varies between production (PROD) and testing (TEST) environments.
-                  example: https://test.api.ats.healthcare
-                grant_type:
-                  type: string
-                  description: The grant type, which should be `client_credentials`.
-                  default: client_credentials
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  access_token:
-                    type: string
-                    description: The access token.
-                    example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJCT2pNMGZTNTBhdHVyVHBqMUpPbyJ9.eyJvcmdhbml6YXRpb25JZCI6IjUiLCJhY2NvdW50SWQiOiI2IiwiYXBwX2dyb3VwcyI6WyJXaW5lU2hpcHBlcl9DdXN0b21lcl9TaGlwcGVyIl0sImNpZCI6IlV4YWlzV0ZLSkxxxzN5QU9HOVFTMWlyNTczOGJkdERpIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi1iMmItYXRzLWhlYWx0aGNhcmUudXMuYXV0aDAuY29tLyIsInN1YiI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3Rlc3QxxXBpLmF0cy5oZWFsdGhjYXJlIiwiaWF0IjoxNzE5NTE1MjkxLCJleHAiOjE3MTk2MDE2OTEsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsImF6cCI6IlV4YWlzV0ZLSkx1bzN5QU9HOVFTMWlyNTczOGJkdERpIn0.kYXezF8MgtTL1G-iqgXp6tReVKLtp2bFVmBrSTqLRbxxDiz9HfunXcIhB3Y7Eja3hUze7IUgWAd-Yw6klj11gromy5Yn57_VpT3Kt2awZu2LEhZN8uCkR0gHN-kfvHNZs0oHEUTfFZqrpIxxZyg020pKYOpHUZxxZ86m_UeV2rlpj_Hd8G6Bk1JKSZQO3G4T5k9j4XuEqfTSa5QvG2GeqFQgWUWI7cIdlXnnKz7fxUrhMsQhLSQcLz_vtvwXlZc5msOB81vWWhC95XwGxxbau2nPJzAVI8KMzj1zQqjPzAJ9GRdCZFaE-Q7Tcaqvqho6ndoKigj35lIt8i7-bZ3LBg
-                  expires_in:
-                    type: integer
-                    description: The duration in seconds for which the token is valid.
-                    example: 86400
-                  token_type:
-                    type: string
-                    description: The type of token.
-                    example: Bearer
-        '400':
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error code.
-                    example: invalid_request
-                  error_description:
-                    type: string
-                    description: Description of the error.
-                    example: 'Missing required parameter: grant_type'
-        '401':
-          description: Unauthorized request. Invalid client credentials.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error code.
-                    example: access_denied
-                  error_description:
-                    type: string
-                    description: Description of the error.
-                    example: Unauthorized
-        '403':
-          description: Forbidden request. Access denied.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error code.
-                    example: access_denied
-                  error_description:
-                    type: string
-                    description: Description of the error.
-                    example: No audience parameter was provided, and no default audience has been configured
   "/v1/PickupRequests":
     post:
       summary: Create a Pickup Request
       operationId: create-pickup-request
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       tags:
       - Pickup Requests
       requestBody:
@@ -166,12 +60,6 @@ paths:
     post:
       summary: Create a Shipment
       operationId: create-shipment
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       tags:
       - Shipments
       requestBody:
@@ -230,12 +118,6 @@ paths:
       - Shipments
       summary: Get Shipment Labels
       operationId: get-shipment-labels
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       description: >-
         Get shipment label by `shipmentId` or `trackingNumber`. 
 
@@ -302,12 +184,6 @@ paths:
       - Shipments
       summary: Get Shipment Labels by Shipment ID
       operationId: get-shipment-labels-by-shipment-id
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       parameters:
       - name: shipmentId
         in: path
@@ -359,12 +235,6 @@ paths:
       tags:
       - Manifests
       operationId: get-continuous-manifest
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       summary: Get Continuous Manifest
       description: Gets continuous manifest. Continuous manifest is a manifest that
         all shipments are automatically assigned to if not specified otherwise.
@@ -379,12 +249,6 @@ paths:
     post:
       summary: Add Shipments to Manifest
       operationId: add-shipments-to-manifest
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       tags:
       - Manifests
       parameters:
@@ -431,12 +295,6 @@ paths:
     patch:
       summary: Close Manifest
       operationId: close-manifest
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       tags:
       - Manifests
       parameters:
@@ -469,12 +327,6 @@ paths:
     get:
       summary: Get Manifest Report
       operationId: get-manifest-report
-      servers:
-        - url: https://atsapi-dev.azurewebsites.net
-      security:
-        - oauth2:
-          - App.Read.All
-          - App.Write.All
       tags:
       - Manifests
       parameters:
@@ -2907,3 +2759,7 @@ components:
           scopes:
             Api.Read.All: Access all read operations
             Api.Write.All: Access all write operations
+security:
+- oauth2:
+  - App.Read.All
+  - App.Write.All
