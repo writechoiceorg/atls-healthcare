@@ -1354,6 +1354,7 @@ components:
       - open
       - closed
       type: string
+      default: closed
       description: The status of the manifest, indicating whether to open or close it.
     Model:
       type: object
