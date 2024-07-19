@@ -717,7 +717,7 @@ components:
         docketCode:
           maxLength: 24
           type: string
-          description: The code associated with the shipment docket.
+          description: The code associated with the shipment docket. You can retrieve your docket codes with the [Get Customer Account Details](/reference/get-customer-account-details) endpoint.
         accountId:
           type: integer
           description: This is the saved address ID in the ATS System used to associate shipments to a saved address.
