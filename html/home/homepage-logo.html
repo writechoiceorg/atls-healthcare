@@ -25,26 +25,12 @@
         margin: 0 auto;
         max-width: var(--container-lg);
         justify-content: start;
-        padding: 80px 30px;
+        padding: 60px 30px;
         gap: 100px;
 
         .hero_title {
           margin: 0 !important;
-
-          h1 {
-            align-self: center;
-            font-family: Inter;
-            font-size: 50px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            max-width: 600px;
-            margin: 0;
-          }
-
-          .second_line {
-            color: #E31937;
-          }
+          max-width: 350px !important;
         }
 
         .hero_content {
@@ -55,7 +41,6 @@
           font-weight: 500;
           line-height: 35.376px;
           max-width: 600px;
-          width: fit-content;
           margin-bottom: 0;
         }
       }
@@ -142,41 +127,24 @@
       }
     }
 
-    @media only screen and (max-width: 1311px) {
+    @media only screen and (max-width: 1375px) {
       .hero {
         .header_container {
-          gap: 40px;
-        }
-      }
-    }
-
-    @media only screen and (max-width: 1255px) {
-      .hero {
-        .header_container {
-          gap: 60px;
-
-          .hero_title {
-            h1 {
-              font-size: 40px;
-              /* width: 500px; */
-            }
-          }
-
           .hero_content {
-            max-width: 500px;
+            margin-right: 5%;
           }
         }
       }
     }
 
     @media only screen and (max-width: 1144px) {
-      /* .hero {
+      .hero {
         .header_container {
           .hero_title {
             width: 300px !important;
           }
         }
-      } */
+      }
 
       main {
         .card_container {
@@ -185,37 +153,11 @@
       }
     }
 
-    @media only screen and (max-width: 1062px) {
-      .hero {
-        .header_container {
-          gap: 40px;
-
-          .hero_title {
-            h1 {
-              font-size: 40px;
-              width: 450px;
-            }
-          }
-
-          .hero_content {
-            max-width: 500px;
-          }
-        }
-      }
-    }
-
     @media only screen and (max-width: 989px) {
       .hero {
         .header_container {
-          gap: 20px;
+          gap: 40px;
           padding: 50px 30px;
-
-          .hero_title {
-            h1 {
-              font-size: 35px;
-              width: 400px;
-            }
-          }
 
           .hero_content {
             font-size: 14px;
@@ -225,6 +167,15 @@
     }
 
     @media only screen and (max-width: 850px) {
+      .hero {
+        .header_container {
+          .hero_title {
+            width: 220px !important;
+            height: 120px !important;
+          }
+        }
+      }
+
       main {
         .card_container {
           flex-wrap: wrap;
@@ -233,30 +184,25 @@
             width: 300px;
             flex-grow: 1;
             flex-shrink: 1;
+            /* max-width: 324px; */
           }
         }
       }
     }
 
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 780px) {
       .hero {
         .header_container {
 
-          .hero_title {
-            h1 {
-              font-size: 30px;
-              width: 340px;
-            }
-          }
-
           .hero_content {
             font-size: 12px;
+            margin-right: 0;
           }
         }
       }
     }
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 692px) {
       .hero {
         .header_container {
           flex-direction: column;
@@ -266,12 +212,9 @@
           justify-content: start;
 
           .hero_title {
-            align-self: flex-start;
-
-            h1 {
-              width: fit-content;
-              font-size: 40px;
-            }
+            padding: 0 !important;
+            width: 150px !important;
+            height: 75px !important;
           }
 
           .hero_content {
@@ -295,16 +238,10 @@
       }
     }
 
-    @media only screen and (max-width: 480px) {
+    @media only screen and (max-width: 450px) {
       .hero {
         .header_container {
-          padding: 20px;
-
-          .hero_title {
-            h1 {
-              font-size: 30px;
-            }
-          }
+          padding: 10px 20px;
         }
       }
 
@@ -327,6 +264,10 @@
 
         .header_container {
           padding: 20px;
+
+          .hero_content {
+            display: none;
+          }
         }
       }
 
@@ -421,10 +362,8 @@
 <body>
   <header class="hero">
     <div class="header_container">
-      <div class="hero_title">
-        <h1 class="first_line">Learn how to integrate</h1>
-        <h1 class="second_line">Atlas Client Shipping</h1>
-      </div>
+      <img class="hero_title"
+        src="https://raw.githubusercontent.com/writechoiceorg/ats-docs/main/html/home/imgs/logo.png" alt="">
       <p class="hero_content">
         Welcome to ATS Healthcare's documentation portal. Find comprehensive guides and resources to help
         you understand our services and integrate with our platform efficiently.
