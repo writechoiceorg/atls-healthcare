@@ -2966,6 +2966,52 @@ components:
       properties:
         id:
           type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 18
+            - 19
+            - 20
+            - 21
+            - 22
+          x-enumDescriptions:
+            1: "Reference Number"
+            2: "Purchase Order Number"
+            3: "Customer Shipment Number"
+            4: "Customer Manifest Number"
+            5: "Bill Of Lading"
+            6: "Consignee PO"
+            7: "Shipper Reference"
+            8: "Distribution Reference"
+            9: "Product Number"
+            10: "Carton ID"
+            11: "Store"
+            12: "Load ID"
+            13: "Indigo HU Returns Type"
+            14: "Delivery Order"
+            15: "Barcode"
+            16: "Credo Licence"
+            17: "Agent Waybill"
+            18: "Sub-Shipment"
+            19: "Purchase Order Number - Special"
+            20: "ASN"
+            21: "Pickup Trailer – Manifest Number"
+            22: "RMA Number"
           format: int32
           description: The unique identifier for the shipment reference type.
         shortName:
