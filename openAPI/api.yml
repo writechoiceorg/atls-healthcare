@@ -1475,10 +1475,7 @@ components:
         docketCode:
           maxLength: 24
           type: string
-          enum:
-            - test1
-            - test2
-          description: The code associated with the shipment docket.
+          description: The code associated with the shipment docket. You can retrieve your docket codes with the [Get Customer Account Details](/reference/get-customer-account-details) endpoint.
         accountId:
           type: integer
           description: This is the saved address ID in the ATS System used to associate shipments to a saved address.
@@ -1571,6 +1568,22 @@ components:
               - TG  # Tailgate
               - NS  # No Signature Required
               - IS  # Freight Insurance
+            x-enumDescriptions:
+              TC: "Ambient (Temperature Track): Ensures that the shipment travels within 15° - 25° C. Available to selected areas only."
+              FR: "Cold Chain Keep Moving: Special handling procedures to maintain the desired temperature range during transit."
+              HS: "Heated Service: Ensures the shipment is transported in a heated vehicle and will not freeze. Available from Oct 15 to Apr 15."
+              KC: "Keep Cool Service: Refrigerated (do not melt) service offered between Apr 16 and Oct 14."
+              PT: "Appointment: Scheduled delivery at a specified time."
+              PD: "PO Expiration/Due Date: Delivery to be made by the expiration date of the purchase order."
+              TR: "Time Release: Delivery to be made on, before, after, or between specific dates."
+              BD: "Backdoor Receipts: Occasionally required by certain consignees to confirm delivery via a backdoor receipt."
+              CS: "Chain of Signature: Ensures signatures at each transfer point for documentation purposes."
+              DG: "Dangerous Goods: Handles dangerous goods provided they comply with all provisions of the I.A.T.A. regulations."
+              PO: "Hard Copy POD Requested: Physical proof of delivery documentation requested."
+              HD: "Residential Delivery: Delivery service to residential addresses, including home-based businesses."
+              TG: "Tailgate: Use of a tailgate lift for loading/unloading heavy items."
+              NS: "No Signature Required: Delivery can be completed without obtaining a signature."
+              IS: "Freight Insurance: Insurance coverage for goods during transit."
           description: The accessorials requested for the shipment. Should be a list of two character codes. Refer to the [Accessorials](ref:accessorials) reference page for a full list of available accessorials.
           nullable: true
         accessorialDetails:
@@ -1951,6 +1964,12 @@ components:
       - pdf
       - zpl
       - tpcl
+      - zplReturn
+      x-enumDescriptions:
+        pdf: "Label in a PDF Document"
+        zpl: "Label in Zebra Programming Language (ZPL)"
+        TPCL: "Label in TEC Printer Control Language (TPCL)"
+        zplReturn: "Special \"Return\" label in Zebra Programming Language (ZPL)"
       type: string
     LabelSize:
       enum:
@@ -1958,10 +1977,19 @@ components:
       - letter
       - fourBySix
       type: string
+      x-enumDescriptions:
+        fourByfour: "4\" by 4\" label size (Suitable for label printers)"
+        letter: "Letter (US) 8.5\" by 11\" (Suitable for plain paper)"
+        fourBysix: "4\" by 6\" label size (Suitable for label printers)"
     LabelSize1:
       enum:
       - fourByFour
       - letter
+      - fourBySix
+      x-enumDescriptions:
+        fourByfour: "4\" by 4\" label size (Suitable for label printers)"
+        letter: "Letter (US) 8.5\" by 11\" (Suitable for plain paper)"
+        fourBysix: "4\" by 6\" label size (Suitable for label printers)"
       type: string
     LabelType:
       enum:
@@ -1970,6 +1998,11 @@ components:
       - tpcl
       - zplReturn
       type: string
+      x-enumDescriptions:
+        pdf: "Label in a PDF Document"
+        zpl: "Label in Zebra Programming Language (ZPL)"
+        TPCL: "Label in TEC Printer Control Language (TPCL)"
+        zplReturn: "Special \"Return\" label in Zebra Programming Language (ZPL)"
     LoadOrdersResponse:
       type: object
       properties:
@@ -2969,6 +3002,7 @@ components:
       properties:
         id:
           type: integer
+          format: int32
           enum:
             - 1
             - 2
@@ -3015,7 +3049,6 @@ components:
             20: "ASN"
             21: "Pickup Trailer – Manifest Number"
             22: "RMA Number"
-          format: int32
           description: The unique identifier for the shipment reference type.
         shortName:
           type: string
@@ -3042,6 +3075,29 @@ components:
             - ASN
             - PTMN
             - RMA
+          x-enumDescriptions:
+            REF: "Reference Number"
+            PO: "Purchase Order Number"
+            CSN: "Customer Shipment Number"
+            CMN: "Customer Manifest Number"
+            BOL: "Bill Of Lading"
+            CPO: "Consignee PO"
+            SREF: "Shipper Reference"
+            DREF: "Distribution Reference"
+            PNO: "Product Number"
+            CID: "Carton ID"
+            STO: "Store"
+            LID: "Load ID"
+            RTYPE: "Indigo HU Returns Type"
+            DO: "Delivery Order"
+            BC: "Barcode"
+            CLIC: "Credo Licence"
+            AWB: "Agent Waybill"
+            SUBS: "Sub-Shipment"
+            POS: "Purchase Order Number - Special"
+            ASN: "ASN"
+            PTMN: "Pickup Trailer – Manifest Number"
+            RMA: "RMA Number"
           description: The short name for the shipment reference type.
         value:
           maxLength: 24
@@ -3508,6 +3564,7 @@ components:
           nullable: true
           description: The name of the manifest.
         status:
+          default: closed
           "$ref": "#/components/schemas/ManifestStatusReq"
       additionalProperties: false
     ValidatePostalCodeResponse:
@@ -3608,3 +3665,4 @@ security:
 - oauth2:
   - App.Read.All
   - App.Write.All
+
