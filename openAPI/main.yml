@@ -1206,6 +1206,12 @@ components:
       - pdf
       - zpl
       - tpcl
+      - zplReturn
+      x-enumDescriptions:
+        pdf: "Label in a PDF Document"
+        zpl: "Label in Zebra Programming Language (ZPL)"
+        TPCL: "Label in TEC Printer Control Language (TPCL)"
+        zplReturn: "Special \"Return\" label in Zebra Programming Language (ZPL)"
       type: string
     LabelSize:
       enum:
@@ -1221,6 +1227,11 @@ components:
       enum:
       - fourByFour
       - letter
+      - fourBySix
+      x-enumDescriptions:
+        fourByfour: "4\" by 4\" label size (Suitable for label printers)"
+        letter: "Letter (US) 8.5\" by 11\" (Suitable for plain paper)"
+        fourBysix: "4\" by 6\" label size (Suitable for label printers)"
       type: string
     LabelType:
       enum:
