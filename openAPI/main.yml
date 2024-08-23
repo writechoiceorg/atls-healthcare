@@ -1701,31 +1701,31 @@ components:
           type: string
           example: '0700'
           description: >-
-            The scheduled time for the pickup in 4-digit military time format.
+            The time the pickup will be available for the driver. In 4-digit military time format.
 
-            <small>Example: 7:00 AM time becomes `0700` in military format.</small>
+            <small>Example: 5:00 PM time becomes 1700 in military format.</small>
         closingTime:
           type: string
           example: '1700'
           description: >-
-            The closing time for the pickup location in 4-digit military time format.
+            The time at which the pickup will no longer be available for the day. Usually the closing time of the store/warehouse/office. In 4-digit military time format.
 
-            <small>Example: 5:00 PM time becomes `1700` in military format.</small>
+            <small>Example: 5:00 PM time becomes 1700 in military format.</small>
         pieces:
           type: integer
           format: int32
           example: 10
-          description: The approximate  number of pieces/packages in the shipment.
+          description: The approximate number of pieces to be picked up.
         weight:
           type: number
           format: double
           example: 150.5
-          description: The approximate total weight of the shipment.
+          description: The approximate total weight of the pickup.
         email:
           type: string
           nullable: true
           example: 'customer@example.com'
-          description: The email address of the customer requesting the pickup.
+          description: The email to be notified of the pickup confirmation, as well as contact for additional pickup details.
         saveEmailAsDefault:
           type: boolean
           nullable: true
