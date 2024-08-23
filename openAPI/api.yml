@@ -870,39 +870,39 @@ paths:
             text/json:
               schema:
                 type: string
-  "/v1/Shipments/tracking/{trackingNumber}":
-    get:
-      summary: Track a shipment by Tracking Number
-      operationId: track-shipment
-      tags:
-      - Shipments
-      parameters:
-      - name: trackingNumber
-        description: The tracking number associated with the shipment.
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ShipmentResponse"
-        '404':
-          description: Not Found
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
+  # "/v1/Shipments/tracking/{trackingNumber}":
+  #   get:
+  #     summary: Track a shipment by Tracking Number
+  #     operationId: track-shipment
+  #     tags:
+  #     - Shipments
+  #     parameters:
+  #     - name: trackingNumber
+  #       description: The tracking number associated with the shipment.
+  #       in: path
+  #       required: true
+  #       schema:
+  #         type: integer
+  #         format: int32
+  #     responses:
+  #       '200':
+  #         description: Success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               "$ref": "#/components/schemas/ShipmentResponse"
+  #       '404':
+  #         description: Not Found
+  #         content:
+  #           text/plain:
+  #             schema:
+  #               type: string
+  #           application/json:
+  #             schema:
+  #               type: string
+  #           text/json:
+  #             schema:
+  #               type: string
   "/v1/Shipments/search/wineDirect/{orderNumber}":
     get:
       tags:
