@@ -794,6 +794,38 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - TC  # Ambient (Temperature Track)
+              - FR  # Cold Chain Keep Moving
+              - HS  # Heated Service
+              - KC  # Keep Cool Service
+              - PT  # Appointment
+              - PD  # PO Expiration/Due Date
+              - TR  # Time Release
+              - BD  # Backdoor Receipts
+              - CS  # Chain of Signature
+              - DG  # Dangerous Goods
+              - PO  # Hard Copy POD Requested
+              - HD  # Residential Delivery
+              - TG  # Tailgate
+              - NS  # No Signature Required
+              - IS  # Freight Insurance
+            x-enumDescriptions:
+              TC: "Ambient (Temperature Track): Ensures that the shipment travels within 15° - 25° C. Available to selected areas only."
+              FR: "Cold Chain Keep Moving: Special handling procedures to maintain the desired temperature range during transit."
+              HS: "Heated Service: Ensures the shipment is transported in a heated vehicle and will not freeze. Available from Oct 15 to Apr 15."
+              KC: "Keep Cool Service: Refrigerated (do not melt) service offered between Apr 16 and Oct 14."
+              PT: "Appointment: Scheduled delivery at a specified time."
+              PD: "PO Expiration/Due Date: Delivery to be made by the expiration date of the purchase order."
+              TR: "Time Release: Delivery to be made on, before, after, or between specific dates."
+              BD: "Backdoor Receipts: Occasionally required by certain consignees to confirm delivery via a backdoor receipt."
+              CS: "Chain of Signature: Ensures signatures at each transfer point for documentation purposes."
+              DG: "Dangerous Goods: Handles dangerous goods provided they comply with all provisions of the I.A.T.A. regulations."
+              PO: "Hard Copy POD Requested: Physical proof of delivery documentation requested."
+              HD: "Residential Delivery: Delivery service to residential addresses, including home-based businesses."
+              TG: "Tailgate: Use of a tailgate lift for loading/unloading heavy items."
+              NS: "No Signature Required: Delivery can be completed without obtaining a signature."
+              IS: "Freight Insurance: Insurance coverage for goods during transit."
           description: The accessorials requested for the shipment. Should be a list of two character codes. Refer to the [Accessorials](ref:accessorials) reference page for a full list of available accessorials.
           nullable: true
         accessorialDetails:
