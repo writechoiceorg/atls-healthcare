@@ -3016,6 +3016,29 @@ components:
           description: The unique identifier for the shipment reference type.
         shortName:
           type: string
+          enum:
+            - REF
+            - PO
+            - CSN
+            - CMN
+            - BOL
+            - CPO
+            - SREF
+            - DREF
+            - PNO
+            - CID
+            - STO
+            - LID
+            - RTYPE
+            - DO
+            - BC
+            - CLIC
+            - AWB
+            - SUBS
+            - POS
+            - ASN
+            - PTMN
+            - RMA
           description: The short name for the shipment reference type.
         value:
           maxLength: 24
