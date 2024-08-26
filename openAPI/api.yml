@@ -65,7 +65,7 @@ paths:
     get:
       operationId: address-validate-residential
       summary: Validate Residential Address
-      description: This endpoint verifies whether the provided address is a valid residential address. It checks the address against various criteria to confirm its accuracy and classification as a residential location.
+      description: This endpoint validates if the address requires the Residential Delivery accessorial. If it returns `isResidential` as `true`, you should include the Residential Delivery accessorial on any shipments to this address.
       tags:
       - Address
       parameters:
