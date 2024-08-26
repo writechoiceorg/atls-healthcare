@@ -10,7 +10,7 @@ paths:
   /oauth/token:
     post:
       summary: Generate Token
-      description: Request an access token using client credentials.
+      description: Request an access token using client credentials to authenticate with ATS Healthcare. This token grants access to secure endpoints, enabling authorized interactions with the ATS Healthcare API.
       operationId: generate-token
       tags:
         - Token
