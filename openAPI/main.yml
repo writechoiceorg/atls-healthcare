@@ -687,7 +687,7 @@ components:
           deprecated: true
         addressId:
           type: integer
-          description: Associated Address book entry. This value will be used for future reporting options.
+          description: Associated Address book entry. This value will be used for future reporting options. Refer to the [Address Book](ref:address-book) endpoints for more details.
           format: int32
           nullable: true
         consigneeCode:
