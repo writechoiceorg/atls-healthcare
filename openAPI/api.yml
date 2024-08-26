@@ -112,6 +112,46 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ValidatePostalCodeResponse"
+      deprecated: true
+  "/v1.1/Address/validate/postalCode":
+    get:
+      operationId: address-validate-postalcode-v1-1
+      summary: Validate Address Postal Code
+      description: >
+        This endpoint can be used to query valid cities within a postal code or to verify that the provided city, province, and postal code combination is valid. The endpoint offers several validation options:
+        
+        - If only a province and postal code are provided, it will validate that they match.
+        - If a city, province, and postal code are all provided, it will validate that they match.
+        - If only a postal code is provided, it will return the list of valid cities within that postal code.
+
+        > 📘 Note
+        > The response always includes the list of valid cities associated with the postal code.
+      tags:
+      - Address
+      parameters:
+      - name: postalCode
+        in: query
+        schema:
+          type: string
+        description: The postal code or ZIP code to be validated.
+      - name: province
+        in: query
+        schema:
+          type: string
+        description: The province or state associated with the postal code.
+      - name: city
+        in: query
+        schema:
+          type: string
+        description: The city associated with the postal code.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidatePostalCodeResponse"
+  
   "/v1.2/Shipments":
     get:
       tags:
