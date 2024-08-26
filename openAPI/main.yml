@@ -9,6 +9,7 @@ paths:
     post:
       summary: Create a Pickup Request
       operationId: create-pickup-request
+      description: This endpoint allows you to schedule a pickup request by providing the necessary details such as pickup location, scheduled pickup date, and contact information.
       tags:
       - Pickup Requests
       requestBody:
@@ -60,6 +61,7 @@ paths:
     post:
       summary: Create a Shipment
       operationId: create-shipment
+      description: This endpoint allows you to create a new shipment by providing the necessary details, such as the address, number of pieces, total weight, and other relevant shipment information.
       tags:
       - Shipments
       requestBody:
@@ -119,13 +121,12 @@ paths:
       summary: Get Shipment Labels
       operationId: get-shipment-labels
       description: >-
-        Get shipment label by `shipmentId` or `trackingNumber`. 
+        This endpoint retrieves the shipping labels for one or more shipments. Retrieve the shipping labels using either the `shipmentId` or `trackingNumber`:
 
+        - **`trackingNumber`**: If `trackingNumber` includes the package number (e.g., '8000...1-1'), the label for that specific package will be returned. Otherwise, labels for all packages in the shipment will be provided.
         
-        If `trackingNumber` includes the package number ('8000...1-1'), then the label for the individual package is returned. Otherwise labels for all packages in the shipment are returned. 
         
-        
-        If `shipmentId` is provided, then the label(s) for the shipment (including all packages) is returned.
+        - **`shipmentId`**: If `shipmentId` is provided, then the label(s) for the shipment (including all packages) is returned.
       parameters:
       - name: trackingNumber
         in: query
@@ -184,6 +185,7 @@ paths:
       - Shipments
       summary: Get Shipment Labels by Shipment ID
       operationId: get-shipment-labels-by-shipment-id
+      description: Retrieve the shipping labels for a specific shipment by providing the `shipmentId`. This will return labels for all packages included in the shipment.
       parameters:
       - name: shipmentId
         in: path
@@ -236,8 +238,7 @@ paths:
       - Manifests
       operationId: get-continuous-manifest
       summary: Get Continuous Manifest
-      description: Gets continuous manifest. Continuous manifest is a manifest that
-        all shipments are automatically assigned to if not specified otherwise.
+      description: Retrieve detailed information about the continuous manifest. A continuous manifest is a default manifest to which all shipments are automatically assigned upon creation, unless a different manifest is specified.
       responses:
         '200':
           description: Success
@@ -249,6 +250,7 @@ paths:
     patch:
       summary: Close Manifest
       operationId: close-manifest
+      description: This endpoint allows you to close an existing manifest. Once a manifest is closed, no further shipments can be added to it. Closing a manifest marks the end of a shipping process for the included shipments, preparing them for final processing or dispatch.
       tags:
       - Manifests
       parameters:
@@ -281,6 +283,7 @@ paths:
     get:
       summary: Get Manifest Report
       operationId: get-manifest-report
+      description: Retrieve a detailed report for a manifest. A manifest report provides a detailed summary of all shipments included in a specific manifest. It ensures that all relevant information about the shipments is consolidated into a single document. The manifest report must be printed and handed to the driver upon arrival.
       tags:
       - Manifests
       parameters:
