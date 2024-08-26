@@ -617,6 +617,11 @@ paths:
       - MyAccount
       summary: Add a new Ship-To Address
       operationId: add-ship-to-address
+      description: >
+        Add a new shipping address to the customer's account. This endpoint allows customers 
+        to create a new "Ship-To" address that can be used for future orders and deliveries. 
+        The request body should include the necessary details for the address, such as the 
+        recipient's name, address line, city, state, postal code, and country.
       requestBody:
         content:
           application/json:
@@ -641,6 +646,9 @@ paths:
       - MyAccount
       summary: Update a Ship-To Address
       operationId: update-ship-to-address
+      description: >
+        Update an existing shipping address in the customer's account using its unique identifier (`addressId`). 
+        This endpoint allows customers to modify the details of an existing "Ship-To" address.
       parameters:
       - name: addressId
         in: path
@@ -672,6 +680,8 @@ paths:
       - MyAccount
       summary: Delete Ship-To Address
       operationId: delete-ship-to-address
+      description: >
+        Remove an existing shipping address from the customer's account using its unique identifier (`addressId`). 
       parameters:
       - name: addressId
         in: path
@@ -688,6 +698,8 @@ paths:
       tags:
       - MyAccount
       summary: Import Addresses
+      description: >
+        This endpoint allows customers to import multiple shipping addresses into their account by uploading a CSV file. The file should contain the address details in the required format, allowing for bulk addition of "Ship-To" addresses. 
       operationId: import-addresses
       requestBody:
         content:
@@ -717,6 +729,8 @@ paths:
       - MyAccount
       summary: Export Addresses
       operationId: export-addresses
+      description: >
+        This endpoint allows customers to export all of their saved shipping addresses from their account. 
       responses:
         '200':
           description: Success
@@ -762,6 +776,9 @@ paths:
       operationId: get-all-pickup-requests
       tags:
       - Pickup Requests
+      description: >
+        Retrieve a list of all pickup requests within the specified date and time range. 
+        This endpoint allows you to filter the pickup requests by specifying a `fromDate` and `toDate`. 
       parameters:
       - name: fromDate
         in: query
@@ -837,6 +854,10 @@ paths:
     get:
       summary: Get Shipment by ID
       operationId: get-shipment-by-id
+      description: >
+        Retrieve detailed information about a specific shipment using its unique identifier (`shipmentId`). 
+        This endpoint returns all relevant details of the shipment, including its status, associated items, 
+        shipping details, and any other pertinent information.
       tags:
       - Shipments
       parameters:
@@ -871,6 +892,11 @@ paths:
       - Shipments
       summary: Void a Shipment
       operationId: void-shipment
+      description: |
+        Cancel a created shipment using its unique identifier (`shipmentId`). This endpoint allows you to void a shipment that is no longer needed or was created in error.
+
+        > 🚧 Warning
+        > If the shipment has already been manifested, it can no longer be canceled.
       parameters:
       - name: shipmentId
         in: path
