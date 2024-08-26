@@ -901,7 +901,7 @@ paths:
       - name: shipmentId
         in: path
         required: true
-        description: The unique identifier for the shipment.
+        description: The unique identifier for the shipment to be voided.
         schema:
           type: integer
           format: int32
@@ -966,6 +966,7 @@ paths:
       - Shipments
       summary: Get Shipment by WineDirect Order Number
       operationId: get-shipment-by-winedirect-order-number
+      description: Retrieve detailed information about a shipment using the WineDirect order number (`orderNumber`). 
       parameters:
       - name: orderNumber
         in: path
@@ -1108,6 +1109,7 @@ paths:
       tags:
       - Shipments
       summary: Get Available Services
+      description: Retrieve a list of available shipping services based on the provided shipment details. This endpoint allows you to determine which services are available for a particular shipment, considering factors such as origin, destination, package weight, and dimensions. 
       requestBody:
         content:
           application/json:
@@ -1137,6 +1139,12 @@ paths:
       tags:
       - Shipments
       summary: Rate Shipment
+      operationId: rate-shipment
+      description: >
+        Calculate and retrieve shipping rates based on the provided shipment details. 
+        This endpoint allows you to obtain pricing information for a shipment, 
+        considering factors such as origin, destination, package weight, dimensions, 
+        and the selected shipping service.
       requestBody:
         content:
           application/json:
