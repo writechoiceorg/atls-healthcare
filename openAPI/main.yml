@@ -794,6 +794,24 @@ components:
         serviceCode:
           maxLength: 2
           type: string
+          enum:
+            - A9
+            - A1
+            - AN
+            - A3
+            - G9
+            - G1
+            - GN
+            - GE
+          x-enumDescriptions:
+            A9: Air By 9:00 AM
+            A1: Air By 10:00 AM
+            AN: Air By Noon
+            A3: Air By 3:00 PM
+            G9: Ground By 9:00 AM
+            G1: Ground By 10:00 AM
+            GN: Ground by Noon
+            GE: Ground Expedited (ATS Standard Delivery option)
           description: The service code for the shipment. Needs to be one of the two character codes found on the [Service Codes](service-codes) reference page.
         source:
           "$ref": "#/components/schemas/Source"
