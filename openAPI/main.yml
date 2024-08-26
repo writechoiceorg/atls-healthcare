@@ -687,13 +687,13 @@ components:
           deprecated: true
         addressId:
           type: integer
-          description: This is the saved address ID in the ATS System used to associate shipments to a saved address.
+          description: Associated Address book entry. This value will be used for future reporting options.
           format: int32
           nullable: true
         consigneeCode:
           maxLength: 24
           type: string
-          description: This is the Shipper's Consignee ID that the Shipper would use to refer to this Consignee.
+          description: A unique ID for referring to the consignee being shipped to. Can be an account ID, or any other data from your own system.
           nullable: true
         address:
           "$ref": "#/components/schemas/AddressRequest"
