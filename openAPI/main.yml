@@ -215,8 +215,7 @@ paths:
           description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
-          description: Returns ZPL string by default, otherwise PDF string binary
-            if `type=pdf`
+          description: Returns a binary string representation of the requested document type.
           content:
             text/plain:
               schema:
