@@ -9,6 +9,7 @@ paths:
     get:
       operationId: address-saved-check
       summary: Address Save Check
+      description: This endpoint allows you to verify whether a given address can be saved in the system. By submitting the address details, the endpoint checks its validity, ensuring that it meets the required standards and formats for future use. 
       tags:
       - Address
       parameters:
@@ -64,6 +65,7 @@ paths:
     get:
       operationId: address-validate-residential
       summary: Validate Residential Address
+      description: This endpoint verifies whether the provided address is a valid residential address. It checks the address against various criteria to confirm its accuracy and classification as a residential location.
       tags:
       - Address
       parameters:
@@ -84,6 +86,7 @@ paths:
     get:
       operationId: address-validate-postalcode
       summary: Validate Address Postal Code
+      description: This endpoint validates the postal code of a given address to ensure it is accurate and correctly formatted.
       tags:
       - Address
       parameters:
@@ -115,6 +118,7 @@ paths:
       - Shipments
       summary: Get a List of Shipments
       operationId: get-shipments-v1-2
+      description: Retrieve a list of shipments based on various filter criteria. You can filter shipments by status, reference numbers, purchase order numbers, or name. Additionally, you can control the pagination of results by specifying the page number and page size, and sort the results by a specific field in either ascending or descending order.
       parameters:
       - name: status
         in: query
@@ -172,6 +176,8 @@ paths:
       tags:
       - Shipments
       summary: Get All Shipment Imports
+      description: |
+        Retrieve a list of all shipment imports. This endpoint allows you to view and manage the imports associated with your shipments. You can sort the results by date using the `DateSortOrder` parameter and control the agination by specifying the page number and page size.
       parameters:
       - name: DateSortOrder
         in: query
@@ -201,6 +207,7 @@ paths:
       - Shipments
       summary: Import Orders or Picklists
       operationId: import-orders-picklists
+      description: This endpoint allows you to import orders or picklists by uploading a file. You can choose to validate the file contents before importing by setting the `validateOnly` parameter to true. If you wish to add the imported orders or picklists directly to the continuous manifest, set the `addToContinuousManifest` parameter to true. The file should be uploaded in binary format as part of a multipart form data request.
       parameters:
       - name: validateOnly
         in: query
@@ -240,6 +247,8 @@ paths:
       - Shipments
       summary: Get Shipment Import by ID
       operationId: get-shipment-import-by-id
+      description: >
+        Retrieve detailed information about a specific shipment import using its unique identifier (`importId`).
       parameters:
       - name: importId
         in: path
@@ -261,6 +270,9 @@ paths:
       - Shipments
       summary: Get Labels by Import ID
       operationId: get-labels-by-import-id
+      description: >
+        Retrieve shipping labels for a specific import using its unique identifier (`id`). 
+        This endpoint allows you to generate labels in various formats and sizes according to your needs. 
       parameters:
       - name: id
         in: path
@@ -298,6 +310,7 @@ paths:
     post:
       operationId: create-manifest
       summary: Create Manifest
+      description: This endpoint allows you to create a new manifest, which is a collection of shipments that are grouped together for processing. By submitting a request with the required manifest details, you can organize shipments under a new manifest. 
       tags:
       - Manifests
       requestBody:
@@ -333,6 +346,7 @@ paths:
     get:
       operationId: get-all-manifests
       summary: Get All Manifests
+      description: Retrieve a list of all manifests based on specified criteria. This endpoint allows you to filter the manifests by their status and supports pagination to navigate through large datasets.
       tags:
       - Manifests
       parameters:
@@ -371,6 +385,10 @@ paths:
     post:
       summary: Add Shipments to Manifest
       operationId: add-shipments-to-manifest
+      description: >
+        This endpoint allows you to add shipments to an existing manifest. 
+        By specifying the `manifestId` and providing a list of `ShipmentIds`, 
+        the shipments are grouped under the specified manifest.
       tags:
       - Manifests
       parameters:
@@ -422,6 +440,8 @@ paths:
     get:
       summary: Get Shipments by Manifest
       operationId: get-shipments-by-manifest
+      description: >
+        Retrieve all shipments associated with a specific manifest using its unique `manifestId`. 
       tags:
       - Manifests
       parameters:
@@ -450,6 +470,10 @@ paths:
     get:
       summary: Get Manifest by ID
       operationId: get-manifest-by-id
+      description: >
+        Retrieve detailed information about a specific manifest using its unique identifier (`manifestId`). 
+        This endpoint allows you to access all relevant details about the manifest, including its status, 
+        associated shipments, and other metadata.
       tags:
       - Manifests
       parameters:
@@ -516,7 +540,7 @@ paths:
       - Manifests
       summary: Delete manifest
       description: >-
-        Delete a manifest by id.
+        Delete a manifest by its unique identifier (`manifestId`). This endpoint allows you to remove a specific manifest from the system.
 
 
         > 🚧 Warning
@@ -554,6 +578,9 @@ paths:
     get:
       summary: Export Manifest
       operationId: export-manifest
+      description: >
+        Export the details of a specific manifest using its unique identifier (`manifestId`). 
+        This endpoint allows you to retrieve the manifest's information in a downloadable format.
       tags:
       - Manifests
       parameters:
@@ -573,6 +600,10 @@ paths:
       - MyAccount
       summary: Get Customer Account Details
       operationId: get-customer-account-details
+      description: >
+        Retrieve detailed information about the customer's account. 
+        This endpoint returns the customer's account details, including personal information, 
+        account settings, and other relevant data. 
       responses:
         '200':
           description: Success
@@ -1598,6 +1629,24 @@ components:
         serviceCode:
           maxLength: 2
           type: string
+          enum:
+            - A9
+            - A1
+            - AN
+            - A3
+            - G9
+            - G1
+            - GN
+            - GE
+          x-enumDescriptions:
+            A9: Air By 9:00 AM
+            A1: Air By 10:00 AM
+            AN: Air By Noon
+            A3: Air By 3:00 PM
+            G9: Ground By 9:00 AM
+            G1: Ground By 10:00 AM
+            GN: Ground by Noon
+            GE: Ground Expedited (ATS Standard Delivery option)
           description: The service code for the shipment. Needs to be one of the two character codes found on the [Service Codes](service-codes) reference page.
         source:
           "$ref": "#/components/schemas/Source"
@@ -2505,31 +2554,31 @@ components:
           type: string
           example: '0700'
           description: >-
-            The scheduled time for the pickup in 4-digit military time format.
+            The time the pickup will be available for the driver. In 4-digit military time format.
 
-            <small>Example: 7:00 AM time becomes `0700` in military format.</small>
+            <small>Example: 5:00 PM time becomes 1700 in military format.</small>
         closingTime:
           type: string
           example: '1700'
           description: >-
-            The closing time for the pickup location in 4-digit military time format.
+            The time at which the pickup will no longer be available for the day. Usually the closing time of the store/warehouse/office. In 4-digit military time format.
 
-            <small>Example: 5:00 PM time becomes `1700` in military format.</small>
+            <small>Example: 5:00 PM time becomes 1700 in military format.</small>
         pieces:
           type: integer
           format: int32
           example: 10
-          description: The approximate  number of pieces/packages in the shipment.
+          description: The approximate number of pieces to be picked up.
         weight:
           type: number
           format: double
           example: 150.5
-          description: The approximate total weight of the shipment.
+          description: The approximate total weight of the pickup.
         email:
           type: string
           nullable: true
           example: 'customer@example.com'
-          description: The email address of the customer requesting the pickup.
+          description: The email to be notified of the pickup confirmation, as well as contact for additional pickup details.
         saveEmailAsDefault:
           type: boolean
           nullable: true
