@@ -117,7 +117,7 @@ paths:
     get:
       operationId: address-validate-postalcode-v1-1
       summary: Validate Address Postal Code
-      description: >
+      description: |
         This endpoint can be used to query valid cities within a postal code or to verify that the provided city, province, and postal code combination is valid. The endpoint offers several validation options:
         
         - If only a province and postal code are provided, it will validate that they match.
