@@ -151,7 +151,18 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ValidatePostalCodeResponse"
-  
+        '400':
+          description: Bad request. Mismatch between the Postal Code and Province.
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
   "/v1.2/Shipments":
     get:
       tags:
