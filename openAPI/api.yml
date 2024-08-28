@@ -403,6 +403,7 @@ paths:
       parameters:
       - name: status
         in: query
+        description: A status to filter the manifests.
         schema:
           "$ref": "#/components/schemas/ManifestStatusReq"
       - name: PageNumber
