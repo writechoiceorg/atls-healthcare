@@ -82,37 +82,37 @@ paths:
       responses:
         '200':
           description: Success
-  "/v1/Address/validate/postalCode":
-    get:
-      operationId: address-validate-postalcode
-      summary: Validate Address Postal Code
-      description: This endpoint validates the postal code of a given address to ensure it is accurate and correctly formatted.
-      tags:
-      - Address
-      parameters:
-      - name: postalCode
-        in: query
-        schema:
-          type: string
-        description: The postal code or ZIP code to be validated.
-      - name: province
-        in: query
-        schema:
-          type: string
-        description: The province or state associated with the postal code.
-      - name: city
-        in: query
-        schema:
-          type: string
-        description: The city associated with the postal code.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ValidatePostalCodeResponse"
-      deprecated: true
+  # "/v1/Address/validate/postalCode":
+  #   get:
+  #     operationId: address-validate-postalcode
+  #     summary: Validate Address Postal Code
+  #     description: This endpoint validates the postal code of a given address to ensure it is accurate and correctly formatted.
+  #     tags:
+  #     - Address
+  #     parameters:
+  #     - name: postalCode
+  #       in: query
+  #       schema:
+  #         type: string
+  #       description: The postal code or ZIP code to be validated.
+  #     - name: province
+  #       in: query
+  #       schema:
+  #         type: string
+  #       description: The province or state associated with the postal code.
+  #     - name: city
+  #       in: query
+  #       schema:
+  #         type: string
+  #       description: The city associated with the postal code.
+  #     responses:
+  #       '200':
+  #         description: Success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               "$ref": "#/components/schemas/ValidatePostalCodeResponse"
+  #     deprecated: true
   "/v1.1/Address/validate/postalCode":
     get:
       operationId: address-validate-postalcode-v1-1
