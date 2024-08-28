@@ -2211,7 +2211,6 @@ components:
     ShipmentReference:
       required:
       - id
-      - shortName
       - value
       type: object
       properties:
@@ -2267,6 +2266,7 @@ components:
           description: The unique identifier for the shipment reference type.
         shortName:
           type: string
+          deprecated: true
           enum:
             - REF
             - PO
