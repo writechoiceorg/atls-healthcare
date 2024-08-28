@@ -228,7 +228,7 @@ paths:
       - Shipments
       summary: Get All Shipment Imports
       description: |
-        Retrieve a list of all shipment imports. This endpoint allows you to view and manage the imports associated with your shipments. You can sort the results by date using the `DateSortOrder` parameter and control the agination by specifying the page number and page size.
+        Retrieve a list of all shipment imports. This endpoint allows you to view and manage the imports associated with your shipments. You can sort the results by date using the `DateSortOrder` parameter and control the pagination by specifying the page number and page size.
       parameters:
       - name: DateSortOrder
         in: query
