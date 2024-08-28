@@ -163,7 +163,7 @@ paths:
         description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
-          description: Returns a binary string representation of the requested document type.
+          description: Returns a binary string representation of the requested document type. If no type is sent, it returns `zplReturn` as default.
           content:
             text/plain:
               schema:
@@ -215,7 +215,7 @@ paths:
           description: Indicates whether the label should include ATS's logo.
       responses:
         '200':
-          description: Returns a binary string representation of the requested document type.
+          description: Returns a binary string representation of the requested document type. If no type is sent, it returns `zplReturn` as default.
           content:
             text/plain:
               schema:
@@ -1180,6 +1180,7 @@ components:
       - zpl
       - tpcl
       - zplReturn
+      default: zplReturn
       x-enumDescriptions:
         pdf: "Label in a PDF Document"
         zpl: "Label in Zebra Programming Language (ZPL)"
@@ -1213,6 +1214,7 @@ components:
       - tpcl
       - zplReturn
       type: string
+      default: zplReturn
       x-enumDescriptions:
         pdf: "Label in a PDF Document"
         zpl: "Label in Zebra Programming Language (ZPL)"
