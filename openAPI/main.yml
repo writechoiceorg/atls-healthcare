@@ -294,7 +294,7 @@ paths:
           format: int32
       responses:
         '200':
-          description: Success
+          description: Succesfully returns the manifest report in **PDF** format. This report must be printed and handed to the driver upon arrival.
 components:
   schemas:
     AccessorialDetails:
