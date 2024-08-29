@@ -464,9 +464,9 @@ paths:
               "$ref": "#/components/schemas/ShipmentIds"
       responses:
         '204':
-          description: Success
+          description: Shipment added to manifest successfully.
         '404':
-          description: Not Found
+          description: Shipment not found in the system.
           content:
             text/plain:
               schema:
@@ -478,7 +478,7 @@ paths:
               schema:
                 type: string
         '409':
-          description: Conflict
+          description: Conflict. The shipment has already been added to the manifest.
           content:
             text/plain:
               schema:
