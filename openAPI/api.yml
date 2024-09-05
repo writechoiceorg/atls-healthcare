@@ -614,6 +614,15 @@ paths:
       responses:
         '204':
           description: Success
+        '400':
+          description: |
+            Bad request. The response will return a `400` status code for the following conditions:
+            - Manifest is already closed.
+            - Manifest is of continuous type.
+            - Manifest has shipments assigned.
+        '404':
+          description: Manifest not found
+          
   # "/v1/Manifests/{manifestId}/report":
   #   get:
   #     summary: Get Manifest Report
