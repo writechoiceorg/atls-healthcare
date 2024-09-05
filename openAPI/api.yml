@@ -597,10 +597,9 @@ paths:
 
         > 🚧 Warning
 
-        > The **Continuous Manifest** can't be deleted.
+        > - The **Continuous Manifest** can't be deleted.
         
-        
-        > Only open manifests can be deleted. Once a manifest is closed, ATS won't allow it to be removed.
+        > - Only open manifests can be deleted. Once a manifest is closed, ATS won't allow it to be removed.
       parameters:
       - name: manifestId
         in: path
