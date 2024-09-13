@@ -61,6 +61,16 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    description: Indicates if a given address can be saved in the system.
+                example:
+                  result: false
   "/v1/Address/validate/residential":
     get:
       operationId: address-validate-residential
@@ -72,16 +82,28 @@ paths:
       - name: address1
         in: query
         description: The primary address line for the residential location.
+        required: true
         schema:
           type: string
       - name: postalCode
         in: query
         description: The postal code or ZIP code for the residential address.
+        required: true
         schema:
           type: string
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isResidential:
+                    type: boolean
+                    description: Indicates if the address is residential
+                example:
+                  isResidential: true
   # "/v1/Address/validate/postalCode":
   #   get:
   #     operationId: address-validate-postalcode
