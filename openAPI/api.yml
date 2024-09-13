@@ -786,7 +786,7 @@ paths:
       description: |
         This endpoint allows customers to import multiple shipping addresses into their account by uploading a CSV file. The file should contain the address details in the required format, allowing for bulk addition of "Ship-To" addresses. 
 
-        The CSV file needs to have the following fields:
+        The CSV file needs to include the following fields:
 
         | Field         | Description                                                                  |
         | ------------- | ---------------------------------------------------------------------------- |
