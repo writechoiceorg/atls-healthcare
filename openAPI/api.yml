@@ -803,6 +803,15 @@ paths:
         | Email         | The email address for the contact                                            |
         | IsResidential | Indicates if the address is residential.                                     |
       
+        The following codeblock presents an example of a CSV file's content with the fields described above:
+
+        ```
+        LookupCode,Name,AttentionTo,Address1,Address2,City,Province,PostalCode,Country,Phone,Email,IsResidential
+        AB12345,John Doe,Jane Doe,123 Main St,Unit 4,Toronto,ON,M5J2N1,CA,416-555-1234,john.doe@example.com,true
+        CD67890,Acme Corp,Bob Smith,456 Industrial Rd,,Mississauga,ON,L4W5A1,CA,905-555-5678,bob.smith@acmecorp.com,false
+        EF11223,Mary Johnson,,789 Elm St,Apt 101,Ottawa,ON,K1P5P6,CA,613-555-7890,mary.johnson@example.com,true
+        ```
+
       operationId: import-addresses
       requestBody:
         content:
@@ -836,7 +845,35 @@ paths:
         This endpoint allows customers to export all of their saved shipping addresses from their account. 
       responses:
         '200':
-          description: Success
+          description: |
+            Returns a CSV file with the following fields:
+
+            | Field         | Description                                                                  |
+            | ------------- | ---------------------------------------------------------------------------- |
+            | LookupCode    | A unique identifier used to look up the contact in the address book          |
+            | Name          | The name of the individual or entity associated with the address.            |
+            | AttentionTo   | The name of the person to whom attention should be directed at this address. |
+            | Address1      | The primary address line for the location.                                   |
+            | Address2      | The secondary address line for the location, if applicable.                  |
+            | City          | The city in which the address is located.                                    |
+            | Province      | Two character province  abbreviation.                                        |
+            | PostalCode    | The postal code or ZIP code for the address.                                 |
+            | IsResidential | Indicates if the address is residential.                                     |
+            | Country       | Country abbreviation. Accepted value: CA for Canada.                         |
+            | Phone         | The phone number for the contact                                             |
+            | Email         | The email address for the contact                                            |
+            | Instructions  | Default instructions to be used with this contact                            |
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+              example: |
+                LookupCode,Name,AttentionTo,Address1,Address2,City,Province,PostalCode,IsResidential,Country,Phone,Email,Instructions
+                AB12345,John Doe,Jane Doe,123 Main St,Unit 4,Toronto,ON,M5J2N1,true,CA,416-555-1234,john.doe@example.com,Leave at front door if no answer
+                CD67890,Acme Corp,Bob Smith,456 Industrial Rd,,Mississauga,ON,L4W5A1,false,CA,905-555-5678,bob.smith@acmecorp.com,Deliver to receiving dock
+                EF11223,Mary Johnson,,789 Elm St,Apt 101,Ottawa,ON,K1P5P6,true,CA,613-555-7890,mary.johnson@example.com,Call upon arrival
+
   "/v1/Picklist":
     post:
       tags:
