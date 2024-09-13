@@ -104,6 +104,42 @@ paths:
                     description: Indicates if the address is residential
                 example:
                   isResidential: true
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    format: uri
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                  title:
+                    type: string
+                    example: "One or more validation errors occurred."
+                  status:
+                    type: integer
+                    format: int32
+                    example: 400
+                  traceId:
+                    type: string
+                    example: "00-4ba4fa05f25bcb9c3c1f88f8c06c0ab4-ec78872bcb55c8fd-00"
+                  errors:
+                    type: object
+                    properties:
+                      address1:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "The address1 field is required."
+                      postalCode:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "The postalCode field is required."
   # "/v1/Address/validate/postalCode":
   #   get:
   #     operationId: address-validate-postalcode
