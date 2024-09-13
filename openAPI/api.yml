@@ -783,8 +783,26 @@ paths:
       tags:
       - MyAccount
       summary: Import Addresses
-      description: >
+      description: |
         This endpoint allows customers to import multiple shipping addresses into their account by uploading a CSV file. The file should contain the address details in the required format, allowing for bulk addition of "Ship-To" addresses. 
+
+        The CSV file needs to have the following fields:
+
+        | Field         | Description                                                                  |
+        | ------------- | ---------------------------------------------------------------------------- |
+        | LookupCode    | A unique identifier used to look up the contact in the address book          |
+        | Name          | The name of the individual or entity associated with the address.            |
+        | AttentionTo   | The name of the person to whom attention should be directed at this address. |
+        | Address1      | The primary address line for the location.                                   |
+        | Address2      | The secondary address line for the location, if applicable.                  |
+        | City          | The city in which the address is located.                                    |
+        | Province      | Two character province  abbreviation.                                        |
+        | PostalCode    | The postal code or ZIP code for the address.                                 |
+        | Country       | Country abbreviation. Accepted value: CA for Canada.                         |
+        | Phone         | The phone number for the contact                                             |
+        | Email         | The email address for the contact                                            |
+        | IsResidential | Indicates if the address is residential.                                     |
+      
       operationId: import-addresses
       requestBody:
         content:
