@@ -786,6 +786,19 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+              example: (binary PDF data)
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
   "/v1/MyAccount/customerAccount":
     get:
       tags:
@@ -832,6 +845,31 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/CustomerShipAddressResponse"
+        '400':
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                  title:
+                    type: string
+                    example: "One or more validation errors occurred."
+                  status:
+                    type: integer
+                    example: 400
+                  traceId:
+                    type: string
+                    example: "00-ecf5d7562dd400693db7e965d2f09625-fe7e869cd1c6c47e-00"
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string        
   "/v1/MyAccount/customerAccount/addresses/{addressId}":
     put:
       tags:
@@ -867,6 +905,13 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/CustomerShipAddressResponse"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
     delete:
       tags:
       - MyAccount
@@ -885,6 +930,13 @@ paths:
       responses:
         '200':
           description: Success
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
   "/v1/MyAccount/customerAccount/addresses/import":
     post:
       tags:
@@ -942,6 +994,33 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/CustomerShipAddressResponse"
+        '400':
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                  title:
+                    type: string
+                    example: "One or more validation errors occurred."
+                  status:
+                    type: integer
+                    example: 400
+                  traceId:
+                    type: string
+                    example: "00-80d1132e96ab14afd554a33c63002e4d-78380ad723934520-00"
+                  errors:
+                    type: object
+                    properties:
+                      addressesCsvFile:
+                        type: array
+                        items:
+                          type: string
+                          example: "The addressesCsvFile field is required."
   "/v1/MyAccount/customerAccount/addresses/export":
     get:
       tags:
@@ -1000,6 +1079,38 @@ paths:
       responses:
         '200':
           description: Success
+        '400':
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                  title:
+                    type: string
+                    example: "One or more validation errors occurred."
+                  status:
+                    type: integer
+                    example: 400
+                  traceId:
+                    type: string
+                    example: "00-d16e4dfe5942fa478430d98f10afdab8-ae16f4a91b122a62-00"
+                  errors:
+                    type: object
+                    properties:
+                      "":
+                        type: array
+                        items:
+                          type: string
+                          example: "A non-empty request body is required."
+                      request:
+                        type: array
+                        items:
+                          type: string
+                          example: "The request field is required."
   "/v1/Picklist/{lookupKey}":
     get:
       tags:

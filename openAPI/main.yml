@@ -295,6 +295,19 @@ paths:
       responses:
         '200':
           description: Succesfully returns the manifest report in **PDF** format. This report must be printed and handed to the driver upon arrival.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+              example: (binary PDF data)
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
 components:
   schemas:
     AccessorialDetails:
