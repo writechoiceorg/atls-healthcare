@@ -909,7 +909,6 @@ paths:
                 AB12345,John Doe,Jane Doe,123 Main St,Unit 4,Toronto,ON,M5J2N1,true,CA,416-555-1234,john.doe@example.com,Leave at front door if no answer
                 CD67890,Acme Corp,Bob Smith,456 Industrial Rd,,Mississauga,ON,L4W5A1,false,CA,905-555-5678,bob.smith@acmecorp.com,Deliver to receiving dock
                 EF11223,Mary Johnson,,789 Elm St,Apt 101,Ottawa,ON,K1P5P6,true,CA,613-555-7890,mary.johnson@example.com,Call upon arrival
-
   "/v1/Picklist":
     post:
       tags:
@@ -930,6 +929,12 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PicklistResponse'
+        '404':
+          description: Not Found
   "/v1/Picklist/{lookupKey}":
     get:
       tags:
@@ -1341,6 +1346,54 @@ paths:
                 "$ref": "#/components/schemas/RateResponse"
 components:
   schemas:
+    PicklistResponse:
+      type: object
+      properties:
+        lookupKey:
+          type: string
+          example: "SID1052787"
+        consigneeCode:
+          type: string
+          nullable: true
+        address:
+          $ref: '#/components/schemas/AddressType'
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        pieces:
+          type: integer
+          example: 6
+        totalWeight:
+          type: number
+          format: double
+          nullable: true
+        isPallet:
+          type: boolean
+          example: false
+        saidToContain:
+          type: string
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
+        descriptionOfGoods:
+          type: string
+          nullable: true
+        paymentTerm:
+          type: string
+          example: "prepaid"
+        paymentAccount:
+          type: string
+          nullable: true
+        ref:
+          type: string
+          example: "2069219.667"
+        po:
+          type: string
+          example: "-636547.6667"
     AccessorialDetails:
       type: object
       properties:
@@ -1551,30 +1604,41 @@ components:
         name:
           type: string
           nullable: true
+          minLength: 0
+          maxLength: 35
+          description: "The name of the individual or entity associated with the address."
         attentionTo:
           type: string
           nullable: true
+          description: "The name of the person to whom attention should be directed at this address."
         address1:
           type: string
           nullable: true
+          description: "The primary address line for the location."
         address2:
           type: string
           nullable: true
+          description: "The secondary address line for the location, if applicable."
         city:
           type: string
           nullable: true
+          description: "The city in which the address is located."
         province:
           type: string
           nullable: true
-        postalCode:
-          type: string
-          nullable: true
-        isResidential:
-          type: boolean
-          nullable: true
+          description: "The province or state in which the address is located."
         country:
           type: string
           nullable: true
+          description: "The country in which the address is located."
+        postalCode:
+          type: string
+          nullable: true
+          description: "The postal code or ZIP code for the address."
+        isResidential:
+          type: boolean
+          nullable: true
+          description: "Indicates if the address is residential."
       additionalProperties: false
     AppointmentDetailRes:
       type: object
