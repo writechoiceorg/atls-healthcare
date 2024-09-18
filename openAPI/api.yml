@@ -951,6 +951,11 @@ paths:
                 $ref: '#/components/schemas/PicklistResponse'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
   "/v1/PickupRequests":
     get:
       summary: Get All Pickup Requests
@@ -964,14 +969,17 @@ paths:
       - name: fromDate
         in: query
         description: |
-          The start date and time for filtering pickup requests, in [RFC3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format.
+          The start date and time for filtering pickup requests, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+          <small>Example: `2021-10-05T14:48:00Z`</small>
         schema:
           type: string
           format: date-time
           example: '2023-01-01T00:00:00Z'
       - name: toDate
         in: query
-        description: The end date and time for filtering pickup requests.
+        description: |
+          The end date and time for filtering pickup requests, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+          <small>Example: `2021-10-05T14:48:00Z`</small>
         schema:
           type: string
           format: date-time
@@ -1691,7 +1699,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date of the appointment.
+          description: |
+            The date of the appointment, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         time:
           type: string
           nullable: true
@@ -1709,7 +1720,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date of the appointment.
+          description: |
+            The date of the appointment, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         time:
           type: string
           nullable: true
@@ -1890,7 +1904,10 @@ components:
         shipDate:
           type: string
           format: date-time
-          description: The date and time when the shipment is to be shipped.
+          description: |
+            The date and time when the shipment is to be shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         accessorials:
           type: array
           items:
@@ -2211,7 +2228,10 @@ components:
         shipDate:
           type: string
           format: date-time
-          description: The date and time when the shipment is to be shipped.
+          description: | 
+            The date and time when the shipment is to be shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         destinationPostalCode:
           type: string
           description: The postal code or ZIP code of the shipment's destination.
@@ -2246,7 +2266,10 @@ components:
         dateImported:
           type: string
           format: date-time
-          description: The date and time when the import was created.
+          description: |
+            The date and time when the import was created, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         shipments:
           type: array
           items:
@@ -2284,7 +2307,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the shipment was shipped.
+          description: |
+            The date and time when the shipment was shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
           description: The current status of the shipment.
@@ -2388,12 +2414,18 @@ components:
         dateCreated:
           type: string
           format: date-time
-          description: The date and time when the manifest was created.
+          description: |
+            The date and time when the manifest was created, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         dateClosed:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the manifest was closed, if applicable.
+          description: |
+            The date and time when the manifest was closed, if applicable, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         name:
           type: string
           nullable: true
@@ -2405,7 +2437,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the pickup is scheduled.
+          description: |
+            The date and time when the pickup is scheduled, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         door:
           type: string
           nullable: true
@@ -2440,12 +2475,18 @@ components:
         dateCreated:
           type: string
           format: date-time
-          description: The date and time when the manifest was created.
+          description: |
+            The date and time when the manifest was created, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         dateClosed:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the manifest was closed, if applicable.
+          description: |
+            The date and time when the manifest was closed, if applicable, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         name:
           type: string
           nullable: true
@@ -2457,7 +2498,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the pickup is scheduled.
+          description: |
+            The date and time when the pickup is scheduled, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         door:
           type: string
           nullable: true
@@ -2536,7 +2580,10 @@ components:
         dateImported:
           type: string
           format: date-time
-          description: The date and time when the model was imported.
+          description: |
+            The date and time when the model was imported, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         shipmentCount:
           type: integer
           format: int32
@@ -2636,7 +2683,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the pickup is scheduled.
+          description: |
+            The date and time when the pickup is scheduled, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         door:
           type: string
           nullable: true
@@ -2908,7 +2958,9 @@ components:
         requestDateTime:
           type: string
           format: date-time
-          description: The date and time when the pickup request was made.
+          description: |
+            The date and time when the pickup request was made, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
           example: '2024-07-01T16:31:40.9603962+00:00'
         pickupTime:
           type: string
@@ -3149,7 +3201,10 @@ components:
         shipDate:
           type: string
           format: date-time
-          description: The date and time when the shipment is to be shipped.
+          description: |
+            The date and time when the shipment is to be shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         shipmentTypeEnum:
           "$ref": "#/components/schemas/ShipmentTypeEnum"
           description: The type of shipment, either regular or return.
@@ -3267,6 +3322,10 @@ components:
         date:
           type: string
           format: date-time
+          description: |
+            Service date, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         services:
           type: array
           items:
@@ -3320,7 +3379,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the shipment was shipped.
+          description: |
+            The date and time when the shipment was shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
           description: The current status of the shipment.
@@ -3547,7 +3609,9 @@ components:
           format: date-time
           example: '2024-07-03T10:00:00+00:00'
           nullable: true
-          description: The date and time when the shipment was shipped.
+          description: |
+            The date and time when the shipment was shipped, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
         status:
           example: created
           "$ref": "#/components/schemas/ShipmentStatus"
@@ -3687,6 +3751,10 @@ components:
         shipDate:
           type: string
           format: date-time
+          description: |
+            The scheduled date and time when the shipment will be sent, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
           nullable: true
         status:
           "$ref": "#/components/schemas/ShipmentStatus"
@@ -3846,12 +3914,18 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The first date associated with the time release.
+          description: | 
+            The first date associated with the time release, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         date2:
           type: string
           format: date-time
           nullable: true
-          description: The second date associated with the time release, if applicable.
+          description: | 
+            The second date associated with the time release, if applicable. formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
       additionalProperties: false
     TimeReleaseDetails:
       required:
@@ -3865,12 +3939,18 @@ components:
         date1:
           type: string
           format: date-time
-          description: The first date associated with the time release.
+          description: |
+            The first date associated with the time release, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         date2:
           type: string
           format: date-time
           nullable: true
-          description: The second date associated with the time release. Required if `type.value` is `deliverBetween`.
+          description: |
+            The second date associated with the time release. Required if `type.value` is `deliverBetween`. formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
       additionalProperties: false
     TimeReleaseType:
       enum:
@@ -3911,7 +3991,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the pickup is scheduled.
+          description: |
+            The date and time when the pickup is scheduled, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         door:
           type: string
           nullable: true
@@ -3971,13 +4054,17 @@ components:
         dateCreated:
           type: string
           format: date-time
-          description: The date and time when the manifest was created.
-          example: 2023-10-03T23:24:36.8083692+00:00
+          description: |
+            The date and time when the manifest was created, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         dateClosed:
           type: string
           format: date-time
           nullable: true
-          description: The date and time when the manifest was closed.
+          description: |
+            The date and time when the manifest was closed, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
           example: null
         name:
           type: string
@@ -3992,8 +4079,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: The scheduled pickup date for the manifest.
-          example: null
+          description: |
+            The scheduled pickup date for the manifest, formatted according to [RFC 3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            <small>Example: `2021-10-05T14:48:00Z`</small>
+          example: '2023-12-31T23:59:59Z'
         door:
           type: string
           nullable: true
