@@ -1063,7 +1063,7 @@ paths:
     post:
       tags:
       - Picklist
-      summary: Create a new Picklist
+      summary: Create a New Picklist
       operationId: create-picklist
       requestBody:
         content:
