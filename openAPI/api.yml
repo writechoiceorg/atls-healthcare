@@ -1079,8 +1079,12 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PicklistResponse'
         '400':
-          description: One or more validation errors occurred.
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -1100,17 +1104,27 @@ paths:
                     example: "00-d16e4dfe5942fa478430d98f10afdab8-ae16f4a91b122a62-00"
                   errors:
                     type: object
-                    properties:
-                      "":
-                        type: array
-                        items:
-                          type: string
-                          example: "A non-empty request body is required."
+              examples:
+                validationError:
+                  description: Validation errors occurred
+                  value:
+                    type: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                    title: "One or more validation errors occurred."
+                    status: 400
+                    traceId: "00-d16e4dfe5942fa478430d98f10afdab8-ae16f4a91b122a62-00"
+                    errors:
+                      "requestBody":
+                        - "A non-empty request body is required."
                       request:
-                        type: array
-                        items:
-                          type: string
-                          example: "The request field is required."
+                        - "The request field is required."
+                lookupKeyError:
+                  description: Picklist already exists
+                  value:
+                    type: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                    title: "Bad Request"
+                    status: 400
+                    detail: "Picklist order with that LookupKey already exists."
+                    traceId: "00-64a662f281ca319e08a29171dbe2bb28-61803eec6853bea3-00"
   "/v1/Picklist/{lookupKey}":
     get:
       tags:
