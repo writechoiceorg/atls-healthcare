@@ -1357,49 +1357,77 @@ components:
       properties:
         lookupKey:
           type: string
-          example: "SID1052787"
+          nullable: false
+          description: Unique identifier for the picklist.
+          example: SID1052787
         consigneeCode:
           type: string
           nullable: true
+          description: Consignee code associated with the picklist.
+          example: null
         address:
           $ref: '#/components/schemas/AddressType'
         phone:
           type: string
           nullable: true
+          description: Contact phone number.
+          example: null
         email:
           type: string
           nullable: true
+          description: Contact email address.
+          example: null
         pieces:
           type: integer
+          nullable: false
+          description: Number of pieces in the shipment.
           example: 6
         totalWeight:
           type: number
           format: double
           nullable: true
+          description: Total weight of the shipment.
+          example: null
         isPallet:
           type: boolean
+          nullable: false
+          description: Indicates if the shipment is on a pallet.
           example: false
         saidToContain:
           type: string
           nullable: true
+          description: Description of what the shipment is said to contain.
+          example: null
         instructions:
           type: string
           nullable: true
+          description: Special instructions for handling the shipment.
+          example: null
         descriptionOfGoods:
           type: string
           nullable: true
+          description: Detailed description of the goods.
+          example: null
         paymentTerm:
           type: string
-          example: "prepaid"
+          nullable: false
+          description: Payment terms for the shipment.
+          example: prepaid
         paymentAccount:
           type: string
           nullable: true
+          description: Payment account information.
+          example: null
         ref:
           type: string
-          example: "2069219.667"
+          nullable: false
+          description: Reference number for the shipment.
+          example: '2069219.667'
         po:
           type: string
-          example: "-636547.6667"
+          nullable: false
+          description: Purchase order number.
+          example: '-636547.6667'
     AccessorialDetails:
       type: object
       properties:
@@ -1612,39 +1640,48 @@ components:
           nullable: true
           minLength: 0
           maxLength: 35
-          description: "The name of the individual or entity associated with the address."
+          description: The name of the individual or entity associated with the address.
+          example: AHS - COLD LAKE HEALTHCARE CENTRE
         attentionTo:
           type: string
           nullable: true
-          description: "The name of the person to whom attention should be directed at this address."
+          description: The name of the person to whom attention should be directed at this address.
+          example: null
         address1:
           type: string
           nullable: true
-          description: "The primary address line for the location."
+          description: The primary address line for the location.
+          example: 314 25 STREET
         address2:
           type: string
           nullable: true
-          description: "The secondary address line for the location, if applicable."
+          description: The secondary address line for the location, if applicable.
+          example: null
         city:
           type: string
           nullable: true
-          description: "The city in which the address is located."
+          description: The city in which the address is located.
+          example: COLD LAKE
         province:
           type: string
           nullable: true
-          description: "The province or state in which the address is located."
+          description: The province or state in which the address is located.
+          example: AB
         country:
           type: string
           nullable: true
-          description: "The country in which the address is located."
+          description: The country in which the address is located.
+          example: CA
         postalCode:
           type: string
           nullable: true
-          description: "The postal code or ZIP code for the address."
+          description: The postal code or ZIP code for the address.
+          example: T9M1G6
         isResidential:
           type: boolean
           nullable: true
-          description: "Indicates if the address is residential."
+          description: Indicates if the address is residential.
+          example: false
       additionalProperties: false
     AppointmentDetailRes:
       type: object
