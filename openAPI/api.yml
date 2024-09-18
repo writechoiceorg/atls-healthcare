@@ -929,12 +929,6 @@ paths:
       responses:
         '200':
           description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PicklistResponse'
-        '404':
-          description: Not Found
   "/v1/Picklist/{lookupKey}":
     get:
       tags:
@@ -969,7 +963,8 @@ paths:
       parameters:
       - name: fromDate
         in: query
-        description: The start date and time for filtering pickup requests.
+        description: |
+          The start date and time for filtering pickup requests, in [RFC3339 section 5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format.
         schema:
           type: string
           format: date-time
