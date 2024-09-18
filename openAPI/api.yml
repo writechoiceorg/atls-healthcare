@@ -350,6 +350,33 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/LoadOrdersResponse"
+        '400':
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+                  title:
+                    type: string
+                    example: "One or more validation errors occurred."
+                  status:
+                    type: integer
+                    example: 400
+                  traceId:
+                    type: string
+                    example: "00-dfd7cfaf80f9022071728acbd8646b3e-faeeee8a46ad8d4a-00"
+                  errors:
+                    type: object
+                    properties:
+                      file:
+                        type: array
+                        items:
+                          type: string
+                          example: "The file field is required."
   "/v1/Shipments/Imports/{importId}":
     get:
       tags:
@@ -373,6 +400,13 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/GetImportByIdResult"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
   "/v1/Shipments/Imports/{id}/labels":
     get:
       tags:
@@ -415,6 +449,43 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                zpl:
+                  summary: ZPL
+                  value: "^XA^CI28^CF0,28,30^FO300,25^FDFROM: ATS Demo 2^FS^FO300,55^A0N,32^FDJohn Doe^FS^FXConsignee Address^FS^FO40,150^FD150-18279 Blundell Rd^FS^FO40,180^FD^FS^FO40,210^FDVancouver, BC^FS^FO40,240^FDV6W1L8^FS^FO40,270^FDATTN: Jane Doe^FS^FO40,300^FDCA^FS^FO200,300^A0N,25^FDTel. / T\u00e9l.: 123-456-7890^FS^FXReferences^FS^FO40,330^A0N,30,34^FDRef: ^FS^FO40,360^A0N,30,34^FDOrd: ^FS^FO40,385^FDHandle with care^FS^FO40,413^FD^FS^FO40,430^FXRouteDetails^FS^FO40,440^GB95,65,65^FS^FO47,450^FR^A0N,60,60^FDGE^FS^FO150,450^FR^A0N,65,65^FDVAN-VAN65^FS^FXTest Env Indication^FS^CF0^FO40,510^GB260,35,3^FS^FO55,520^A0N,20^FDDO NOT SHIP - TEST ONLY^FS^FO46,515^FR^GB247,24,24^FS^CF0,28,30^FO040,550^BY4,3^BCN,100,N,N,N^FDT-V6W1L8GE^FS^FO100,660^A0N,28,30^FD^FS^FO100,690^A0N,28,30^FD^FS^FO660,150^BY3,2^BCB,120,N,N,N^FDT-800014422-1^FS^FO40,740^FD^FS^FO40,770^FD800014422-1 OF 5^FS^FO420,770^FD2024/07/03^FS^XZ^XA^CI28^CF0,28,30^FO300,25^FDFROM: ATS Demo 2^FS^FO300,55^A0N,32^FDJohn Doe^FS^FXConsignee Address^FS^FO40,150^FD150-18279 Blundell Rd^FS^FO40,180^FD^FS^FO40,210^FDVancouver, BC^FS^FO40,240^FDV6W1L8^FS^FO40,270^FDATTN: Jane Doe^FS^FO40,300^FDCA^FS^FO200,300^A0N,25^FDTel. / T\u00e9l.: 123-456-7890^FS^FXReferences^FS^FO40,330^A0N,30,34^FDRef: ^FS^FO40,360^A0N,30,34^FDOrd: ^FS^FO40,385^FDHandle with care^FS^FO40,413^FD^FS^FO40,430^FXRouteDetails^FS^FO40,440^GB95,65,65^FS^FO47,450^FR^A0N,60,60^FDGE^FS^FO150,450^FR^A0N,65,65^FDVAN-VAN65^FS^FXTest Env Indication^FS^CF0^FO40,510^GB260,35,3^FS^FO55,520^A0N,20^FDDO NOT SHIP - TEST ONLY^FS^FO46,515^FR^GB247,24,24^FS^CF0,28,30^FO040,550^BY4,3^BCN,100,N,N,N^FDT-V6W1L8GE^FS^FO100,660^A0N,28,30^FD^FS^FO100,690^A0N,28,30^FD^FS^FO660,150^BY3,2^BCB,120,N,N,N^FDT-800014422-2^FS^FO40,740^FD^FS^FO40,770^FD800014422-2 OF 5^FS^FO420,770^FD2024/07/03^FS^XZ^XA^CI28^CF0,28,30^FO300,25^FDFROM: ATS Demo 2^FS^FO300,55^A0N,32^FDJohn Doe^FS^FXConsignee Address^FS^FO40,150^FD150-18279 Blundell Rd^FS^FO40,180^FD^FS^FO40,210^FDVancouver, BC^FS^FO40,240^FDV6W1L8^FS^FO40,270^FDATTN: Jane Doe^FS^FO40,300^FDCA^FS^FO200,300^A0N,25^FDTel. / T\u00e9l.: 123-456-7890^FS^FXReferences^FS^FO40,330^A0N,30,34^FDRef: ^FS^FO40,360^A0N,30,34^FDOrd: ^FS^FO40,385^FDHandle with care^FS^FO40,413^FD^FS^FO40,430^FXRouteDetails^FS^FO40,440^GB95,65,65^FS^FO47,450^FR^A0N,60,60^FDGE^FS^FO150,450^FR^A0N,65,65^FDVAN-VAN65^FS^FXTest Env Indication^FS^CF0^FO40,510^GB260,35,3^FS^FO55,520^A0N,20^FDDO NOT SHIP - TEST ONLY^FS^FO46,515^FR^GB247,24,24^FS^CF0,28,30^FO040,550^BY4,3^BCN,100,N,N,N^FDT-V6W1L8GE^FS^FO100,660^A0N,28,30^FD^FS^FO100,690^A0N,28,30^FD^FS^FO660,150^BY3,2^BCB,120,N,N,N^FDT-800014422-3^FS^FO40,740^FD^FS^FO40,770^FD800014422-3 OF 5^FS^FO420,770^FD2024/07/03^FS^XZ^XA^CI28^CF0,28,30^FO300,25^FDFROM: ATS Demo 2^FS^FO300,55^A0N,32^FDJohn Doe^FS^FXConsignee Address^FS^FO40,150^FD150-18279 Blundell Rd^FS^FO40,180^FD^FS^FO40,210^FDVancouver, BC^FS^FO40,240^FDV6W1L8^FS^FO40,270^FDATTN: Jane Doe^FS^FO40,300^FDCA^FS^FO200,300^A0N,25^FDTel. / T\u00e9l.: 123-456-7890^FS^FXReferences^FS^FO40,330^A0N,30,34^FDRef: ^FS^FO40,360^A0N,30,34^FDOrd: ^FS^FO40,385^FDHandle with care^FS^FO40,413^FD^FS^FO40,430^FXRouteDetails^FS^FO40,440^GB95,65,65^FS^FO47,450^FR^A0N,60,60^FDGE^FS^FO150,450^FR^A0N,65,65^FDVAN-VAN65^FS^FXTest Env Indication^FS^CF0^FO40,510^GB260,35,3^FS^FO55,520^A0N,20^FDDO NOT SHIP - TEST ONLY^FS^FO46,515^FR^GB247,24,24^FS^CF0,28,30^FO040,550^BY4,3^BCN,100,N,N,N^FDT-V6W1L8GE^FS^FO100,660^A0N,28,30^FD^FS^FO100,690^A0N,28,30^FD^FS^FO660,150^BY3,2^BCB,120,N,N,N^FDT-800014422-4^FS^FO40,740^FD^FS^FO40,770^FD800014422-4 OF 5^FS^FO420,770^FD2024/07/03^FS^XZ^XA^CI28^CF0,28,30^FO300,25^FDFROM: ATS Demo 2^FS^FO300,55^A0N,32^FDJohn Doe^FS^FXConsignee Address^FS^FO40,150^FD150-18279 Blundell Rd^FS^FO40,180^FD^FS^FO40,210^FDVancouver, BC^FS^FO40,240^FDV6W1L8^FS^FO40,270^FDATTN: Jane Doe^FS^FO40,300^FDCA^FS^FO200,300^A0N,25^FDTel. / T\u00e9l.: 123-456-7890^FS^FXReferences^FS^FO40,330^A0N,30,34^FDRef: ^FS^FO40,360^A0N,30,34^FDOrd: ^FS^FO40,385^FDHandle with care^FS^FO40,413^FD^FS^FO40,430^FXRouteDetails^FS^FO40,440^GB95,65,65^FS^FO47,450^FR^A0N,60,60^FDGE^FS^FO150,450^FR^A0N,65,65^FDVAN-VAN65^FS^FXTest Env Indication^FS^CF0^FO40,510^GB260,35,3^FS^FO55,520^A0N,20^FDDO NOT SHIP - TEST ONLY^FS^FO46,515^FR^GB247,24,24^FS^CF0,28,30^FO040,550^BY4,3^BCN,100,N,N,N^FDT-V6W1L8GE^FS^FO100,660^A0N,28,30^FD^FS^FO100,690^A0N,28,30^FD^FS^FO660,150^BY3,2^BCB,120,N,N,N^FDT-800014422-5^FS^FO40,740^FD^FS^FO40,770^FD800014422-5 OF 5^FS^FO420,770^FD2024/07/03^FS^XZ"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Not Found
+        '500':
+          description: An error occurred while processing your request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: "https://tools.ietf.org/html/rfc7231#section-6.6.1"
+                  title:
+                    type: string
+                    example: "An error occurred while processing your request."
+                  status:
+                    type: integer
+                    example: 500
+                  detail:
+                    type: string
+                    example: "Operation Failed"
+                  traceId:
+                    type: string
+                    example: "00-888da78691ed85ec5c55981b7a0b4198-433d8676e9337a4f-00"
   "/v1/Manifests":
     post:
       operationId: create-manifest
